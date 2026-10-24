@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose draws everything; the window theme only sets the color shown before the first frame. -->
+    <style name="Theme.Oriel" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/oriel_window</item>
+        <item name="android:windowShowWallpaper">false</item>
+    </style>
+
+    <color name="oriel_window">#FF07090F</color>
+    <color name="oriel_icon_background">#FF141A33</color>
+</resources>
