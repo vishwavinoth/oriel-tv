@@ -1,0 +1,15 @@
+{
+  "name": "oriel-tv",
+  "private": true,
+  "description": "Repository tooling for Oriel TV. The website has its own package in website/.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "tokens": "node shared/design-tokens/build.mjs",
+    "tokens:check": "node shared/design-tokens/build.mjs --check",
+    "test:tokens": "node --test shared/design-tokens/tokens.test.mjs"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}
