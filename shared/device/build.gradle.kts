@@ -5,6 +5,16 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.licensee)
+}
+
+// Every dependency must use a license compatible with Apache-2.0 (PRD section 9.2), or the build fails.
+licensee {
+    allow("Apache-2.0")
+    allow("MIT")
+    allow("BSD-2-Clause")
+    allow("BSD-3-Clause")
+    unusedAction(app.cash.licensee.UnusedAction.IGNORE)
 }
 
 java {

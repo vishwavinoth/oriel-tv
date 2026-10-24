@@ -1,0 +1,30 @@
+# Keeps dependencies current (PRD section 11). Every update runs CI, including the license checks, so a new
+# version with a license Oriel doesn't allow fails before it can be merged.
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      androidx:
+        patterns: ["androidx.*", "com.android.*"]
+      kotlin-and-compose:
+        patterns: ["org.jetbrains.kotlin*", "org.jetbrains.kotlinx*", "org.jetbrains.compose*"]
+
+  - package-ecosystem: npm
+    directory: /website
+    schedule:
+      interval: weekly
+    groups:
+      next:
+        patterns: ["next", "eslint-config-next"]
+      react:
+        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
+      tailwind:
+        patterns: ["tailwindcss", "@tailwindcss/*", "tailwind-merge"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

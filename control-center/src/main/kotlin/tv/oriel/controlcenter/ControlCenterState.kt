@@ -69,6 +69,7 @@ class ControlCenterState(
         private set
     var entries by mutableStateOf(history.load())
         private set
+    var showLicenses by mutableStateOf(false)
 
     val adbMissing: Boolean get() = runner == null
 

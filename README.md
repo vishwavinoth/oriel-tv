@@ -41,7 +41,7 @@ npm run tokens && npm run test:tokens
 
 - [Product requirements](PRD.md)
 - [Getting started](docs/guides/getting-started.md), [Device management](docs/guides/device-management.md), and [Troubleshooting](docs/guides/troubleshooting.md)
-- [Design system](docs/design-system.md) and [architecture decisions](docs/adr/)
+- [Design system](docs/design-system.md), [architecture decisions](docs/adr/), and [releasing](docs/releasing.md)
 - [Contributing](CONTRIBUTING.md), [Security](SECURITY.md), [Privacy](PRIVACY.md), and [Changelog](CHANGELOG.md)
 
 ## License

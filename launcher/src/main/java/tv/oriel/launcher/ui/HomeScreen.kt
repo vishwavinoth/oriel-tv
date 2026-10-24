@@ -96,6 +96,7 @@ fun HomeScreen(
     var focused by remember { mutableStateOf<AppEntry?>(null) }
     var showSettings by rememberSaveable { mutableStateOf(false) }
     var showControlPanel by rememberSaveable { mutableStateOf(false) }
+    var showLicenses by rememberSaveable { mutableStateOf(false) }
     var options by remember { mutableStateOf<Pair<AppEntry, Boolean>?>(null) }
     var message by remember { mutableStateOf<String?>(null) }
     var initialFocusDone by rememberSaveable { mutableStateOf(false) }
@@ -111,6 +112,7 @@ fun HomeScreen(
         homePresses.collect {
             showSettings = false
             showControlPanel = false
+            showLicenses = false
             options = null
             listState.scrollToItem(0)
             focusFirstTile()
@@ -228,9 +230,15 @@ fun HomeScreen(
                     onUpdatePreferences { HomeArrangement.restoreDefaults() }
                     message = context.getString(R.string.message_restored)
                 },
+                onLicenses = {
+                    showSettings = false
+                    showLicenses = true
+                },
                 onClose = { showSettings = false },
             )
         }
+
+        if (showLicenses) LicensesPanel(onClose = { showLicenses = false })
 
         options?.let { (app, fromDock) ->
             AppOptionsMenu(

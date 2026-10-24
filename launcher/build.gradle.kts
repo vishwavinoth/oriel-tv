@@ -4,6 +4,18 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.licensee)
+}
+
+// Every dependency must use a license compatible with Apache-2.0 (PRD section 9.2), or the build fails. The
+// verified list ships inside the app for its Open-source licenses screen (rule 4).
+licensee {
+    allow("Apache-2.0")
+    allow("MIT")
+    allow("BSD-2-Clause")
+    allow("BSD-3-Clause")
+    unusedAction(app.cash.licensee.UnusedAction.IGNORE)
+    bundleAndroidAsset.set(true)
 }
 
 android {
@@ -19,11 +31,25 @@ android {
         versionName = "0.1.0-dev"
     }
 
+    // Release signing comes only from the environment (the release workflow's secrets), never from the repository.
+    val releaseKeystore = System.getenv("ORIEL_KEYSTORE_FILE")
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("ORIEL_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("ORIEL_KEY_ALIAS")
+                keyPassword = System.getenv("ORIEL_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (releaseKeystore != null) signingConfig = signingConfigs.getByName("release")
         }
     }
 

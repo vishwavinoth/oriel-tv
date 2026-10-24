@@ -22,6 +22,9 @@
     <string name="settings_reduce_transparency">Reduce transparency</string>
     <string name="settings_reduce_motion">Reduce motion</string>
     <string name="settings_restore">Restore defaults</string>
+    <string name="settings_licenses">Open-source licenses</string>
+    <string name="licenses_intro">Oriel is open source under the Apache License 2.0. It’s built with these libraries, each used under the license shown. Every build checks them against the licenses the project allows.</string>
+    <string name="licenses_missing">The license list isn’t in this build. It’s added when the app is built with Gradle.</string>
     <string name="state_on">On</string>
     <string name="state_off">Off</string>
 

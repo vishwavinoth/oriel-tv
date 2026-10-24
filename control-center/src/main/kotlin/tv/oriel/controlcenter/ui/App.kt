@@ -42,6 +42,7 @@ import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.nio.file.Path
 import tv.oriel.controlcenter.ControlCenterState
+import tv.oriel.controlcenter.OpenSourceLicenses
 import tv.oriel.controlcenter.theme.OrielTokens
 import tv.oriel.device.ConnectedDevice
 import tv.oriel.device.DeviceReport
@@ -62,6 +63,7 @@ fun App(state: ControlCenterState) {
             val snapshot = state.snapshot
             val review = state.review
             when {
+                state.showLicenses -> LicensesView(state)
                 state.adbMissing -> AdbMissing()
                 review != null && snapshot != null -> OperationSheet(state, review, snapshot)
                 snapshot != null -> DeviceView(state, snapshot)
@@ -93,7 +95,29 @@ private fun Sidebar(state: ControlCenterState) {
         OutlinedTextField(value = host, onValueChange = { host = it }, label = { Text("TV address, e.g. 192.168.1.50") }, singleLine = true, modifier = Modifier.fillMaxWidth())
         Button(onClick = { state.connect(host) }, enabled = host.isNotBlank() && !state.adbMissing && !state.busy, modifier = Modifier.fillMaxWidth()) { Text("Connect") }
         Spacer(Modifier.weight(1f))
+        TextButton(onClick = { state.showLicenses = !state.showLicenses }) {
+            Text(if (state.showLicenses) "Back to devices" else "Open-source licenses")
+        }
         Text("Network debugging isn’t encrypted. Turn it off on the TV when you’re done.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
+}
+
+@Composable
+private fun LicensesView(state: ControlCenterState) {
+    val libraries = remember { OpenSourceLicenses.load() }
+    Panel("Open-source licenses") {
+        Text(
+            "Oriel Control Center is open source under the Apache License 2.0. It’s built with these libraries, each used under the license shown. Every build checks them against the licenses the project allows.",
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        if (libraries.isEmpty()) Text("The license list isn’t in this build. It’s added when Control Center is built with Gradle.")
+        libraries.forEach { library ->
+            Column {
+                Text(library.displayName, fontWeight = FontWeight.SemiBold)
+                Text("${library.licenses.joinToString()} · ${library.coordinates}", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+        OutlinedButton(onClick = { state.showLicenses = false }) { Text("Back to devices") }
     }
 }
 

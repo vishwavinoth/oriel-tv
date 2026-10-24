@@ -129,6 +129,7 @@ fun SettingsPanel(
     preferences: LauncherPreferences,
     onUpdate: ((LauncherPreferences) -> LauncherPreferences) -> Unit,
     onRestore: () -> Unit,
+    onLicenses: () -> Unit,
     onClose: () -> Unit,
 ) {
     val colors = LocalOrielColors.current
@@ -207,6 +208,20 @@ fun SettingsPanel(
                 }
                 ToggleRow(stringResource(R.string.settings_reduce_motion), preferences.reduceMotion) {
                     onUpdate { it.copy(reduceMotion = !it.reduceMotion) }
+                }
+
+                PanelControl(
+                    onClick = onLicenses,
+                    shape = RoundedCornerShape(OrielTokens.Radius.Md),
+                    container = colors.textPrimary.copy(alpha = 0f),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(
+                        stringResource(R.string.settings_licenses),
+                        style = OrielType.Body,
+                        color = colors.textSecondary,
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                    )
                 }
 
                 PanelControl(

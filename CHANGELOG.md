@@ -32,6 +32,9 @@ All notable changes to Oriel TV are recorded here. The format follows the common
   - Keeps an operation history on the computer, without device serial numbers.
   - Copies a device report for compatibility and bug reports, leaving out the TV's address, serial number, and app list.
 - A device-safety core with a closed command allowlist and validation that blocks shell injection, covered by unit tests.
+- Dependency license checks: every Gradle and npm dependency is checked against the licenses the project allows, in CI and in every release build. The launcher and Control Center show their libraries in an Open-source licenses screen, and the website lists its own on the License page.
+- A release workflow that builds the launcher APK and Control Center installers for Linux and Windows (and a runnable jar for macOS) from a version tag, adds SHA-256 checksums and build provenance, and opens a draft release for review. See [docs/releasing.md](docs/releasing.md).
+- Dependabot keeps Gradle, npm, and GitHub Actions dependencies up to date.
 
 ### Privacy
 
