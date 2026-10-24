@@ -13,8 +13,8 @@ PRD section 3.2 recommends Kotlin and Jetpack Compose for TV for the launcher, a
 
 - Kotlin 2.2, Jetpack Compose with `androidx.tv:tv-material`, and Gradle with a version catalog.
 - Android Gradle Plugin 8.13 with Gradle 9.0. AGP 9 needs a newer Android Studio than many contributors run; AGP 8.13 opens in Android Studio 2025.2 and later.
-- `minSdk 26` (Android 8.0) and `compileSdk`/`targetSdk 36`.
-- Preferences are stored with Jetpack DataStore. No database and no `INTERNET` permission.
+- `minSdk 21` (Android 5.0, the first Android TV release) and `compileSdk`/`targetSdk 36`. Every dependency supports API 21. Features that need newer versions check at runtime: wallpaper blur needs Android 12, and gradient artwork has solid-color versions for Android 5.0 to 6.0.
+- Preferences are stored with Jetpack DataStore. No database and no `INTERNET` permission; `ACCESS_NETWORK_STATE` is used only to show whether the TV is on Wi-Fi, Ethernet, or offline.
 - Application ID `tv.oriel.launcher`. This is provisional until the project secures a matching domain (PRD section 4.1).
 
 ### Shared code (`shared/`)

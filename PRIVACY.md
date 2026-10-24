@@ -4,9 +4,10 @@ Oriel TV is built to work without collecting anything about you. This page descr
 
 ## Oriel Launcher
 
-- **No network access.** The launcher doesn't request Android's `INTERNET` permission, so it can't send data anywhere.
+- **No internet access.** The launcher doesn't request Android's `INTERNET` permission, so it can't send data anywhere.
 - **No accounts, analytics, ads, or tracking.**
-- **What it reads:** the list of installed apps that can be opened from a home screen, so it can show them. This list stays on the TV.
+- **What it reads:** the list of installed apps that can be opened from a home screen, so it can show them, and which of the TV's settings screens exist, so the control panel only offers ones that work. These stay on the TV.
+- **Connection status:** with Android's `ACCESS_NETWORK_STATE` permission, it reads only whether the TV is on Wi-Fi, Ethernet, or offline, to show in the top row. It can't see network names, addresses, or traffic.
 - **What it stores:** your favorites, hidden apps, app order, theme, accent color, wallpaper choice, and display settings. They're saved in the launcher's private storage on the TV and deleted when you uninstall it.
 
 ## Oriel Control Center

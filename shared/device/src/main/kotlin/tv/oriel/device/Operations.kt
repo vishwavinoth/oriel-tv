@@ -51,7 +51,7 @@ object OperationPlanner {
 
     fun install(device: DeviceSnapshot, apk: Path?): OperationOption {
         if (device.sdk in 1 until DeviceSnapshot.MIN_SDK) {
-            return OperationOption.Unavailable(INSTALL, "Oriel needs Android 8.0 or newer.")
+            return OperationOption.Unavailable(INSTALL, "Oriel needs Android 5.0 or newer.")
         }
         val file = apk?.let { runCatching { Validate.apkFile(it) }.getOrNull() }
             ?: return OperationOption.Unavailable(INSTALL, "Choose the Oriel APK first. Build it with ./gradlew :launcher:assembleDebug.")
@@ -73,6 +73,9 @@ object OperationPlanner {
     fun setHome(device: DeviceSnapshot): OperationOption {
         if (!device.orielInstalled) return OperationOption.Unavailable(SET_HOME, "Install Oriel first.")
         if (device.platform == Platform.FireTv) return OperationOption.Unavailable(SET_HOME, "Fire OS doesn’t allow another home app.")
+        if (device.sdk in 1 until DeviceSnapshot.HOME_COMMANDS_MIN_SDK) {
+            return OperationOption.Unavailable(SET_HOME, "Android ${device.androidVersion} can’t change the home app over adb. Press Home on the TV and choose Oriel when Android asks.")
+        }
         if (device.orielIsHome) return OperationOption.Unavailable(SET_HOME, "Oriel is already the home app.")
         return OperationOption.Available(
             OperationPlan(

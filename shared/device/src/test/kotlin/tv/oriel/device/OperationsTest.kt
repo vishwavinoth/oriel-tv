@@ -22,6 +22,18 @@ class OperationsTest {
     }
 
     @Test
+    fun `older Android can install Oriel but can't switch the home app over adb`() {
+        val apk = Files.write(Files.createTempDirectory("oriel").resolve("launcher-debug.apk"), byteArrayOf(1))
+        assertIs<OperationOption.Available>(OperationPlanner.install(sampleDevice(sdk = "22"), apk))
+        assertIs<OperationOption.Unavailable>(OperationPlanner.install(sampleDevice(sdk = "19"), apk))
+
+        val old = sampleDevice(installed = setOf(launcherx, oriel), home = null, sdk = "23")
+        assertTrue(assertIs<OperationOption.Unavailable>(OperationPlanner.setHome(old)).reason.contains("choose Oriel"))
+        assertTrue(old.warnings.any { it.contains("can’t report or change the home app") })
+        assertIs<OperationOption.Available>(OperationPlanner.setHome(sampleDevice(installed = setOf(launcherx, oriel), home = null, sdk = "24")))
+    }
+
+    @Test
     fun `turning off the built-in home screen requires Oriel to be installed`() {
         val withoutOriel = OperationPlanner.turnOffBuiltInHome(sampleDevice())
         assertIs<OperationOption.Unavailable>(withoutOriel)

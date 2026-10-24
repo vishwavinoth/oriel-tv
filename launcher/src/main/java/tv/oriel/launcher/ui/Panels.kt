@@ -50,7 +50,7 @@ import tv.oriel.launcher.ui.theme.OrielType
 
 /** A focusable control inside a glass panel. It uses a tinted fill, never glass of its own (ADR 0004, rule 3). */
 @Composable
-private fun PanelControl(
+internal fun PanelControl(
     onClick: () -> Unit,
     shape: Shape,
     modifier: Modifier = Modifier,
@@ -82,7 +82,7 @@ private fun PanelControl(
 }
 
 @Composable
-private fun SettingLabel(text: String) {
+internal fun SettingLabel(text: String) {
     Text(text, style = OrielType.Label, color = LocalOrielColors.current.textSecondary)
 }
 

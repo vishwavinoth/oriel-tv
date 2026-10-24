@@ -20,7 +20,9 @@ All notable changes to Oriel TV are recorded here. The format follows the common
   - D-pad navigation that stops at edges and restores focus after closing a panel or returning from an app.
   - Favorites, reordering, and hiding apps, from an options menu on any app.
   - Settings for theme, accent, wallpaper, clock, reduce transparency, and reduce motion, saved on the TV.
-  - No network permission.
+  - A control panel with the connection status and shortcuts to the TV's own settings. Each shortcut appears only if the TV can open it.
+  - Runs on Android 5.0 and newer, so it reaches older Android TV and Fire TV devices.
+  - No internet permission.
 - Oriel Control Center, a desktop companion in Kotlin with Compose Multiplatform (ADR 0006):
   - Finds or connects to TVs through the user's own adb, and shows device details and warnings.
   - Installs or updates Oriel, makes it the home app, and turns the built-in home screen off and back on, never uninstalling anything.
@@ -32,4 +34,4 @@ All notable changes to Oriel TV are recorded here. The format follows the common
 
 ### Privacy
 
-- The launcher requests no network access and contains no analytics. The website uses no cookies, analytics, or third-party scripts.
+- The launcher requests no internet access and contains no analytics. It reads only the connection type, for the status in the top row. The website uses no cookies, analytics, or third-party scripts.

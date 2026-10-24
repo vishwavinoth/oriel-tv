@@ -88,15 +88,27 @@ data class DeviceSnapshot(
         get() = buildList {
             if (isNetwork) add("This connection uses network debugging, which isn’t encrypted. Turn it off on the TV when you’re done.")
             if (platform == Platform.FireTv) add("Fire OS always returns to Amazon’s home screen, so Oriel can only be opened as an app here.")
-            if (sdk in 1 until MIN_SDK) add("Oriel needs Android 8.0 or newer. This device runs Android $androidVersion.")
-            if (homeActivity == null) add("Couldn’t read which app is the home screen. Some operations are unavailable.")
+            if (sdk in 1 until MIN_SDK) add("Oriel needs Android 5.0 or newer. This device runs Android $androidVersion.")
+            if (homeActivity == null) {
+                add(
+                    if (sdk in 1 until HOME_COMMANDS_MIN_SDK) {
+                        "Android $androidVersion can’t report or change the home app over adb. To use Oriel, press Home on the TV and choose it when Android asks."
+                    } else {
+                        "Couldn’t read which app is the home screen. Some operations are unavailable."
+                    },
+                )
+            }
             if (platform == Platform.OtherAndroid) add("This doesn’t look like a TV. Oriel is designed for Android TV and Google TV.")
         }
 
     companion object {
         const val ORIEL_PACKAGE = "tv.oriel.launcher"
         const val ORIEL_HOME = "tv.oriel.launcher/.MainActivity"
-        const val MIN_SDK = 26
+        /** Android 5.0, the first Android TV release. Matches the launcher's minSdk. */
+        const val MIN_SDK = 21
+
+        /** `cmd package` (resolve-activity, set-home-activity) arrived in Android 7.0. */
+        const val HOME_COMMANDS_MIN_SDK = 24
         val BUILT_IN_HOMES = listOf(
             "com.google.android.apps.tv.launcherx",
             "com.google.android.tvlauncher",

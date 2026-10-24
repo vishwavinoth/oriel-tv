@@ -38,7 +38,7 @@ const STEPS = [
 ];
 
 const PRIVACY_FACTS = [
-  "No network permission, so the launcher can’t send data anywhere",
+  "No internet permission, so the launcher can’t send data anywhere",
   "No accounts, analytics, advertising, or tracking",
   "Settings stay on the TV and leave with the app when you uninstall it",
   "The website uses no cookies, analytics, or third-party scripts",

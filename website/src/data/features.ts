@@ -22,6 +22,7 @@ export const FEATURES: readonly Feature[] = [
     points: [
       "A favorites dock for the apps you open most, above a grid of everything else.",
       "Reorder favorites and hide apps you never use, without uninstalling anything.",
+      "A control panel shows the connection and opens the TV’s own Wi-Fi, Bluetooth, notification, and display settings.",
       "The focused app’s name and category appear large enough to read from the couch.",
     ],
     icon: Tv,
@@ -66,7 +67,7 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "privacy",
     title: "Privacy-first operation",
-    summary: "The launcher has no network permission. It can’t send anything anywhere.",
+    summary: "The launcher has no internet permission. It can’t send anything anywhere.",
     points: [
       "No accounts, analytics, ads, or tracking.",
       "Your settings live on the TV and are deleted when you uninstall Oriel.",

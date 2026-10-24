@@ -13,7 +13,7 @@ android {
     defaultConfig {
         // Provisional until the project secures a matching domain (PRD section 4.1).
         applicationId = "tv.oriel.launcher"
-        minSdk = 26
+        minSdk = 21
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0-dev"
