@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- German. Draft translation: it needs review by a native speaker before a release. See docs/translations.md. -->
+<resources>
+    <string name="loading_apps">Apps werden geladen…</string>
+    <string name="favorites">Favoriten</string>
+    <string name="all_apps">Alle Apps</string>
+    <string name="no_favorites">Noch keine Favoriten. Halte OK auf einer App gedrückt, um sie hinzuzufügen.</string>
+    <string name="no_apps">Keine Apps zum Anzeigen. Setze in den Einstellungen alles auf Standard zurück, um ausgeblendete Apps wiederherzustellen.</string>
+    <string name="tv_app">TV-App</string>
+    <string name="android_app">Android-App</string>
+    <string name="options_hint">OK gedrückt halten für Optionen</string>
+    <string name="settings">Einstellungen</string>
+
+    <string name="settings_close_hint">Zum Schließen „Zurück“ drücken</string>
+    <string name="settings_theme_pack">Designpaket</string>
+    <string name="theme_pack_custom">Benutzerdefiniert: deine eigene Kombination aus Design, Akzentfarbe und Hintergrund.</string>
+    <string name="theme_pack_caption">%1$s: %2$s</string>
+    <string name="settings_theme">Design</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="theme_light">Hell</string>
+    <string name="settings_accent">Akzentfarbe</string>
+    <string name="settings_wallpaper">Hintergrund</string>
+    <string name="settings_clock">Uhr anzeigen</string>
+    <string name="settings_reduce_transparency">Transparenz reduzieren</string>
+    <string name="settings_reduce_motion">Bewegung reduzieren</string>
+    <string name="settings_restore">Auf Standard zurücksetzen</string>
+    <string name="settings_licenses">Open-Source-Lizenzen</string>
+    <string name="licenses_intro">Oriel ist Open Source unter der Apache-Lizenz 2.0. Es basiert auf diesen Bibliotheken, die jeweils unter der angegebenen Lizenz verwendet werden. Jeder Build prüft sie anhand der Lizenzen, die das Projekt erlaubt.</string>
+    <string name="licenses_missing">Die Lizenzliste ist in diesem Build nicht enthalten. Sie wird hinzugefügt, wenn die App mit Gradle gebaut wird.</string>
+    <string name="state_on">An</string>
+    <string name="state_off">Aus</string>
+
+    <string name="option_add_favorite">Zu Favoriten hinzufügen</string>
+    <string name="option_remove_favorite">Aus Favoriten entfernen</string>
+    <string name="option_move_left">Nach links verschieben</string>
+    <string name="option_move_right">Nach rechts verschieben</string>
+    <string name="option_hide">App ausblenden</string>
+
+    <string name="control_panel">Bedienfeld</string>
+    <string name="control_panel_hint">Öffnet die Einstellungen deines Fernsehers</string>
+    <string name="connection_wifi">WLAN</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Online</string>
+    <string name="connection_offline">Offline</string>
+    <string name="connection_wifi_detail">Über WLAN verbunden.</string>
+    <string name="connection_ethernet_detail">Mit einem Netzwerkkabel verbunden.</string>
+    <string name="connection_other_detail">Mit einem Netzwerk verbunden.</string>
+    <string name="connection_offline_detail">Nicht verbunden. Apps, die das Internet brauchen, funktionieren erst wieder, wenn der Fernseher verbunden ist.</string>
+    <string name="shortcut_oriel">Oriel-Einstellungen</string>
+    <string name="shortcut_network">WLAN und Netzwerk</string>
+    <string name="shortcut_bluetooth">Bluetooth</string>
+    <string name="shortcut_notifications">Benachrichtigungen</string>
+    <string name="shortcut_display">Display und Bild</string>
+    <string name="shortcut_sound">Ton</string>
+    <string name="shortcut_screensaver">Bildschirmschoner</string>
+    <string name="shortcut_date">Datum und Uhrzeit</string>
+    <string name="shortcut_language">Sprache</string>
+    <string name="shortcut_keyboard">Tastatur</string>
+    <string name="shortcut_accessibility">Bedienungshilfen</string>
+    <string name="shortcut_apps">Apps</string>
+    <string name="shortcut_storage">Speicher</string>
+    <string name="shortcut_privacy">Datenschutz</string>
+    <string name="shortcut_about">Über diesen Fernseher</string>
+    <string name="shortcut_all">Alle Einstellungen</string>
+    <string name="message_shortcut_failed">%1$s konnte auf diesem Fernseher nicht geöffnet werden.</string>
+
+    <string name="message_open_failed">%1$s konnte nicht geöffnet werden. Die App wurde möglicherweise deinstalliert.</string>
+    <string name="message_hidden">%1$s ist ausgeblendet. Setze in den Einstellungen alles auf Standard zurück, um die App wiederherzustellen.</string>
+    <string name="message_restored">Einstellungen, Favoriten und ausgeblendete Apps sind wieder auf Standard.</string>
+
+    <string name="accent_daylight">Tageslicht</string>
+    <string name="accent_amber">Bernstein</string>
+    <string name="accent_lagoon">Lagune</string>
+    <string name="accent_rose">Rosé</string>
+    <string name="accent_violet">Violett</string>
+    <string name="wallpaper_dusk">Dämmerung</string>
+    <string name="wallpaper_lagoon">Lagune</string>
+    <string name="wallpaper_aurora">Polarlicht</string>
+    <string name="wallpaper_ember">Glut</string>
+    <string name="wallpaper_mist">Nebel</string>
+    <string name="wallpaper_dawn">Morgenrot</string>
+    <string name="pack_evening">Abend</string>
+    <string name="pack_evening_description">Oriels Standard: eine violette Dämmerung mit einem sanften blauen Akzent.</string>
+    <string name="pack_cinema">Kino</string>
+    <string name="pack_cinema_description">Warm und gedämpft, zum Fernsehen im Dunkeln.</string>
+    <string name="pack_reef">Riff</string>
+    <string name="pack_reef_description">Tiefes türkisfarbenes Wasser und ein leuchtender Lagunen-Akzent.</string>
+    <string name="pack_northern">Nordlicht</string>
+    <string name="pack_northern_description">Grün und Blau des Nachthimmels mit einem violetten Akzent.</string>
+    <string name="pack_morning">Morgen</string>
+    <string name="pack_morning_description">Ein helles, luftiges Design für den Tag.</string>
+    <string name="pack_sunrise">Sonnenaufgang</string>
+    <string name="pack_sunrise_description">Sanftes Pfirsichlicht mit einem Rosé-Akzent.</string>
+</resources>

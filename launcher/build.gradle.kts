@@ -31,6 +31,11 @@ android {
         versionName = "0.1.0-dev"
     }
 
+    // Lists Oriel's languages for Android 13's per-app language setting, from the values-<language> folders.
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     // Release signing comes only from the environment (the release workflow's secrets), never from the repository.
     val releaseKeystore = System.getenv("ORIEL_KEYSTORE_FILE")
     signingConfigs {

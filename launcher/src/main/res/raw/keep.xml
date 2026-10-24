@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Design token names are looked up by name at runtime (ui/TokenText.kt), so resource shrinking must keep them. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/accent_*,@string/wallpaper_*,@string/pack_*" />

@@ -81,6 +81,10 @@ On Windows, use `gradlew.bat`. To try it, install the debug APK on an Android TV
 
 Read [ADR 0004](docs/adr/0004-glass-material-system.md) and [ADR 0005](docs/adr/0005-materials-hig.md) before changing any surface. In short: glass is only for controls and navigation, standard materials give structure to content, glass never sits on glass, and every combination must pass the contrast tests.
 
+### Review or add a translation
+
+The launcher's first translations (Spanish, French, German, Hindi, Tamil, and Arabic) are drafts that need a native speaker's review. If you speak one of them, or want to add a language, follow [docs/translations.md](docs/translations.md).
+
 ### Submit a theme pack
 
 Anyone can propose a theme pack:

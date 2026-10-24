@@ -24,6 +24,7 @@ All notable changes to Oriel TV are recorded here. The format follows the common
   - A control panel with the connection status and shortcuts to the TV's own settings. Each shortcut appears only if the TV can open it.
   - Runs on Android 5.0 and newer, so it reaches older Android TV and Fire TV devices.
   - No internet permission.
+  - Draft translations into Spanish, French, German, Hindi, Tamil, and Arabic, each marked for native-speaker review. The launcher works right to left, and on Android 13 and newer its language can be chosen on its own. See [docs/translations.md](docs/translations.md).
 - Oriel Control Center, a desktop companion in Kotlin with Compose Multiplatform (ADR 0006):
   - Finds or connects to TVs through the user's own adb, and shows device details and warnings.
   - Installs or updates Oriel, makes it the home app, and turns the built-in home screen off and back on, never uninstalling anything.

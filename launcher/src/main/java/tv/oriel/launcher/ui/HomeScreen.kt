@@ -257,10 +257,13 @@ fun HomeScreen(
     }
 }
 
-/** Left on the first item and Right on the last item stop at the edge instead of jumping rows. */
+/**
+ * Moving past the first or last item stops at the edge instead of jumping rows. Start and end, not left and right,
+ * so the edges stay correct when a right-to-left language mirrors the row.
+ */
 private fun Modifier.rowEdges(index: Int, count: Int): Modifier = focusProperties {
-    if (index == 0) left = FocusRequester.Cancel
-    if (index == count - 1) right = FocusRequester.Cancel
+    if (index == 0) start = FocusRequester.Cancel
+    if (index == count - 1) end = FocusRequester.Cancel
 }
 
 @Composable

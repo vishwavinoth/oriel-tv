@@ -166,6 +166,7 @@ fun SettingsPanel(
                     OrielTokens.ThemePack.All.forEachIndexed { index, pack ->
                         val wallpaper = wallpaperById(pack.wallpaperId)
                         val accent = OrielTokens.Accent.All.firstOrNull { it.id == pack.accentId } ?: OrielTokens.Accent.Default
+                        val packLabel = tokenText("pack_${pack.id}", pack.label)
                         PanelControl(
                             onClick = { onUpdate { it.withPack(pack) } },
                             shape = RoundedCornerShape(OrielTokens.Radius.Sm),
@@ -173,7 +174,7 @@ fun SettingsPanel(
                             container = wallpaper.base,
                             modifier = Modifier
                                 .size(width = 52.dp, height = 36.dp)
-                                .semantics { contentDescription = pack.label }
+                                .semantics { contentDescription = packLabel }
                                 .then(if (index == 0) Modifier.focusRequester(first) else Modifier),
                         ) {
                             Canvas(Modifier.fillMaxSize()) {
@@ -188,7 +189,9 @@ fun SettingsPanel(
                     }
                 }
                 Text(
-                    currentPack?.let { "${it.label}: ${it.description}" } ?: stringResource(R.string.theme_pack_custom),
+                    currentPack?.let {
+                        stringResource(R.string.theme_pack_caption, tokenText("pack_${it.id}", it.label), tokenText("pack_${it.id}_description", it.description))
+                    } ?: stringResource(R.string.theme_pack_custom),
                     style = OrielType.Caption,
                     color = colors.textSecondary,
                 )
@@ -213,12 +216,13 @@ fun SettingsPanel(
                 SettingLabel(stringResource(R.string.settings_accent))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     OrielTokens.Accent.All.forEach { accent ->
+                        val accentLabel = tokenText("accent_${accent.id}", accent.label)
                         PanelControl(
                             onClick = { onUpdate { it.copy(accentId = accent.id) } },
                             shape = CircleShape,
                             selected = preferences.accentId == accent.id,
                             container = if (colors.isLight) accent.onLight else accent.onDark,
-                            modifier = Modifier.size(40.dp).semantics { contentDescription = accent.label },
+                            modifier = Modifier.size(40.dp).semantics { contentDescription = accentLabel },
                         ) {}
                     }
                 }
@@ -226,12 +230,13 @@ fun SettingsPanel(
                 SettingLabel(stringResource(R.string.settings_wallpaper))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     OrielTokens.Wallpaper.All.forEach { wallpaper ->
+                        val wallpaperLabel = tokenText("wallpaper_${wallpaper.id}", wallpaper.label)
                         PanelControl(
                             onClick = { onUpdate { it.copy(wallpaperId = wallpaper.id) } },
                             shape = RoundedCornerShape(OrielTokens.Radius.Sm),
                             selected = preferences.wallpaperId == wallpaper.id,
                             container = wallpaper.base,
-                            modifier = Modifier.size(width = 56.dp, height = 36.dp).semantics { contentDescription = wallpaper.label },
+                            modifier = Modifier.size(width = 56.dp, height = 36.dp).semantics { contentDescription = wallpaperLabel },
                         ) {
                             Canvas(Modifier.fillMaxSize()) { drawWallpaper(wallpaper) }
                         }

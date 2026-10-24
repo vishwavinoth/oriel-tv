@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tamil. Draft translation: it needs review by a native speaker before a release. See docs/translations.md. -->
+<resources>
+    <string name="loading_apps">ஆப்ஸ் ஏற்றப்படுகின்றன…</string>
+    <string name="favorites">பிடித்தவை</string>
+    <string name="all_apps">அனைத்து ஆப்ஸும்</string>
+    <string name="no_favorites">இன்னும் பிடித்தவை எதுவும் இல்லை. ஓர் ஆப்ஸைச் சேர்க்க, அதில் OK பட்டனை அழுத்திப் பிடிக்கவும்.</string>
+    <string name="no_apps">காட்டுவதற்கு ஆப்ஸ் எதுவும் இல்லை. மறைக்கப்பட்ட ஆப்ஸைத் திரும்பப் பெற, அமைப்புகளில் இயல்புநிலைகளை மீட்டமைக்கவும்.</string>
+    <string name="tv_app">டிவி ஆப்ஸ்</string>
+    <string name="android_app">Android ஆப்ஸ்</string>
+    <string name="options_hint">விருப்பங்களுக்கு OK பட்டனை அழுத்திப் பிடிக்கவும்</string>
+    <string name="settings">அமைப்புகள்</string>
+
+    <string name="settings_close_hint">மூட, பின்செல் பட்டனை அழுத்தவும்</string>
+    <string name="settings_theme_pack">தீம் தொகுப்பு</string>
+    <string name="theme_pack_custom">பிரத்தியேகம்: தீம், முதன்மை வண்ணம், வால்பேப்பர் ஆகியவற்றின் உங்கள் சொந்தக் கலவை.</string>
+    <string name="theme_pack_caption">%1$s: %2$s</string>
+    <string name="settings_theme">தீம்</string>
+    <string name="theme_dark">அடர்</string>
+    <string name="theme_light">வெளிர்</string>
+    <string name="settings_accent">முதன்மை வண்ணம்</string>
+    <string name="settings_wallpaper">வால்பேப்பர்</string>
+    <string name="settings_clock">கடிகாரத்தைக் காட்டு</string>
+    <string name="settings_reduce_transparency">ஒளிபுகுதன்மையைக் குறை</string>
+    <string name="settings_reduce_motion">அசைவைக் குறை</string>
+    <string name="settings_restore">இயல்புநிலைகளை மீட்டமை</string>
+    <string name="settings_licenses">ஓப்பன் சோர்ஸ் உரிமங்கள்</string>
+    <string name="licenses_intro">Oriel என்பது Apache License 2.0 உரிமத்தின் கீழ் உள்ள ஓப்பன் சோர்ஸ் ஆப்ஸ் ஆகும். இது இந்த லைப்ரரிகளைக் கொண்டு உருவாக்கப்பட்டது, ஒவ்வொன்றும் காட்டப்பட்டுள்ள உரிமத்தின் கீழ் பயன்படுத்தப்படுகிறது. ஒவ்வொரு பில்டும் அவற்றை இந்தத் திட்டம் அனுமதிக்கும் உரிமங்களுடன் ஒப்பிட்டுச் சரிபார்க்கிறது.</string>
+    <string name="licenses_missing">இந்தப் பில்டில் உரிமப் பட்டியல் இல்லை. Gradle மூலம் ஆப்ஸை உருவாக்கும்போது அது சேர்க்கப்படும்.</string>
+    <string name="state_on">ஆன்</string>
+    <string name="state_off">ஆஃப்</string>
+
+    <string name="option_add_favorite">பிடித்தவையில் சேர்</string>
+    <string name="option_remove_favorite">பிடித்தவையிலிருந்து அகற்று</string>
+    <string name="option_move_left">இடப்புறம் நகர்த்து</string>
+    <string name="option_move_right">வலப்புறம் நகர்த்து</string>
+    <string name="option_hide">ஆப்ஸை மறை</string>
+
+    <string name="control_panel">கட்டுப்பாட்டுப் பலகம்</string>
+    <string name="control_panel_hint">உங்கள் டிவியின் சொந்த அமைப்புகளைத் திறக்கும்</string>
+    <string name="connection_wifi">வைஃபை</string>
+    <string name="connection_ethernet">ஈதர்நெட்</string>
+    <string name="connection_other">ஆன்லைன்</string>
+    <string name="connection_offline">ஆஃப்லைன்</string>
+    <string name="connection_wifi_detail">வைஃபை மூலம் இணைக்கப்பட்டுள்ளது.</string>
+    <string name="connection_ethernet_detail">நெட்வொர்க் கேபிள் மூலம் இணைக்கப்பட்டுள்ளது.</string>
+    <string name="connection_other_detail">நெட்வொர்க்குடன் இணைக்கப்பட்டுள்ளது.</string>
+    <string name="connection_offline_detail">இணைக்கப்படவில்லை. டிவி மீண்டும் இணைக்கப்படும் வரை இணையம் தேவைப்படும் ஆப்ஸ் வேலை செய்யாது.</string>
+    <string name="shortcut_oriel">Oriel அமைப்புகள்</string>
+    <string name="shortcut_network">வைஃபை மற்றும் நெட்வொர்க்</string>
+    <string name="shortcut_bluetooth">புளூடூத்</string>
+    <string name="shortcut_notifications">அறிவிப்புகள்</string>
+    <string name="shortcut_display">டிஸ்ப்ளே மற்றும் படம்</string>
+    <string name="shortcut_sound">ஒலி</string>
+    <string name="shortcut_screensaver">ஸ்கிரீன் சேவர்</string>
+    <string name="shortcut_date">தேதி மற்றும் நேரம்</string>
+    <string name="shortcut_language">மொழி</string>
+    <string name="shortcut_keyboard">கீபோர்டு</string>
+    <string name="shortcut_accessibility">அணுகல்தன்மை</string>
+    <string name="shortcut_apps">ஆப்ஸ்</string>
+    <string name="shortcut_storage">சேமிப்பகம்</string>
+    <string name="shortcut_privacy">தனியுரிமை</string>
+    <string name="shortcut_about">இந்த டிவி பற்றி</string>
+    <string name="shortcut_all">அனைத்து அமைப்புகளும்</string>
+    <string name="message_shortcut_failed">இந்த டிவியில் %1$s ஐத் திறக்க முடியவில்லை.</string>
+
+    <string name="message_open_failed">%1$s ஐத் திறக்க முடியவில்லை. அது நிறுவல் நீக்கப்பட்டிருக்கலாம்.</string>
+    <string name="message_hidden">%1$s மறைக்கப்பட்டது. அதைத் திரும்பப் பெற, அமைப்புகளில் இயல்புநிலைகளை மீட்டமைக்கவும்.</string>
+    <string name="message_restored">அமைப்புகள், பிடித்தவை, மறைக்கப்பட்ட ஆப்ஸ் ஆகியவை இயல்புநிலைக்குத் திரும்பின.</string>
+
+    <string name="accent_daylight">பகலொளி</string>
+    <string name="accent_amber">அம்பர்</string>
+    <string name="accent_lagoon">காயல்</string>
+    <string name="accent_rose">ரோஜா</string>
+    <string name="accent_violet">ஊதா</string>
+    <string name="wallpaper_dusk">அந்தி</string>
+    <string name="wallpaper_lagoon">காயல்</string>
+    <string name="wallpaper_aurora">துருவ ஒளி</string>
+    <string name="wallpaper_ember">தணல்</string>
+    <string name="wallpaper_mist">மூடுபனி</string>
+    <string name="wallpaper_dawn">விடியல்</string>
+    <string name="pack_evening">மாலை</string>
+    <string name="pack_evening_description">Oriel இன் இயல்புநிலை: ஊதா அந்தியும் மென்மையான நீல வண்ணமும்.</string>
+    <string name="pack_cinema">சினிமா</string>
+    <string name="pack_cinema_description">இதமான, மங்கிய ஒளி. இருட்டில் பார்ப்பதற்கு ஏற்றது.</string>
+    <string name="pack_reef">பவளப்பாறை</string>
+    <string name="pack_reef_description">ஆழ்ந்த நீலப்பச்சை நீரும் பிரகாசமான காயல் வண்ணமும்.</string>
+    <string name="pack_northern">வடதுருவ ஒளி</string>
+    <string name="pack_northern_description">இரவு வானின் பச்சை, நீல வண்ணங்களுடன் ஊதா வண்ணம்.</string>
+    <string name="pack_morning">காலை</string>
+    <string name="pack_morning_description">பகல் நேரத்திற்கான பிரகாசமான, இலகுவான வெளிர் தீம்.</string>
+    <string name="pack_sunrise">சூரிய உதயம்</string>
+    <string name="pack_sunrise_description">மென்மையான பீச் நிற ஒளியுடன் ரோஜா வண்ணம்.</string>
+</resources>

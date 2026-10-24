@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Arabic, a right-to-left language. Draft translation: it needs review by a native speaker before a release. See docs/translations.md. -->
+<resources>
+    <string name="loading_apps">جارٍ تحميل التطبيقات…</string>
+    <string name="favorites">المفضّلة</string>
+    <string name="all_apps">كل التطبيقات</string>
+    <string name="no_favorites">لا توجد تطبيقات مفضّلة بعد. اضغط مع الاستمرار على زر OK في أي تطبيق لإضافته.</string>
+    <string name="no_apps">لا توجد تطبيقات لعرضها. استعِد الإعدادات التلقائية من الإعدادات لإرجاع التطبيقات المخفية.</string>
+    <string name="tv_app">تطبيق تلفزيون</string>
+    <string name="android_app">تطبيق Android</string>
+    <string name="options_hint">اضغط مع الاستمرار على OK لعرض الخيارات</string>
+    <string name="settings">الإعدادات</string>
+
+    <string name="settings_close_hint">اضغط على رجوع للإغلاق</string>
+    <string name="settings_theme_pack">حزمة المظهر</string>
+    <string name="theme_pack_custom">مخصّص: مزيجك الخاص من المظهر ولون التمييز والخلفية.</string>
+    <string name="theme_pack_caption">%1$s: %2$s</string>
+    <string name="settings_theme">المظهر</string>
+    <string name="theme_dark">داكن</string>
+    <string name="theme_light">فاتح</string>
+    <string name="settings_accent">لون التمييز</string>
+    <string name="settings_wallpaper">الخلفية</string>
+    <string name="settings_clock">عرض الساعة</string>
+    <string name="settings_reduce_transparency">تقليل الشفافية</string>
+    <string name="settings_reduce_motion">تقليل الحركة</string>
+    <string name="settings_restore">استعادة الإعدادات التلقائية</string>
+    <string name="settings_licenses">تراخيص البرامج المفتوحة المصدر</string>
+    <string name="licenses_intro">يُعدّ Oriel برنامجًا مفتوح المصدر بموجب ترخيص Apache 2.0. وهو مبنيّ باستخدام هذه المكتبات، وتُستخدم كل منها بموجب الترخيص المذكور. ويتحقّق كل إصدار منها مقارنةً بالتراخيص التي يسمح بها المشروع.</string>
+    <string name="licenses_missing">قائمة التراخيص غير موجودة في هذا الإصدار، وتُضاف عند إنشاء التطبيق باستخدام Gradle.</string>
+    <string name="state_on">مفعّل</string>
+    <string name="state_off">غير مفعّل</string>
+
+    <string name="option_add_favorite">إضافة إلى المفضّلة</string>
+    <string name="option_remove_favorite">إزالة من المفضّلة</string>
+    <!-- Toward the start of the row, which is on the right in Arabic. -->
+    <string name="option_move_left">نقل إلى اليمين</string>
+    <!-- Toward the end of the row, which is on the left in Arabic. -->
+    <string name="option_move_right">نقل إلى اليسار</string>
+    <string name="option_hide">إخفاء التطبيق</string>
+
+    <string name="control_panel">لوحة التحكّم</string>
+    <string name="control_panel_hint">تفتح إعدادات التلفزيون نفسه</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_ethernet">إيثرنت</string>
+    <string name="connection_other">متّصل</string>
+    <string name="connection_offline">غير متّصل</string>
+    <string name="connection_wifi_detail">متّصل عبر Wi-Fi.</string>
+    <string name="connection_ethernet_detail">متّصل بكابل شبكة.</string>
+    <string name="connection_other_detail">متّصل بشبكة.</string>
+    <string name="connection_offline_detail">غير متّصل. لن تعمل التطبيقات التي تحتاج إلى الإنترنت حتى يُعاد اتصال التلفزيون.</string>
+    <string name="shortcut_oriel">إعدادات Oriel</string>
+    <string name="shortcut_network">Wi-Fi والشبكة</string>
+    <string name="shortcut_bluetooth">بلوتوث</string>
+    <string name="shortcut_notifications">الإشعارات</string>
+    <string name="shortcut_display">الشاشة والصورة</string>
+    <string name="shortcut_sound">الصوت</string>
+    <string name="shortcut_screensaver">شاشة التوقف</string>
+    <string name="shortcut_date">التاريخ والوقت</string>
+    <string name="shortcut_language">اللغة</string>
+    <string name="shortcut_keyboard">لوحة المفاتيح</string>
+    <string name="shortcut_accessibility">سهولة الاستخدام</string>
+    <string name="shortcut_apps">التطبيقات</string>
+    <string name="shortcut_storage">مساحة التخزين</string>
+    <string name="shortcut_privacy">الخصوصية</string>
+    <string name="shortcut_about">لمحة عن التلفزيون</string>
+    <string name="shortcut_all">كل الإعدادات</string>
+    <string name="message_shortcut_failed">تعذّر فتح %1$s على هذا التلفزيون.</string>
+
+    <string name="message_open_failed">تعذّر فتح %1$s. ربما تمّت إزالة تثبيته.</string>
+    <string name="message_hidden">تم إخفاء %1$s. استعِد الإعدادات التلقائية من الإعدادات لإرجاعه.</string>
+    <string name="message_restored">عادت الإعدادات والتطبيقات المفضّلة والمخفية إلى وضعها التلقائي.</string>
+
+    <string name="accent_daylight">ضوء النهار</string>
+    <string name="accent_amber">كهرماني</string>
+    <string name="accent_lagoon">بحيرة</string>
+    <string name="accent_rose">وردي</string>
+    <string name="accent_violet">بنفسجي</string>
+    <string name="wallpaper_dusk">الغسق</string>
+    <string name="wallpaper_lagoon">البحيرة</string>
+    <string name="wallpaper_aurora">الشفق القطبي</string>
+    <string name="wallpaper_ember">الجمر</string>
+    <string name="wallpaper_mist">الضباب</string>
+    <string name="wallpaper_dawn">الفجر</string>
+    <string name="pack_evening">المساء</string>
+    <string name="pack_evening_description">المظهر التلقائي في Oriel: غسق بنفسجي مع لون تمييز أزرق هادئ.</string>
+    <string name="pack_cinema">السينما</string>
+    <string name="pack_cinema_description">دافئ وخافت، للمشاهدة في الظلام.</string>
+    <string name="pack_reef">الشعاب</string>
+    <string name="pack_reef_description">مياه فيروزية عميقة مع لون تمييز ساطع بلون البحيرة.</string>
+    <string name="pack_northern">الشمال</string>
+    <string name="pack_northern_description">أخضر وأزرق سماء الليل مع لون تمييز بنفسجي.</string>
+    <string name="pack_morning">الصباح</string>
+    <string name="pack_morning_description">مظهر فاتح ومشرق للنهار.</string>
+    <string name="pack_sunrise">شروق الشمس</string>
+    <string name="pack_sunrise_description">ضوء خوخي ناعم مع لون تمييز وردي.</string>
+</resources>

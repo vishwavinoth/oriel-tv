@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Spanish. Draft translation: it needs review by a native speaker before a release. See docs/translations.md. -->
+<resources>
+    <string name="loading_apps">Cargando aplicaciones…</string>
+    <string name="favorites">Favoritos</string>
+    <string name="all_apps">Todas las aplicaciones</string>
+    <string name="no_favorites">Aún no hay favoritos. Mantén pulsado OK en una aplicación para añadirla.</string>
+    <string name="no_apps">No hay aplicaciones que mostrar. Restablece los valores predeterminados en Ajustes para recuperar las aplicaciones ocultas.</string>
+    <string name="tv_app">Aplicación de TV</string>
+    <string name="android_app">Aplicación de Android</string>
+    <string name="options_hint">Mantén pulsado OK para ver las opciones</string>
+    <string name="settings">Ajustes</string>
+
+    <string name="settings_close_hint">Pulsa Atrás para cerrar</string>
+    <string name="settings_theme_pack">Paquete de tema</string>
+    <string name="theme_pack_custom">Personalizado: tu propia combinación de tema, color de acento y fondo de pantalla.</string>
+    <string name="theme_pack_caption">%1$s: %2$s</string>
+    <string name="settings_theme">Tema</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_light">Claro</string>
+    <string name="settings_accent">Color de acento</string>
+    <string name="settings_wallpaper">Fondo de pantalla</string>
+    <string name="settings_clock">Mostrar reloj</string>
+    <string name="settings_reduce_transparency">Reducir transparencia</string>
+    <string name="settings_reduce_motion">Reducir movimiento</string>
+    <string name="settings_restore">Restablecer valores predeterminados</string>
+    <string name="settings_licenses">Licencias de código abierto</string>
+    <string name="licenses_intro">Oriel es de código abierto con la licencia Apache 2.0. Está hecho con estas bibliotecas, y cada una se usa con la licencia que se indica. Cada compilación las comprueba con las licencias que permite el proyecto.</string>
+    <string name="licenses_missing">La lista de licencias no está en esta compilación. Se añade cuando la aplicación se compila con Gradle.</string>
+    <string name="state_on">Activado</string>
+    <string name="state_off">Desactivado</string>
+
+    <string name="option_add_favorite">Añadir a Favoritos</string>
+    <string name="option_remove_favorite">Quitar de Favoritos</string>
+    <string name="option_move_left">Mover a la izquierda</string>
+    <string name="option_move_right">Mover a la derecha</string>
+    <string name="option_hide">Ocultar aplicación</string>
+
+    <string name="control_panel">Panel de control</string>
+    <string name="control_panel_hint">Abre los ajustes de tu televisor</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">En línea</string>
+    <string name="connection_offline">Sin conexión</string>
+    <string name="connection_wifi_detail">Conectado por Wi-Fi.</string>
+    <string name="connection_ethernet_detail">Conectado con un cable de red.</string>
+    <string name="connection_other_detail">Conectado a una red.</string>
+    <string name="connection_offline_detail">Sin conexión. Las aplicaciones que necesitan internet no funcionarán hasta que el televisor vuelva a conectarse.</string>
+    <string name="shortcut_oriel">Ajustes de Oriel</string>
+    <string name="shortcut_network">Wi-Fi y red</string>
+    <string name="shortcut_bluetooth">Bluetooth</string>
+    <string name="shortcut_notifications">Notificaciones</string>
+    <string name="shortcut_display">Pantalla e imagen</string>
+    <string name="shortcut_sound">Sonido</string>
+    <string name="shortcut_screensaver">Salvapantallas</string>
+    <string name="shortcut_date">Fecha y hora</string>
+    <string name="shortcut_language">Idioma</string>
+    <string name="shortcut_keyboard">Teclado</string>
+    <string name="shortcut_accessibility">Accesibilidad</string>
+    <string name="shortcut_apps">Aplicaciones</string>
+    <string name="shortcut_storage">Almacenamiento</string>
+    <string name="shortcut_privacy">Privacidad</string>
+    <string name="shortcut_about">Información del televisor</string>
+    <string name="shortcut_all">Todos los ajustes</string>
+    <string name="message_shortcut_failed">No se pudo abrir %1$s en este televisor.</string>
+
+    <string name="message_open_failed">No se pudo abrir %1$s. Es posible que se haya desinstalado.</string>
+    <string name="message_hidden">%1$s se ha ocultado. Restablece los valores predeterminados en Ajustes para recuperarla.</string>
+    <string name="message_restored">Los ajustes, los favoritos y las aplicaciones ocultas han vuelto a sus valores predeterminados.</string>
+
+    <string name="accent_daylight">Luz de día</string>
+    <string name="accent_amber">Ámbar</string>
+    <string name="accent_lagoon">Laguna</string>
+    <string name="accent_rose">Rosa</string>
+    <string name="accent_violet">Violeta</string>
+    <string name="wallpaper_dusk">Anochecer</string>
+    <string name="wallpaper_lagoon">Laguna</string>
+    <string name="wallpaper_aurora">Aurora boreal</string>
+    <string name="wallpaper_ember">Brasa</string>
+    <string name="wallpaper_mist">Niebla</string>
+    <string name="wallpaper_dawn">Amanecer</string>
+    <string name="pack_evening">Velada</string>
+    <string name="pack_evening_description">El tema predeterminado de Oriel: un anochecer violeta con un acento azul suave.</string>
+    <string name="pack_cinema">Cine</string>
+    <string name="pack_cinema_description">Cálido y tenue, para ver la tele a oscuras.</string>
+    <string name="pack_reef">Arrecife</string>
+    <string name="pack_reef_description">Aguas turquesa profundas y un acento laguna brillante.</string>
+    <string name="pack_northern">Boreal</string>
+    <string name="pack_northern_description">Verdes y azules de cielo nocturno con un acento violeta.</string>
+    <string name="pack_morning">Mañana</string>
+    <string name="pack_morning_description">Un tema claro, luminoso y ligero para el día.</string>
+    <string name="pack_sunrise">Alba</string>
+    <string name="pack_sunrise_description">Luz suave color melocotón con un acento rosa.</string>
+</resources>
