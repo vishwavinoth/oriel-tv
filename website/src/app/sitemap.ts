@@ -8,6 +8,7 @@ export const ROUTES = [
   "/features/",
   "/demo/",
   "/devices/",
+  "/community/",
   "/docs/",
   "/docs/getting-started/",
   "/docs/device-management/",

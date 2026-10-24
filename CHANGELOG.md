@@ -14,6 +14,7 @@ All notable changes to Oriel TV are recorded here. The format follows the common
   - A landing page with an interactive launcher demo that works with a keyboard, pointer, or on-screen remote, including the control panel and simulated TV settings screens.
   - A live demo page that starts with the TV switched off, tracks a guided walkthrough, goes fullscreen, and walks through Control Center's review, confirm, run, and result steps.
   - Features, compatibility explorer, documentation, downloads, changelog, contributing, security, privacy, and license pages.
+  - A community gallery of theme packs and device reports. Reports are JSON files in `community/device-reports/`, checked at build time, and they also appear in the compatibility explorer.
   - Light, dark, and system themes, and support for reduced motion, reduced transparency, and increased contrast.
 - User guides for getting started, device management, and troubleshooting.
 - The Oriel Launcher for Android TV and Google TV, in Kotlin with Jetpack Compose for TV:

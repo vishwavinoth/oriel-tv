@@ -146,6 +146,12 @@ test('every theme pack uses a real theme, accent, and wallpaper', () => {
   const combinations = new Set();
   for (const [id, pack] of Object.entries(tokens.themePack.options)) {
     assert.match(id, /^[a-z]+$/, `${id} is one lowercase word, so it also works as a Kotlin name`);
+    for (const key of Object.keys(pack)) {
+      assert.ok(['label', 'description', 'theme', 'accent', 'wallpaper', 'author'].includes(key), `${id} has an unknown field "${key}"`);
+    }
+    if (pack.author !== undefined) {
+      assert.match(pack.author, /^[A-Za-z0-9](?:[A-Za-z0-9]|-(?=[A-Za-z0-9])){0,38}$/, `${id} author is a GitHub username`);
+    }
     assert.ok(pack.label && pack.description, `${id} has a label and a description`);
     assert.doesNotMatch(pack.label + pack.description, /["\\$]/, `${id} text is safe to generate into Kotlin`);
     assert.ok(THEMES.includes(pack.theme), `${id} uses a real theme`);

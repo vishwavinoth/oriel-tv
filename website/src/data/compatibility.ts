@@ -154,5 +154,4 @@ export const COMPATIBILITY: readonly CompatibilityEntry[] = [
   },
 ];
 
-/** Device reports from real hardware. None yet; see .github/ISSUE_TEMPLATE/device_report.yml. */
-export const DEVICE_REPORTS: readonly CompatibilityEntry[] = [];
+// Device entries come from community/device-reports/*.json (src/lib/deviceReports.ts).
