@@ -8,6 +8,17 @@ import tv.oriel.launcher.ui.theme.OrielTokens
 
 class PreferencesCodecTest {
     @Test
+    fun `a theme pack sets the theme, accent, and wallpaper and keeps everything else`() {
+        val before = LauncherPreferences(showClock = false, favorites = listOf("a/.A"), hidden = setOf("b/.B"))
+        val after = before.withPack(OrielTokens.ThemePack.Sunrise)
+        assertEquals(before.copy(theme = ThemeMode.Light, accentId = "rose", wallpaperId = "dawn"), after)
+        assertTrue(after.matches(OrielTokens.ThemePack.Sunrise))
+        assertFalse(after.matches(OrielTokens.ThemePack.Evening))
+        // The defaults are the Evening pack, so a fresh launcher shows it as selected.
+        assertTrue(LauncherPreferences().matches(OrielTokens.ThemePack.Evening))
+    }
+
+    @Test
     fun `nothing stored decodes to the defaults`() {
         assertEquals(LauncherPreferences(), PreferencesCodec.decode(emptyMap()))
     }

@@ -13,6 +13,8 @@
     <string name="settings">Settings</string>
 
     <string name="settings_close_hint">Press Back to close</string>
+    <string name="settings_theme_pack">Theme pack</string>
+    <string name="theme_pack_custom">Custom: your own mix of theme, accent, and wallpaper.</string>
     <string name="settings_theme">Theme</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>

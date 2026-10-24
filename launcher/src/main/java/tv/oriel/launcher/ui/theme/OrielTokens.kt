@@ -168,6 +168,16 @@ object OrielTokens {
         val Default: WallpaperToken = Dusk
     }
 
+    object ThemePack {
+        val Evening = ThemePackToken(id = "evening", label = "Evening", description = "Oriel’s default: a violet dusk with a soft blue accent.", isLight = false, accentId = "daylight", wallpaperId = "dusk")
+        val Cinema = ThemePackToken(id = "cinema", label = "Cinema", description = "Warm and low, for watching in the dark.", isLight = false, accentId = "amber", wallpaperId = "ember")
+        val Reef = ThemePackToken(id = "reef", label = "Reef", description = "Deep teal water and a bright lagoon accent.", isLight = false, accentId = "lagoon", wallpaperId = "lagoon")
+        val Northern = ThemePackToken(id = "northern", label = "Northern", description = "Night-sky greens and blues with a violet accent.", isLight = false, accentId = "violet", wallpaperId = "aurora")
+        val Morning = ThemePackToken(id = "morning", label = "Morning", description = "A bright, airy light theme for daytime.", isLight = true, accentId = "daylight", wallpaperId = "mist")
+        val Sunrise = ThemePackToken(id = "sunrise", label = "Sunrise", description = "Soft peach light with a rose accent.", isLight = true, accentId = "rose", wallpaperId = "dawn")
+        val All: List<ThemePackToken> = listOf(Evening, Cinema, Reef, Northern, Morning, Sunrise)
+    }
+
     object Blur {
         val Regular = 28.dp
         val Clear = 14.dp
@@ -274,4 +284,14 @@ data class WallpaperToken(
     val isLight: Boolean,
     val base: Color,
     val glows: List<WallpaperGlow>,
+)
+
+/** A named set of a theme, an accent, and a wallpaper, applied together. */
+data class ThemePackToken(
+    val id: String,
+    val label: String,
+    val description: String,
+    val isLight: Boolean,
+    val accentId: String,
+    val wallpaperId: String,
 )

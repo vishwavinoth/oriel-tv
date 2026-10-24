@@ -35,6 +35,7 @@ All notable changes to Oriel TV are recorded here. The format follows the common
 - Dependency license checks: every Gradle and npm dependency is checked against the licenses the project allows, in CI and in every release build. The launcher and Control Center show their libraries in an Open-source licenses screen, and the website lists its own on the License page.
 - A release workflow that builds the launcher APK and Control Center installers for Linux and Windows (and a runnable jar for macOS) from a version tag, adds SHA-256 checksums and build provenance, and opens a draft release for review. See [docs/releasing.md](docs/releasing.md).
 - Dependabot keeps Gradle, npm, and GitHub Actions dependencies up to date.
+- Six theme packs (Evening, Cinema, Reef, Northern, Morning, and Sunrise) set the theme, accent, and wallpaper in one step, in the launcher and the website demo. Anyone can propose a new one; see CONTRIBUTING.md.
 
 ### Privacy
 

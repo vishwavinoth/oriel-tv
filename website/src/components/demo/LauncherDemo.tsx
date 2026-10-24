@@ -42,6 +42,7 @@ import { normalizeFocus, type Focus } from "@/lib/demo/focus";
 import {
   CONTROL_TILES,
   controlTileLabel,
+  currentPackId,
   demoReducer,
   focusedItem,
   homeRows,
@@ -59,7 +60,7 @@ import {
   type RemoteKey,
   type SystemTileId,
 } from "@/lib/demo/state";
-import { accents, wallpapers, type AccentId, type WallpaperId } from "@/lib/tokens.generated";
+import { accents, themePacks, wallpapers, type AccentId, type WallpaperId } from "@/lib/tokens.generated";
 import { cn } from "@/lib/utils";
 import { AppGlyph } from "./AppGlyph";
 import styles from "./LauncherDemo.module.css";
@@ -262,8 +263,19 @@ function HomeScreen({ state, dispatch }: { state: DemoState; dispatch: Dispatch 
 // ---------- Overlays ----------
 
 function SettingsPanel({ prefs, focus, bump, dispatch }: { prefs: DemoPreferences; focus: Focus; bump?: string; dispatch: Dispatch }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  const currentPack = themePacks.find((pack) => pack.id === currentPackId(prefs));
+
+  // The panel scrolls on its own, like the launcher's, so the focused setting is always in view.
+  useEffect(() => {
+    const panel = panelRef.current;
+    const target = panel?.querySelector<HTMLElement>('[data-focused="true"]');
+    if (panel && target) panel.scrollTo({ top: Math.max(0, target.offsetTop - (panel.clientHeight - target.offsetHeight) / 2) });
+  }, [focus.rowId, focus.index]);
+
   return (
     <motion.div
+      ref={panelRef}
       className={cn(styles.panel, "glass")}
       role="dialog"
       aria-label="Settings"
@@ -306,7 +318,22 @@ function SettingsPanel({ prefs, focus, bump, dispatch }: { prefs: DemoPreference
                   </button>
                 );
               }
-              const selected = prefs[row.id as "theme" | "accent" | "wallpaper"] === option.value;
+              const selected = (row.id === "pack" ? currentPack?.id : prefs[row.id as "theme" | "accent" | "wallpaper"]) === option.value;
+              if (row.id === "pack") {
+                const pack = themePacks.find((candidate) => candidate.id === option.value);
+                const accent = accents.find((candidate) => candidate.id === pack?.accent);
+                return (
+                  <button
+                    key={option.value}
+                    {...common}
+                    className={cn(styles.swatch, styles.wallpaperSwatch, styles.packSwatch)}
+                    data-selected={selected}
+                    aria-label={option.label}
+                    aria-pressed={selected}
+                    style={{ background: `var(--o-wallpaper-${pack?.wallpaper})`, "--pack-accent": pack && accent?.[pack.theme] } as CSSProperties}
+                  />
+                );
+              }
               if (row.id === "accent" || row.id === "wallpaper") {
                 const background =
                   row.id === "accent" ? accents.find((accent) => accent.id === option.value)?.[prefs.theme] : `var(--o-wallpaper-${option.value})`;
@@ -329,6 +356,11 @@ function SettingsPanel({ prefs, focus, bump, dispatch }: { prefs: DemoPreference
               );
             })}
           </div>
+          {row.id === "pack" && (
+            <p className={styles.settingHint}>
+              {currentPack ? `${currentPack.label}: ${currentPack.description}` : "Custom: your own mix of theme, accent, and wallpaper."}
+            </p>
+          )}
         </div>
       ))}
     </motion.div>

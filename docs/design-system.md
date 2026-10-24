@@ -46,6 +46,14 @@ Use `fg` (primary), `fg-2` (secondary), and `fg-3` (tertiary) on the web, or the
 - **TV:** focused tiles scale by `Focus.Scale` (1.08), gain a `Focus.RingWidth` ring in the focus-ring color, and lift with a soft glow. That's where glass shows up on TV.
 - **Web:** every interactive element shows a visible focus ring (`:focus-visible`), and every control works with a keyboard.
 
+## Theme packs
+
+A theme pack is a named set of a theme, an accent, and a wallpaper, applied together from the top of Settings in the launcher and in the website demo. Packs live in `tokens.json` under `themePack.options`, and the generator writes them into both apps, so they always match.
+
+A pack only combines existing tokens. The contrast tests already check every theme over every wallpaper, so any valid pack is legible. The tests also check that each pack uses a real theme, accent, and wallpaper, and doesn't repeat another pack. Choosing a pack and then changing one part makes it a custom mix; nothing is lost.
+
+To add a new look that needs a new wallpaper or accent, add that token first. It's then contrast-tested like every other, and a pack can use it.
+
 ## Accessibility settings
 
 | Setting | Website | Launcher |

@@ -377,6 +377,37 @@
   gap: 1.5cqi;
   border-radius: 2.8cqi;
   border-width: 0.1cqi;
+  /* Taller than the screen when every setting shows, so it scrolls itself to keep focus in view. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.panel::-webkit-scrollbar {
+  display: none;
+}
+
+.settingHint {
+  font-size: 1.1cqi;
+  line-height: 1.4;
+  color: var(--o-color-text-secondary);
+}
+
+/* A theme pack's swatch: its wallpaper, with its accent as a dot. */
+.packSwatch {
+  position: relative;
+}
+
+.packSwatch::after {
+  content: "";
+  position: absolute;
+  right: 0.45cqi;
+  bottom: 0.45cqi;
+  width: 1.1cqi;
+  height: 1.1cqi;
+  border-radius: 50%;
+  background: var(--pack-accent);
+  box-shadow: 0 0 0 0.12cqi rgba(255, 255, 255, 0.7);
 }
 
 .panelHeader {
@@ -441,7 +472,8 @@
 }
 
 .wallpaperSwatch {
-  width: 5cqi;
+  /* Six of these, with their borders and gaps, fit on one row of the 31cqi-wide panel. */
+  width: 3.9cqi;
   border-radius: 0.9cqi;
 }
 

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
+  currentPackId,
   demoReducer,
   focusedItem,
   homeRows,
@@ -45,7 +46,7 @@ test("closing Settings returns focus to the Settings button", () => {
 
 test("Settings changes the theme, accent, and wallpaper", () => {
   let state = press(initialDemoState(), "up", "right", "ok");
-  state = press(state, "right", "ok");
+  state = press(state, "down", "right", "ok");
   assert.equal(state.prefs.theme, "light");
   state = press(state, "down", "right", "ok");
   assert.equal(state.prefs.accent, "amber");
@@ -53,16 +54,30 @@ test("Settings changes the theme, accent, and wallpaper", () => {
   assert.equal(state.prefs.wallpaper, "aurora");
 });
 
+test("a theme pack sets the theme, accent, and wallpaper together", () => {
+  let state = press(initialDemoState(), "up", "right", "ok");
+  assert.deepEqual(state.overlay, { kind: "settings", focus: { rowId: "pack", index: 0 } });
+  assert.equal(currentPackId(state.prefs), "evening");
+  state = press(state, "right", "right", "right", "right", "right", "ok");
+  assert.deepEqual([state.prefs.theme, state.prefs.accent, state.prefs.wallpaper], ["light", "rose", "dawn"]);
+  assert.equal(currentPackId(state.prefs), "sunrise");
+  // Changing one part afterwards makes it a custom mix.
+  state = press(state, "down", "left", "ok");
+  assert.equal(state.prefs.theme, "dark");
+  assert.equal(currentPackId(state.prefs), undefined);
+  assert.ok(state.milestones.includes("personalize"));
+});
+
 test("entering a choice row lands on its current value", () => {
   let state = initialDemoState();
   state = demoReducer(state, { type: "setPreference", preference: { accent: "rose" } });
-  state = press(state, "up", "right", "ok", "down");
+  state = press(state, "up", "right", "ok", "down", "down");
   assert.equal(state.overlay.kind, "settings");
   if (state.overlay.kind === "settings") assert.deepEqual(state.overlay.focus, { rowId: "accent", index: 3 });
 });
 
 test("toggles flip and Restore defaults resets everything", () => {
-  let state = press(initialDemoState(), "up", "right", "ok", "down", "down", "down", "ok");
+  let state = press(initialDemoState(), "up", "right", "ok", "down", "down", "down", "down", "ok");
   assert.equal(state.prefs.reduceTransparency, true);
   state = press(state, "down", "down", "down", "ok");
   assert.equal(state.prefs.reduceTransparency, false);

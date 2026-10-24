@@ -7,6 +7,7 @@ import {
   accents,
   defaultAccent,
   defaultWallpaper,
+  themePacks,
   wallpapers,
   type AccentId,
   type WallpaperId,
@@ -34,7 +35,7 @@ export const DEFAULT_PREFERENCES: DemoPreferences = {
 
 // ---------- Settings panel ----------
 
-export type SettingId = "theme" | "accent" | "wallpaper" | "reduceTransparency" | "reduceMotion" | "showClock" | "restore";
+export type SettingId = "pack" | "theme" | "accent" | "wallpaper" | "reduceTransparency" | "reduceMotion" | "showClock" | "restore";
 
 export interface SettingOption {
   value: string;
@@ -49,6 +50,7 @@ export interface SettingsRow {
 }
 
 export const SETTINGS_ROWS: readonly SettingsRow[] = [
+  { id: "pack", label: "Theme pack", kind: "choice", options: themePacks.map(({ id, label }) => ({ value: id, label })) },
   {
     id: "theme",
     label: "Theme",
@@ -73,12 +75,17 @@ export const SETTINGS_ROWS: readonly SettingsRow[] = [
 
 const settingsFocusRows: FocusRow[] = SETTINGS_ROWS.map((row) => ({ id: row.id, size: row.options.length, remember: true }));
 
+/** The theme pack these preferences match exactly, as in the launcher's Settings. */
+export function currentPackId(prefs: DemoPreferences): string | undefined {
+  return themePacks.find((pack) => pack.theme === prefs.theme && pack.accent === prefs.accent && pack.wallpaper === prefs.wallpaper)?.id;
+}
+
 /** For choice rows, entering the row lands on the option that's currently selected. */
 function settingsMemory(prefs: DemoPreferences): Record<string, number> {
   const memory: Record<string, number> = {};
   for (const row of SETTINGS_ROWS) {
     if (row.kind !== "choice") continue;
-    const current = String(prefs[row.id as "theme" | "accent" | "wallpaper"]);
+    const current = row.id === "pack" ? currentPackId(prefs) : String(prefs[row.id as "theme" | "accent" | "wallpaper"]);
     memory[row.id] = Math.max(0, row.options.findIndex((option) => option.value === current));
   }
   return memory;
@@ -396,7 +403,7 @@ function goHome(state: DemoState): DemoState {
 
 function openSettings(state: DemoState): DemoState {
   const memory = settingsMemory(state.prefs);
-  return { ...state, overlay: { kind: "settings", focus: { rowId: "theme", index: memory.theme } }, announcement: "Settings opened. Theme." };
+  return { ...state, overlay: { kind: "settings", focus: { rowId: "pack", index: memory.pack } }, announcement: "Settings opened. Theme pack." };
 }
 
 function selectHomeItem(state: DemoState): DemoState {
@@ -425,6 +432,12 @@ function applySetting(state: DemoState, target: Focus): DemoState {
     const key = row.id as "reduceTransparency" | "reduceMotion" | "showClock";
     const value = !state.prefs[key];
     return mark({ ...state, prefs: { ...state.prefs, [key]: value }, overlay, announcement: `${row.label} ${value ? "on" : "off"}.` }, "personalize");
+  }
+  if (row.id === "pack") {
+    const pack = themePacks.find((candidate) => candidate.id === option.value);
+    if (!pack) return state;
+    const prefs = { ...state.prefs, theme: pack.theme, accent: pack.accent, wallpaper: pack.wallpaper };
+    return mark({ ...state, prefs, overlay, announcement: `Theme pack: ${pack.label}. ${pack.description}` }, "personalize");
   }
   const key = row.id as "theme" | "accent" | "wallpaper";
   return mark({ ...state, prefs: { ...state.prefs, [key]: option.value }, overlay, announcement: `${row.label}: ${option.label}.` }, "personalize");

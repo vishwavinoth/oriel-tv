@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
@@ -43,6 +44,8 @@ import tv.oriel.launcher.data.AppEntry
 import tv.oriel.launcher.home.AppOption
 import tv.oriel.launcher.prefs.LauncherPreferences
 import tv.oriel.launcher.prefs.ThemeMode
+import tv.oriel.launcher.prefs.matches
+import tv.oriel.launcher.prefs.withPack
 import tv.oriel.launcher.ui.theme.LocalOrielColors
 import tv.oriel.launcher.ui.theme.LocalOrielEffects
 import tv.oriel.launcher.ui.theme.OrielTokens
@@ -156,14 +159,47 @@ fun SettingsPanel(
                     Text(stringResource(R.string.settings_close_hint), style = OrielType.Caption, color = colors.textSecondary)
                 }
 
+                // Theme packs come first: one choice sets the theme, accent, and wallpaper together.
+                val currentPack = OrielTokens.ThemePack.All.firstOrNull { preferences.matches(it) }
+                SettingLabel(stringResource(R.string.settings_theme_pack))
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    OrielTokens.ThemePack.All.forEachIndexed { index, pack ->
+                        val wallpaper = wallpaperById(pack.wallpaperId)
+                        val accent = OrielTokens.Accent.All.firstOrNull { it.id == pack.accentId } ?: OrielTokens.Accent.Default
+                        PanelControl(
+                            onClick = { onUpdate { it.withPack(pack) } },
+                            shape = RoundedCornerShape(OrielTokens.Radius.Sm),
+                            selected = currentPack == pack,
+                            container = wallpaper.base,
+                            modifier = Modifier
+                                .size(width = 52.dp, height = 36.dp)
+                                .semantics { contentDescription = pack.label }
+                                .then(if (index == 0) Modifier.focusRequester(first) else Modifier),
+                        ) {
+                            Canvas(Modifier.fillMaxSize()) {
+                                drawWallpaper(wallpaper)
+                                drawCircle(
+                                    color = if (pack.isLight) accent.onLight else accent.onDark,
+                                    radius = 5.dp.toPx(),
+                                    center = Offset(size.width - 9.dp.toPx(), size.height - 9.dp.toPx()),
+                                )
+                            }
+                        }
+                    }
+                }
+                Text(
+                    currentPack?.let { "${it.label}: ${it.description}" } ?: stringResource(R.string.theme_pack_custom),
+                    style = OrielType.Caption,
+                    color = colors.textSecondary,
+                )
+
                 SettingLabel(stringResource(R.string.settings_theme))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    ThemeMode.entries.forEachIndexed { index, mode ->
+                    ThemeMode.entries.forEach { mode ->
                         PanelControl(
                             onClick = { onUpdate { it.copy(theme = mode) } },
                             shape = RoundedCornerShape(OrielTokens.Radius.Pill),
                             selected = preferences.theme == mode,
-                            modifier = if (index == 0) Modifier.focusRequester(first) else Modifier,
                         ) {
                             Text(
                                 stringResource(if (mode == ThemeMode.Dark) R.string.theme_dark else R.string.theme_light),

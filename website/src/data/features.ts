@@ -33,6 +33,7 @@ export const FEATURES: readonly Feature[] = [
     title: "Personal themes and wallpapers",
     summary: "Light or dark, five accent colors, and six original wallpapers called atmospheres.",
     points: [
+      "Theme packs set the theme, accent, and wallpaper in one step, and anyone can propose a new one.",
       "Every combination is checked for legible contrast before it ships.",
       "Glass surfaces adapt to the wallpaper behind them.",
       "Reduce transparency and reduce motion are built-in settings.",
