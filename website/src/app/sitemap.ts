@@ -6,6 +6,7 @@ export const dynamic = "force-static";
 export const ROUTES = [
   "/",
   "/features/",
+  "/demo/",
   "/devices/",
   "/docs/",
   "/docs/getting-started/",

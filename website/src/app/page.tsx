@@ -124,6 +124,12 @@ export default function HomePage() {
         </div>
         <div className="page-width rise mt-14 [animation-delay:150ms]">
           <LauncherDemo />
+          <p className="mt-6 text-center">
+            <Link href="/demo/" className="inline-flex items-center gap-1.5 font-semibold text-accent no-underline hover:underline">
+              Try the full demo, with power-on, a guided walkthrough, and Control Center
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          </p>
         </div>
       </section>
 

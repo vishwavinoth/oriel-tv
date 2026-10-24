@@ -5,34 +5,59 @@
 // run the Android launcher's code (PRD section 5.1).
 
 import {
+  Accessibility,
+  Bell,
+  Bluetooth,
+  Check,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  Clock as ClockIcon,
   Ellipsis,
+  HardDrive,
   House,
+  Info,
+  LayoutGrid,
+  Maximize2,
+  Minimize2,
+  Monitor,
+  Moon,
+  Power as PowerIcon,
   RotateCcw,
-  Search,
   SlidersHorizontal,
+  ToggleRight,
   Undo2,
+  Volume2,
+  Wifi,
+  WifiOff,
   type LucideIcon,
 } from "lucide-react";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import { ToggleGroup } from "radix-ui";
-import { useEffect, useId, useReducer, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useId, useReducer, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
+import { OrielMark } from "@/components/OrielMark";
 import { findApp } from "@/lib/demo/apps";
 import { normalizeFocus, type Focus } from "@/lib/demo/focus";
 import {
+  CONTROL_TILES,
+  controlTileLabel,
   demoReducer,
   focusedItem,
   homeRows,
   initialDemoState,
   optionItems,
   SETTINGS_ROWS,
+  systemRows,
+  TOUR_STEPS,
+  type ControlTileId,
   type DemoAction,
   type DemoPreferences,
   type DemoState,
+  type Milestone,
+  type Power,
   type RemoteKey,
+  type SystemTileId,
 } from "@/lib/demo/state";
 import { accents, wallpapers, type AccentId, type WallpaperId } from "@/lib/tokens.generated";
 import { cn } from "@/lib/utils";
@@ -114,9 +139,26 @@ function Tile({ appId, focused, bump, onActivate }: { appId: string; focused: bo
 }
 
 const TOP_ICONS: Record<string, { Icon: LucideIcon; label: string }> = {
-  search: { Icon: Search, label: "Search" },
+  controls: { Icon: ToggleRight, label: "Control panel" },
   settings: { Icon: SlidersHorizontal, label: "Settings" },
 };
+
+const TILE_ICONS: Record<ControlTileId, LucideIcon> = {
+  oriel: SlidersHorizontal,
+  network: Wifi,
+  bluetooth: Bluetooth,
+  notifications: Bell,
+  display: Monitor,
+  sound: Volume2,
+  screensaver: Moon,
+  date: ClockIcon,
+  accessibility: Accessibility,
+  apps: LayoutGrid,
+  storage: HardDrive,
+  about: Info,
+};
+
+const brightWallpaper = (prefs: DemoPreferences) => prefs.wallpaper === "mist" || prefs.wallpaper === "dawn";
 
 function HomeScreen({ state, dispatch }: { state: DemoState; dispatch: Dispatch }) {
   const rows = homeRows(state);
@@ -136,25 +178,32 @@ function HomeScreen({ state, dispatch }: { state: DemoState; dispatch: Dispatch 
     <div className={styles.home} data-dimmed={overlayOpen}>
       <div className={styles.topRow}>
         <div className={styles.clock}>{state.prefs.showClock && <Clock />}</div>
-        {/* Quick actions are small controls over the wallpaper: clear glass, dimmed when the wallpaper is bright. */}
-        <div className={cn(styles.controls, "glass-clear", state.prefs.wallpaper === "mist" || state.prefs.wallpaper === "dawn" ? "glass-dim" : undefined)}>
-          {top.items.map((id, index) => {
-            const { Icon, label } = TOP_ICONS[id];
-            return (
-              <button
-                key={id}
-                type="button"
-                tabIndex={-1}
-                className={styles.control}
-                data-focused={isFocused("top", index)}
-                data-bump={isFocused("top", index) ? bump : undefined}
-                aria-label={label}
-                onClick={() => activate("top", index)}
-              >
-                <Icon aria-hidden="true" />
-              </button>
-            );
-          })}
+        <div className={styles.topActions}>
+          {/* Status, not a control, so focus skips it. Like the launcher, it shows only the kind of connection. */}
+          <p className={cn(styles.status, "glass-clear", brightWallpaper(state.prefs) && "glass-dim")}>
+            {state.connection === "wifi" ? <Wifi aria-hidden="true" /> : <WifiOff aria-hidden="true" />}
+            {state.connection === "wifi" ? "Wi-Fi" : "Offline"}
+          </p>
+          {/* Quick actions are small controls over the wallpaper: clear glass, dimmed when the wallpaper is bright. */}
+          <div className={cn(styles.controls, "glass-clear", brightWallpaper(state.prefs) && "glass-dim")}>
+            {top.items.map((id, index) => {
+              const { Icon, label } = TOP_ICONS[id];
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  tabIndex={-1}
+                  className={styles.control}
+                  data-focused={isFocused("top", index)}
+                  data-bump={isFocused("top", index) ? bump : undefined}
+                  aria-label={label}
+                  onClick={() => activate("top", index)}
+                >
+                  <Icon aria-hidden="true" />
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -171,11 +220,11 @@ function HomeScreen({ state, dispatch }: { state: DemoState; dispatch: Dispatch 
         ) : (
           <>
             <p className={styles.spotlightCategory}>Oriel</p>
-            <p className={styles.spotlightTitle}>{focused?.id === "settings" ? "Settings" : "Search"}</p>
+            <p className={styles.spotlightTitle}>{focused?.id === "settings" ? "Settings" : "Control panel"}</p>
             <p className={styles.spotlightBlurb}>
               {focused?.id === "settings"
                 ? "Theme, accent, wallpaper, and accessibility options."
-                : "Find apps on this TV. Not part of this demo."}
+                : "The connection, and shortcuts to the TV’s own Wi-Fi, Bluetooth, notification, and display settings."}
             </p>
           </>
         )}
@@ -343,6 +392,166 @@ function AppScreen({ appId, dispatch }: { appId: string; dispatch: Dispatch }) {
   );
 }
 
+function ControlPanelView({ state, index, bump, dispatch }: { state: DemoState; index: number; bump?: string; dispatch: Dispatch }) {
+  const online = state.connection === "wifi";
+  return (
+    <motion.div
+      className={cn(styles.panel, styles.panelWide, "glass")}
+      role="dialog"
+      aria-label="Control panel"
+      initial={{ opacity: 0, x: 28 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 28 }}
+      transition={{ duration: 0.32, ease: EASE_OUT }}
+    >
+      <div className={styles.panelHeader}>
+        <p className={styles.panelTitle}>Control panel</p>
+        <p className={styles.panelHint}>Back to close</p>
+      </div>
+      <div className={styles.connection}>
+        {online ? <Wifi aria-hidden="true" /> : <WifiOff aria-hidden="true" />}
+        <div>
+          <p className={styles.connectionTitle}>{online ? "Wi-Fi" : "Offline"}</p>
+          <p className={styles.connectionDetail}>{online ? "Connected over Wi-Fi." : "Not connected. Apps that need the internet won’t work."}</p>
+        </div>
+      </div>
+      <p className={styles.settingLabel}>Opens your TV’s own settings</p>
+      <div className={styles.tiles}>
+        {CONTROL_TILES.map((tile, tileIndex) => {
+          const Icon = TILE_ICONS[tile.id];
+          const focused = tileIndex === index;
+          return (
+            <button
+              key={tile.id}
+              type="button"
+              tabIndex={-1}
+              className={styles.controlTile}
+              data-focused={focused}
+              data-bump={focused ? bump : undefined}
+              onClick={() => dispatch({ type: "activateControl", index: tileIndex })}
+            >
+              <Icon aria-hidden="true" />
+              {tile.label}
+            </button>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+}
+
+/** A stand-in for the TV's own settings screen, drawn plainly so it doesn't look like part of Oriel. */
+function SystemScreen({ state, tile, index, bump, dispatch }: { state: DemoState; tile: SystemTileId; index: number; bump?: string; dispatch: Dispatch }) {
+  const Icon = TILE_ICONS[tile];
+  return (
+    <motion.div
+      className={styles.system}
+      role="dialog"
+      aria-label={`${controlTileLabel(tile)}, the TV’s settings`}
+      initial={{ opacity: 0, x: 28 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 28 }}
+      transition={{ duration: 0.28, ease: EASE_OUT }}
+    >
+      <div className={styles.systemIntro}>
+        <Icon aria-hidden="true" />
+        <p className={styles.systemTitle}>{controlTileLabel(tile)}</p>
+        <p className={styles.systemCaption}>The TV’s own settings, simulated. Oriel opens this screen; the TV draws it.</p>
+      </div>
+      <div className={styles.systemList}>
+        {systemRows(state, tile).map((row, rowIndex) => {
+          const focused = rowIndex === index;
+          return (
+            <button
+              key={row.id}
+              type="button"
+              tabIndex={-1}
+              className={styles.systemRow}
+              data-focused={focused}
+              data-bump={focused ? bump : undefined}
+              data-kind={row.kind}
+              aria-pressed={row.kind === "toggle" ? row.on : undefined}
+              onClick={() => dispatch({ type: "activateSystemRow", index: rowIndex })}
+            >
+              <span>{row.label}</span>
+              {row.kind === "toggle" ? (
+                <span className={styles.toggleTrack} data-on={row.on} aria-hidden="true" />
+              ) : (
+                row.value && <span className={styles.systemValue}>{row.value}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+}
+
+function PowerScreen({ power, onPower }: { power: Power; onPower: () => void }) {
+  return (
+    <motion.div className={styles.power} exit={{ opacity: 0 }} transition={{ duration: 0.5, ease: EASE_OUT }}>
+      {power === "off" ? (
+        <button type="button" tabIndex={-1} className={styles.powerButton} onClick={onPower}>
+          <PowerIcon aria-hidden="true" />
+          <span>Press OK to turn on the TV</span>
+        </button>
+      ) : (
+        <motion.div className={styles.boot} initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease: EASE_OUT }}>
+          <OrielMark className={styles.bootMark} />
+          <p>Oriel</p>
+        </motion.div>
+      )}
+    </motion.div>
+  );
+}
+
+function Walkthrough({ milestones }: { milestones: readonly Milestone[] }) {
+  const titleId = useId();
+  const done = TOUR_STEPS.filter((step) => milestones.includes(step.id)).length;
+  const next = TOUR_STEPS.find((step) => !milestones.includes(step.id));
+  return (
+    <section aria-labelledby={titleId} className="rounded-lg border border-border bg-surface p-5 sm:p-6">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h2 id={titleId} className="text-title3">
+          Guided walkthrough
+        </h2>
+        <p className="text-callout text-fg-2">
+          {done} of {TOUR_STEPS.length} done
+        </p>
+      </div>
+      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-fg/10" aria-hidden="true">
+        <div className="h-full rounded-full bg-accent transition-[width] duration-(--o-duration-slow)" style={{ width: `${(done / TOUR_STEPS.length) * 100}%` }} />
+      </div>
+      <ol className="mt-5 grid gap-4 sm:grid-cols-2">
+        {TOUR_STEPS.map((step, index) => {
+          const complete = milestones.includes(step.id);
+          return (
+            <li key={step.id} className="flex gap-3">
+              <span
+                className={cn(
+                  "grid size-7 shrink-0 place-items-center rounded-full border text-caption font-semibold",
+                  complete ? "border-transparent bg-success text-background" : step === next ? "border-accent text-accent" : "border-border text-fg-2",
+                )}
+              >
+                {complete ? <Check aria-label="Done" strokeWidth={3} className="size-4" /> : index + 1}
+              </span>
+              <div>
+                <p className="font-semibold">{step.title}</p>
+                <p className="text-callout text-fg-2">{step.hint}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+      {done === TOUR_STEPS.length && (
+        <p className="mt-5 font-semibold text-success" role="status">
+          You’ve tried everything. Keep exploring, or see how Control Center makes changes safely below.
+        </p>
+      )}
+    </section>
+  );
+}
+
 // ---------- Controls outside the screen ----------
 
 const DPAD: { key: RemoteKey; label: string; Icon: LucideIcon; position: string }[] = [
@@ -471,9 +680,16 @@ function QuickSettings({ prefs, dispatch }: { prefs: DemoPreferences; dispatch: 
 
 // ---------- The demo ----------
 
-export function LauncherDemo() {
-  const [state, dispatch] = useReducer(demoReducer, undefined, initialDemoState);
+/**
+ * `full` is the demo page's version: the TV starts switched off, a walkthrough tracks what you've tried, and the
+ * demo can go fullscreen. The home page shows the TV already on.
+ */
+export function LauncherDemo({ full = false }: { full?: boolean }) {
+  const [state, dispatch] = useReducer(demoReducer, { poweredOff: full }, initialDemoState);
   const helpId = useId();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const screenRef = useRef<HTMLDivElement>(null);
+  const [fullscreen, setFullscreen] = useState(false);
   const { prefs, overlay } = state;
   const focused = focusedItem(state);
   const focusedApp = focused && focused.row.id !== "top" ? findApp(focused.id) : undefined;
@@ -485,7 +701,29 @@ export function LauncherDemo() {
     return () => window.clearTimeout(timer);
   }, [state.toast, state.toastId]);
 
+  useEffect(() => {
+    if (state.power !== "booting") return;
+    const timer = window.setTimeout(() => dispatch({ type: "booted" }), prefs.reduceMotion ? 250 : 1700);
+    return () => window.clearTimeout(timer);
+  }, [state.power, prefs.reduceMotion]);
+
+  useEffect(() => {
+    const onChange = () => setFullscreen(document.fullscreenElement !== null && document.fullscreenElement === rootRef.current);
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void rootRef.current?.requestFullscreen?.().then(() => screenRef.current?.focus());
+  };
+
   const press = (key: RemoteKey) => dispatch({ type: "press", key });
+
+  const powerOn = () => {
+    press("ok");
+    screenRef.current?.focus();
+  };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
@@ -496,10 +734,32 @@ export function LauncherDemo() {
   };
 
   return (
-    <div className="grid gap-6">
-      <div className={styles.stage} style={{ "--demo-wallpaper": `var(--o-wallpaper-${prefs.wallpaper})` } as CSSProperties}>
+    <div
+      ref={rootRef}
+      className={cn("grid gap-6", fullscreen && "content-center overflow-auto bg-background p-[clamp(1rem,3vw,2.5rem)]")}
+    >
+      {full && (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-callout text-fg-2">
+            {state.power === "on" ? "The TV is on. Click it, then use your keyboard or the remote below." : "Press OK, or click the TV, to turn it on."}
+          </p>
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            className="glass-clear inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-full pr-4 pl-3 text-sm font-semibold"
+          >
+            {fullscreen ? <Minimize2 aria-hidden="true" className="size-4.5" /> : <Maximize2 aria-hidden="true" className="size-4.5" />}
+            {fullscreen ? "Exit fullscreen" : "Fullscreen"}
+          </button>
+        </div>
+      )}
+      <div
+        className={cn(styles.stage, fullscreen && "mx-auto w-full")}
+        style={{ "--demo-wallpaper": `var(--o-wallpaper-${prefs.wallpaper})`, ...(fullscreen ? { maxWidth: "calc((100dvh - 15rem) * 16 / 9)" } : {}) } as CSSProperties}
+      >
         <MotionConfig reducedMotion={prefs.reduceMotion ? "always" : "user"}>
           <div
+            ref={screenRef}
             className={styles.screen}
             data-oriel-scope=""
             data-theme={prefs.theme}
@@ -522,6 +782,13 @@ export function LauncherDemo() {
               )}
               {overlay.kind === "options" && <OptionsSheet key="options" state={state} dispatch={dispatch} />}
               {overlay.kind === "app" && <AppScreen key="app" appId={overlay.appId} dispatch={dispatch} />}
+              {overlay.kind === "controlPanel" && (
+                <ControlPanelView key="control-panel" state={state} index={overlay.index} bump={bumpName(state)} dispatch={dispatch} />
+              )}
+              {overlay.kind === "system" && (
+                <SystemScreen key={`system-${overlay.tile}`} state={state} tile={overlay.tile} index={overlay.index} bump={bumpName(state)} dispatch={dispatch} />
+              )}
+              {state.power !== "on" && <PowerScreen key="power" power={state.power} onPower={powerOn} />}
               {state.toast && (
                 <motion.p
                   key={`toast-${state.toastId}`}
@@ -546,7 +813,7 @@ export function LauncherDemo() {
             <strong className="text-fg">{focusedApp.name}</strong> · {focusedApp.blurb}
           </>
         ) : (
-          <strong className="text-fg">{focused?.id === "settings" ? "Settings" : "Search"}</strong>
+          <strong className="text-fg">{focused?.id === "settings" ? "Settings" : "Control panel"}</strong>
         )}
       </p>
 
@@ -555,9 +822,11 @@ export function LauncherDemo() {
         <QuickSettings prefs={prefs} dispatch={dispatch} />
       </div>
 
+      {full && <Walkthrough milestones={state.milestones} />}
+
       <p id={helpId} className="max-w-190 text-callout text-fg-2">
-        Click the screen, then use the arrow keys, Enter to open, Esc for Back, and M for Menu. Or use the remote. This is a website
-        demo of Oriel’s home screen; it doesn’t run the Android launcher’s code.
+        Click the screen, then use the arrow keys, Enter to open, Esc for Back, M for Menu, and H for Home. Or use the remote. This is
+        a website demo of Oriel’s home screen; it doesn’t run the Android launcher’s code.
       </p>
       <p className="sr-only" aria-live="polite">
         {state.announcement}

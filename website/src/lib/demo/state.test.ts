@@ -5,7 +5,9 @@ import {
   focusedItem,
   homeRows,
   initialDemoState,
+  moveInGrid,
   optionItems,
+  systemRows,
   type DemoAction,
   type DemoState,
   type RemoteKey,
@@ -33,7 +35,7 @@ test("hitting an edge doesn't move focus and records a bump", () => {
 
 test("closing Settings returns focus to the Settings button", () => {
   let state = press(initialDemoState(), "up");
-  assert.equal(focusedItem(state)?.id, "search");
+  assert.equal(focusedItem(state)?.id, "controls");
   state = press(state, "right", "ok");
   assert.equal(state.overlay.kind, "settings");
   state = press(state, "back");
@@ -107,7 +109,7 @@ test("removing every favorite skips the empty dock", () => {
   assert.deepEqual(state.favorites, []);
   assert.equal(focusedItem(state)?.row.label, "All apps");
   state = press(state, "up");
-  assert.equal(focusedItem(state)?.id, "search");
+  assert.equal(focusedItem(state)?.id, "controls");
 });
 
 test("Home closes overlays and returns to the first favorite", () => {
@@ -116,6 +118,69 @@ test("Home closes overlays and returns to the first favorite", () => {
   state = press(state, "home");
   assert.equal(state.overlay.kind, "none");
   assert.equal(focusedItem(state)?.id, "cinema");
+});
+
+test("the control panel opens from the top row and moves through a two-column grid", () => {
+  let state = press(initialDemoState(), "up", "ok");
+  assert.deepEqual(state.overlay, { kind: "controlPanel", index: 0 });
+  state = press(state, "left");
+  assert.equal(state.bump?.direction, "left");
+  state = press(state, "right", "down");
+  assert.deepEqual(state.overlay, { kind: "controlPanel", index: 3 });
+  assert.equal(state.announcement, "Notifications");
+});
+
+test("turning Wi-Fi off in the TV's settings shows Offline, and Back returns to the same tile", () => {
+  let state = press(initialDemoState(), "up", "ok", "right", "ok");
+  assert.deepEqual(state.overlay, { kind: "system", tile: "network", index: 0 });
+  state = press(state, "ok");
+  assert.equal(state.connection, "offline");
+  assert.equal(systemRows(state, "network")[0].on, false);
+  state = press(state, "back");
+  assert.deepEqual(state.overlay, { kind: "controlPanel", index: 1 });
+  state = press(state, "back");
+  assert.equal(state.overlay.kind, "none");
+  assert.equal(focusedItem(state)?.id, "controls");
+});
+
+test("Clear all empties the notifications screen", () => {
+  let state = press(initialDemoState(), "up", "ok", "right", "down", "ok");
+  assert.equal(state.overlay.kind === "system" && state.overlay.tile, "notifications");
+  state = press(state, "down", "down", "down", "ok");
+  assert.deepEqual(state.notifications, []);
+  assert.deepEqual(systemRows(state, "notifications").map((row) => row.id), ["empty"]);
+});
+
+test("the Oriel settings tile opens Oriel's own settings", () => {
+  const state = press(initialDemoState(), "up", "ok", "ok");
+  assert.equal(state.overlay.kind, "settings");
+});
+
+test("a powered-off demo turns on with OK and ignores keys while it boots", () => {
+  let state = initialDemoState({ poweredOff: true });
+  state = press(state, "right");
+  assert.equal(state.power, "off");
+  state = press(state, "ok");
+  assert.equal(state.power, "booting");
+  state = press(state, "right");
+  assert.equal(focusedItem(state)?.id, "cinema");
+  state = demoReducer(state, { type: "booted" });
+  assert.equal(state.power, "on");
+  assert.match(state.announcement, /Oriel is ready/);
+});
+
+test("the walkthrough records each milestone once", () => {
+  let state = press(initialDemoState(), "right", "left", "ok", "back", "menu", "back", "home");
+  assert.deepEqual(state.milestones, ["move", "open-app", "menu", "home"]);
+  state = press(state, "up", "ok", "right", "ok");
+  assert.deepEqual(state.milestones, ["move", "open-app", "menu", "home", "control-panel", "tv-setting"]);
+});
+
+test("moveInGrid stops at edges and lands on the last item of a short row", () => {
+  assert.equal(moveInGrid(0, 5, 2, "up"), null);
+  assert.equal(moveInGrid(1, 5, 2, "right"), null);
+  assert.equal(moveInGrid(3, 5, 2, "down"), 4);
+  assert.equal(moveInGrid(4, 5, 2, "down"), null);
 });
 
 test("toasts dismiss only their own id", () => {

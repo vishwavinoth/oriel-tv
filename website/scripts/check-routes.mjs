@@ -11,6 +11,7 @@ const out = fileURLToPath(new URL("../out/", import.meta.url));
 const REQUIRED = [
   "/",
   "/features/",
+  "/demo/",
   "/devices/",
   "/docs/",
   "/docs/getting-started/",
