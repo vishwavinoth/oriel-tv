@@ -130,7 +130,7 @@ export default function HomePage() {
       <section className="py-[clamp(4rem,9vw,7.5rem)]" aria-labelledby="features-title">
         <div className="page-width">
           <SectionHeader id="features-title" eyebrow="What Oriel does" title="A calmer home screen that stays out of your way">
-            Eight promises shape every decision. Each one says honestly whether it’s in the current build or still planned.
+            Eight promises shape every decision. All of them are in the current development build, which hasn’t been verified on a TV yet.
           </SectionHeader>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((feature, index) => (

@@ -72,7 +72,7 @@ export const COMPATIBILITY: readonly CompatibilityEntry[] = [
         support: "partial",
         note: "Most devices have no setting to change the home app. The Home button keeps opening Google’s home screen unless that’s turned off with ADB.",
       },
-      deviceTools: { support: "partial", note: "Developer options and ADB are available on most devices. Control Center isn’t released yet." },
+      deviceTools: { support: "partial", note: "Developer options and ADB are available on most devices. Control Center can use them." },
     },
     limitations: [
       "Turning off the built-in home screen can affect setup screens, voice search, or casting on some models.",
@@ -94,7 +94,7 @@ export const COMPATIBILITY: readonly CompatibilityEntry[] = [
         support: "partial",
         note: "Some devices ask which home app to use when you press Home. Many manufacturer builds don’t.",
       },
-      deviceTools: { support: "partial", note: "Developer options and ADB are available on most devices. Control Center isn’t released yet." },
+      deviceTools: { support: "partial", note: "Developer options and ADB are available on most devices. Control Center can use them." },
     },
     limitations: ["Manufacturers customize Android TV heavily, so behavior varies by model and software version."],
     checked: null,

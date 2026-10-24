@@ -11,7 +11,11 @@ Oriel TV is built to work without collecting anything about you. This page descr
 
 ## Oriel Control Center
 
-Control Center isn't available yet. Before it ships, this section will describe exactly which device information it reads, what it stores on your computer, and confirm that it doesn't send that information anywhere.
+Control Center is available as a development build. It runs on your computer and talks only to the TV you connect, through Android's own `adb` tool.
+
+- **What it reads from the TV:** the model, maker, Android version and build, screen size, memory, platform features, the list of installed and turned-off apps, and which app is the home screen. It doesn't keep the TV's serial number.
+- **What it stores on your computer:** a history of the operations you ran (time, TV model, operation, and outcome) in `~/.oriel/control-center/history.jsonl`, and backup files only where you choose to save them.
+- **What it sends elsewhere:** nothing. It has no analytics and makes no network requests other than adb's connection to your TV.
 
 ## Website
 

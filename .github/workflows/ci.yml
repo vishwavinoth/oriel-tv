@@ -48,7 +48,7 @@ jobs:
         run: npm run check:routes
 
   launcher:
-    name: Launcher
+    name: Launcher and Control Center
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -59,7 +59,7 @@ jobs:
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
       - name: Unit tests, lint, and debug build
-        run: ./gradlew :launcher:testDebugUnitTest :launcher:lintDebug :launcher:assembleDebug --console=plain
+        run: ./gradlew :shared:device:test :control-center:test :launcher:testDebugUnitTest :launcher:lintDebug :launcher:assembleDebug --console=plain
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -67,6 +67,8 @@ jobs:
           path: |
             launcher/build/reports/
             launcher/build/test-results/
+            shared/device/build/reports/
+            control-center/build/reports/
       - uses: actions/upload-artifact@v4
         with:
           name: launcher-debug-apk

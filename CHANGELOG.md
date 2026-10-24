@@ -21,6 +21,13 @@ All notable changes to Oriel TV are recorded here. The format follows the common
   - Favorites, reordering, and hiding apps, from an options menu on any app.
   - Settings for theme, accent, wallpaper, clock, reduce transparency, and reduce motion, saved on the TV.
   - No network permission.
+- Oriel Control Center, a desktop companion in Kotlin with Compose Multiplatform (ADR 0006):
+  - Finds or connects to TVs through the user's own adb, and shows device details and warnings.
+  - Installs or updates Oriel, makes it the home app, and turns the built-in home screen off and back on, never uninstalling anything.
+  - Shows every operation's explanation, risks, reversibility, exact commands, and recovery before a confirmation, and reports partial failures honestly.
+  - Exports a backup of which apps are turned off, and restores one after previewing every change.
+  - Keeps an operation history on the computer, without device serial numbers.
+- A device-safety core with a closed command allowlist and validation that blocks shell injection, covered by unit tests.
 
 ### Privacy
 

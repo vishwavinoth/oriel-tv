@@ -13,7 +13,8 @@ Oriel TV is an open-source, privacy-first home screen and customization toolkit 
 - **Oriel Launcher** (`launcher/`): a home screen for Android TV and Google TV, in Kotlin with Jetpack Compose for TV. It has a favorites dock, a grid of every app, D-pad navigation that stops at edges, an options menu for favorites and hiding apps, and settings for theme, accent, wallpaper, clock, reduce transparency, and reduce motion. It has no network permission.
 - **Website** (`website/`): Next.js, React, Tailwind CSS, Motion, and Radix UI, exported as a static site. It includes an interactive launcher demo, a compatibility explorer, and the documentation.
 - **Design tokens** (`shared/design-tokens/`): one source of colors, materials, type, motion, and wallpapers for both, with contrast tests.
-- **Oriel Control Center**, a guided tool for safe device customization, is planned and hasn't started yet.
+- **Oriel Control Center** (`control-center/`): a desktop companion, in Kotlin with Compose Multiplatform, that installs Oriel, makes it the home app, turns the built-in home screen off and on, and backs up and restores which apps are turned off. Every change is explained, previewed with its exact commands, and confirmed first. Run it with `./gradlew :control-center:run`.
+- **Device-safety core** (`shared/device/`): the command allowlist, validation, operation plans, and backup format behind Control Center, with unit tests.
 
 ## Principles
 

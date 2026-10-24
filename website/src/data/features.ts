@@ -13,7 +13,6 @@ export interface Feature {
 }
 
 const IN_BUILD = { tone: "success", label: "In the current build" } as const;
-const PLANNED = { tone: "neutral", label: "Planned" } as const;
 
 export const FEATURES: readonly Feature[] = [
   {
@@ -55,14 +54,14 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "safe",
     title: "Safe device customization",
-    summary: "Control Center will guide supported changes on your TV, and explain each one first.",
+    summary: "Control Center, a desktop companion, guides supported changes on your TV and explains each one first.",
     points: [
       "Every operation shows what it does, what could go wrong, and how to undo it.",
       "Nothing changes until you confirm, and only allowlisted operations can run.",
       "Changes that canâ€™t be reversed reliably are marked before you approve them.",
     ],
     icon: ShieldCheck,
-    status: PLANNED,
+    status: IN_BUILD,
   },
   {
     id: "privacy",
@@ -79,14 +78,14 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "backup",
     title: "Backup and recovery",
-    summary: "Export your setup, check it, and restore it on the same or another TV.",
+    summary: "Control Center saves which apps are turned off and which app is home, checks the file, and previews any restore.",
     points: [
       "Backups are validated before anything is restored.",
       "You see a preview of what a restore will change.",
       "Oriel wonâ€™t claim to back up anything it canâ€™t actually restore.",
     ],
     icon: RotateCcw,
-    status: PLANNED,
+    status: IN_BUILD,
   },
   {
     id: "open",

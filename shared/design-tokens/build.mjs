@@ -25,6 +25,10 @@ const outputs = [
     path: resolve(root, 'launcher/src/main/java/tv/oriel/launcher/ui/theme/OrielTokens.kt'),
     content: renderKotlin(tokens),
   },
+  {
+    path: resolve(root, 'control-center/src/main/kotlin/tv/oriel/controlcenter/theme/OrielTokens.kt'),
+    content: renderKotlin(tokens, 'tv.oriel.controlcenter.theme'),
+  },
 ];
 
 const check = process.argv.includes('--check');

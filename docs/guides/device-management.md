@@ -1,12 +1,18 @@
 # Device management
 
-Oriel Control Center will guide supported device changes with previews, confirmations, and recovery steps. It isn't available yet. This guide explains the basics and the risks, so you can make informed choices in the meantime.
+Oriel Control Center guides supported device changes with explanations, previews, confirmations, and recovery steps. It's available as a development build. With Android platform tools and JDK 17 or newer installed, run it from the repository:
+
+```bash
+./gradlew :control-center:run
+```
+
+It can install or update Oriel, make Oriel the home app, turn the built-in home screen off and back on, and export or restore a backup of which apps are turned off. Every operation shows its exact commands before you confirm it. The rest of this guide explains the same steps by hand, and the risks behind them.
 
 > **Warning:** The commands on this page change how your TV behaves. Nobody on the Oriel project has verified them on your model yet. Read every step first, and keep the restore command handy.
 
 ## How Oriel approaches device changes
 
-Every device operation Oriel supports, now or in Control Center, follows the same rules (PRD section 7):
+Every device operation Oriel supports follows the same rules (PRD section 7, [ADR 0006](../adr/0006-control-center.md)):
 
 1. Explain what the change does and which device it targets.
 2. Explain the risks, and say plainly when a change can't be reliably undone.

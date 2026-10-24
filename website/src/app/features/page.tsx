@@ -9,7 +9,7 @@ import { FEATURES } from "@/data/features";
 
 export const metadata: Metadata = {
   title: "Features",
-  description: "What Oriel TV does today, what’s planned, and what it will never do.",
+  description: "What Oriel TV does today, and what it will never do.",
   alternates: { canonical: "/features/" },
 };
 
@@ -27,7 +27,7 @@ export default function FeaturesPage() {
       <PageHeader
         eyebrow="Features"
         title="Everything Oriel does, and how honestly"
-        description="Each feature is labeled: in the current development build, or planned. Oriel hasn’t had its first release yet."
+        description="Every feature below is in the current development build. Oriel hasn’t had its first release yet, and no TV has been verified."
       >
         <Button asChild>
           <Link href="/docs/getting-started/">Get started</Link>
