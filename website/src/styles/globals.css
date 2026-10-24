@@ -1,0 +1,450 @@
+/* Global styles for the Oriel website. Tailwind's theme is built from the Oriel design tokens in
+   tokens.css (generated from shared/design-tokens/tokens.json), and its default palette is turned off,
+   so every color, radius, type size, and easing comes from the shared tokens.
+   Materials follow ADR 0004 (Oriel Glass) and ADR 0005 (Apple's HIG for Materials). */
+
+@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+}
+
+@theme inline {
+  --color-background: var(--o-color-background);
+  --color-raised: var(--o-color-background-raised);
+  --color-surface: var(--o-color-surface);
+  --color-surface-hover: var(--o-color-surface-hover);
+  --color-fg: var(--o-color-text-primary);
+  --color-fg-2: var(--o-color-text-secondary);
+  --color-fg-3: var(--o-color-text-tertiary);
+  --color-fg-4: var(--o-color-text-quaternary);
+  --color-border: var(--o-color-border);
+  --color-accent: var(--o-color-accent);
+  --color-on-accent: var(--o-color-on-accent);
+  --color-success: var(--o-color-success);
+  --color-warning: var(--o-color-warning);
+  --color-danger: var(--o-color-danger);
+  --color-info: var(--o-color-info);
+  --color-focus: var(--o-color-focus-ring);
+
+  --font-sans: var(--o-font-sans);
+  --font-mono: var(--o-font-mono);
+
+  --radius-xs: var(--o-radius-xs);
+  --radius-sm: var(--o-radius-sm);
+  --radius-md: var(--o-radius-md);
+  --radius-lg: var(--o-radius-lg);
+  --radius-xl: var(--o-radius-xl);
+
+  --text-display: var(--o-text-display-size);
+  --text-display--line-height: var(--o-text-display-line);
+  --text-display--letter-spacing: var(--o-text-display-tracking);
+  --text-display--font-weight: var(--o-text-display-weight);
+  --text-title1: var(--o-text-title1-size);
+  --text-title1--line-height: var(--o-text-title1-line);
+  --text-title1--letter-spacing: var(--o-text-title1-tracking);
+  --text-title1--font-weight: var(--o-text-title1-weight);
+  --text-title2: var(--o-text-title2-size);
+  --text-title2--line-height: var(--o-text-title2-line);
+  --text-title2--letter-spacing: var(--o-text-title2-tracking);
+  --text-title2--font-weight: var(--o-text-title2-weight);
+  --text-title3: var(--o-text-title3-size);
+  --text-title3--line-height: var(--o-text-title3-line);
+  --text-title3--letter-spacing: var(--o-text-title3-tracking);
+  --text-title3--font-weight: var(--o-text-title3-weight);
+  --text-body-lg: var(--o-text-body-large-size);
+  --text-body-lg--line-height: var(--o-text-body-large-line);
+  --text-body: var(--o-text-body-size);
+  --text-body--line-height: var(--o-text-body-line);
+  --text-callout: var(--o-text-callout-size);
+  --text-callout--line-height: var(--o-text-callout-line);
+  --text-caption: var(--o-text-caption-size);
+  --text-caption--line-height: var(--o-text-caption-line);
+
+  --ease-standard: var(--o-ease-standard);
+  --ease-decelerate: var(--o-ease-decelerate);
+  --ease-spring: var(--o-ease-spring);
+
+  --shadow-1: var(--o-elevation-1);
+  --shadow-2: var(--o-elevation-2);
+  --shadow-3: var(--o-elevation-3);
+}
+
+/* ---------- Materials ---------- */
+
+/* Liquid Glass equivalents: the functional layer for controls and navigation only. */
+@utility glass {
+  background-color: var(--o-glass-regular);
+  border: 1px solid var(--o-glass-edge);
+  box-shadow:
+    inset 0 1px 0 var(--o-glass-highlight),
+    var(--o-elevation-2);
+  -webkit-backdrop-filter: blur(var(--o-blur-regular)) saturate(var(--o-saturate-regular));
+  backdrop-filter: blur(var(--o-blur-regular)) saturate(var(--o-saturate-regular));
+}
+
+@utility glass-clear {
+  background-color: var(--o-glass-clear);
+  border: 1px solid var(--o-glass-edge);
+  box-shadow:
+    inset 0 1px 0 var(--o-glass-highlight),
+    var(--o-elevation-2);
+  -webkit-backdrop-filter: blur(var(--o-blur-clear)) saturate(var(--o-saturate-clear));
+  backdrop-filter: blur(var(--o-blur-clear)) saturate(var(--o-saturate-clear));
+}
+
+/* Clear glass over a bright background gets a dimming layer; dark backgrounds don't need one. */
+@utility glass-dim {
+  background-image: linear-gradient(var(--o-glass-dim), var(--o-glass-dim));
+}
+
+/* Standard materials: structure in the content layer, chosen by purpose (ADR 0005). */
+@utility material-ultra-thin {
+  background-color: var(--o-material-ultra-thin);
+  -webkit-backdrop-filter: blur(var(--o-material-blur-ultra-thin)) saturate(1.4);
+  backdrop-filter: blur(var(--o-material-blur-ultra-thin)) saturate(1.4);
+}
+
+@utility material-thin {
+  background-color: var(--o-material-thin);
+  -webkit-backdrop-filter: blur(var(--o-material-blur-thin)) saturate(1.4);
+  backdrop-filter: blur(var(--o-material-blur-thin)) saturate(1.4);
+}
+
+@utility material-regular {
+  background-color: var(--o-material-regular);
+  -webkit-backdrop-filter: blur(var(--o-material-blur-regular)) saturate(1.5);
+  backdrop-filter: blur(var(--o-material-blur-regular)) saturate(1.5);
+}
+
+@utility material-thick {
+  background-color: var(--o-material-thick);
+  -webkit-backdrop-filter: blur(var(--o-material-blur-thick)) saturate(1.5);
+  backdrop-filter: blur(var(--o-material-blur-thick)) saturate(1.5);
+}
+
+@utility page-width {
+  width: min(100% - 2.5rem, 1180px);
+  margin-inline: auto;
+}
+
+@utility page-width-narrow {
+  width: min(100% - 2.5rem, 780px);
+  margin-inline: auto;
+}
+
+@layer utilities {
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass,
+    .glass-clear,
+    .material-ultra-thin,
+    .material-thin,
+    .material-regular,
+    .material-thick {
+      background-color: var(--o-glass-solid);
+    }
+  }
+}
+
+/* ---------- Base ---------- */
+
+@layer base {
+  :root {
+    --site-ambient: var(--o-wallpaper-dusk);
+    --header-height: 76px;
+  }
+
+  :root[data-theme="light"] {
+    --site-ambient: var(--o-wallpaper-dawn);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --site-ambient: var(--o-wallpaper-dawn);
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--o-color-background);
+    color: var(--o-color-text-primary);
+    font-family: var(--o-font-sans);
+    font-size: var(--o-text-body-size);
+    line-height: var(--o-text-body-line);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  main {
+    flex: 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--o-color-accent) 35%, transparent);
+  }
+
+  :focus-visible {
+    outline: var(--o-focus-ring-width) solid var(--o-color-focus-ring);
+    outline-offset: var(--o-focus-ring-offset);
+  }
+}
+
+/* ---------- Shared components ---------- */
+
+@layer components {
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    background: var(--o-color-accent);
+    color: var(--o-color-on-accent);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
+  .eyebrow {
+    font-size: var(--o-text-caption-size);
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--o-color-text-secondary);
+  }
+
+  /* The atmospheric glow behind page titles, from the same wallpapers as the launcher. */
+  .ambient {
+    position: absolute;
+    inset: -20% -10% auto;
+    height: 620px;
+    background: var(--site-ambient);
+    filter: blur(70px) saturate(1.15);
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent);
+    mask-image: linear-gradient(to bottom, black 30%, transparent);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .rise {
+    animation: rise 0.8s var(--o-ease-decelerate) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise {
+      animation: none;
+    }
+  }
+
+  /* Markdown documents rendered from the repository. */
+  .prose {
+    max-width: 760px;
+  }
+
+  .prose > * + * {
+    margin-top: 1rem;
+  }
+
+  .prose h1 {
+    font-size: clamp(2rem, 4vw, var(--o-text-title1-size));
+    line-height: var(--o-text-title1-line);
+    letter-spacing: var(--o-text-title1-tracking);
+    font-weight: 700;
+  }
+
+  .prose h2 {
+    margin-top: 3rem;
+    font-size: clamp(1.5rem, 2.6vw, var(--o-text-title2-size));
+    line-height: var(--o-text-title2-line);
+    letter-spacing: var(--o-text-title2-tracking);
+    font-weight: var(--o-text-title2-weight);
+  }
+
+  .prose h3 {
+    margin-top: 2rem;
+    font-size: var(--o-text-title3-size);
+    line-height: var(--o-text-title3-line);
+    font-weight: var(--o-text-title3-weight);
+  }
+
+  .prose h4 {
+    margin-top: 1.5rem;
+    font-size: var(--o-text-body-large-size);
+    font-weight: 650;
+  }
+
+  .prose :is(h2, h3, h4)[id] {
+    scroll-margin-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .prose p,
+  .prose li {
+    color: var(--o-color-text-secondary);
+  }
+
+  .prose strong {
+    color: var(--o-color-text-primary);
+    font-weight: 650;
+  }
+
+  .prose a {
+    color: var(--o-color-accent);
+    font-weight: 550;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.4em;
+  }
+
+  .prose ul {
+    list-style: disc;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li + li,
+  .prose li > * + * {
+    margin-top: 0.5rem;
+  }
+
+  .prose li.task {
+    list-style: none;
+    margin-left: -1.4em;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .prose code {
+    font-family: var(--o-font-mono);
+    font-size: 0.88em;
+    padding: 0.12em 0.4em;
+    border-radius: var(--o-radius-xs);
+    background: var(--o-color-surface);
+    border: 1px solid var(--o-color-border);
+    color: var(--o-color-text-primary);
+    overflow-wrap: anywhere;
+  }
+
+  .prose pre {
+    position: relative;
+    margin-block: 1.25rem;
+    padding: 1.25rem;
+    overflow-x: auto;
+    border-radius: var(--o-radius-md);
+    background: var(--o-color-surface);
+    border: 1px solid var(--o-color-border);
+    font-size: var(--o-text-callout-size);
+    line-height: 1.65;
+  }
+
+  .prose pre code {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: inherit;
+    overflow-wrap: normal;
+  }
+
+  .prose pre[data-lang]::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-family: var(--o-font-sans);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--o-color-text-tertiary);
+  }
+
+  .prose blockquote {
+    margin-block: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--o-radius-md);
+    background: color-mix(in srgb, var(--o-color-accent) 9%, var(--o-color-surface));
+    border: 1px solid color-mix(in srgb, var(--o-color-accent) 25%, var(--o-color-border));
+  }
+
+  .prose .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--o-color-border);
+    border-radius: var(--o-radius-md);
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--o-text-callout-size);
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--o-color-border);
+    color: var(--o-color-text-secondary);
+  }
+
+  .prose th {
+    color: var(--o-color-text-primary);
+    background: var(--o-color-surface);
+    font-weight: 650;
+  }
+
+  .prose tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .prose hr {
+    border: 0;
+    border-top: 1px solid var(--o-color-border);
+    margin-block: 2.5rem;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+}
