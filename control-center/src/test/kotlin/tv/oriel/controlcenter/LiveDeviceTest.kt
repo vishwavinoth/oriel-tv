@@ -11,6 +11,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assume.assumeTrue
 import tv.oriel.device.BackupCodec
 import tv.oriel.device.DeviceReader
+import tv.oriel.device.DeviceReport
 import tv.oriel.device.DeviceSnapshot
 import tv.oriel.device.ExecutionResult
 import tv.oriel.device.HostCommand
@@ -48,6 +49,10 @@ class LiveDeviceTest {
         assertIs<ExecutionResult.Succeeded>(OperationExecutor.execute(install, runner))
         val installed = DeviceReader.snapshot(device, runner)
         assertTrue(installed.orielInstalled)
+        assertNotNull(installed.orielVersion, "couldn’t read Oriel’s version")
+        val report = DeviceReport.text(installed)
+        println(report)
+        assertTrue(serial !in report)
 
         try {
             if (!installed.orielIsHome) {

@@ -6,7 +6,7 @@ Oriel Control Center guides supported device changes with explanations, previews
 ./gradlew :control-center:run
 ```
 
-It can install or update Oriel, make Oriel the home app, turn the built-in home screen off and back on, and export or restore a backup of which apps are turned off. Every operation shows its exact commands before you confirm it. The rest of this guide explains the same steps by hand, and the risks behind them.
+It can install or update Oriel, make Oriel the home app, turn the built-in home screen off and back on, and export or restore a backup of which apps are turned off. Every operation shows its exact commands before you confirm it. It can also copy a device report to paste into a compatibility report or bug report; the report leaves out the TV's address, serial number, and list of apps. The rest of this guide explains the same steps by hand, and the risks behind them.
 
 > **Warning:** The commands on this page change how your TV behaves. Nobody on the Oriel project has verified them on your model yet. Read every step first, and keep the restore command handy.
 

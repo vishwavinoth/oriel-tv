@@ -38,10 +38,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.awt.FileDialog
 import java.awt.Frame
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
 import java.nio.file.Path
 import tv.oriel.controlcenter.ControlCenterState
 import tv.oriel.controlcenter.theme.OrielTokens
 import tv.oriel.device.ConnectedDevice
+import tv.oriel.device.DeviceReport
 import tv.oriel.device.DeviceSnapshot
 import tv.oriel.device.OperationOption
 
@@ -152,7 +155,7 @@ private fun DeviceView(state: ControlCenterState, device: DeviceSnapshot) {
         Fact("Memory", device.memoryMb?.let { "$it MB" } ?: "Couldn’t read")
         Fact("Connection", if (device.isNetwork) "Network (${device.serial})" else "USB (${device.serial})")
         Fact("Home app", device.homeActivity ?: "Couldn’t read")
-        Fact("Oriel", if (device.orielInstalled) "Installed" else "Not installed")
+        Fact("Oriel", if (device.orielInstalled) "Installed, version ${device.orielVersion ?: "unknown"}" else "Not installed")
         device.warnings.forEach { Text("⚠ $it", color = OrielTokens.DarkColor.Warning) }
     }
 
@@ -180,6 +183,13 @@ private fun DeviceView(state: ControlCenterState, device: DeviceSnapshot) {
         }
     }
 
+    Panel("Device report") {
+        Text("A summary to share in a compatibility report or when asking for help. It leaves out the device’s address, serial number, and your list of apps.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        val report = DeviceReport.text(device)
+        Mono(report)
+        OutlinedButton(onClick = { copyText(report); state.notice = "Device report copied." }) { Text("Copy report") }
+    }
+
     Panel("History") {
         if (state.entries.isEmpty()) Text("No operations yet.", color = MaterialTheme.colorScheme.onSurfaceVariant)
         state.entries.asReversed().take(20).forEach { entry ->
@@ -195,6 +205,8 @@ private fun Fact(label: String, value: String) {
         Text(value)
     }
 }
+
+private fun copyText(text: String) = Toolkit.getDefaultToolkit().systemClipboard.setContents(StringSelection(text), null)
 
 /** The system's own file dialog, so Control Center never needs broad file access. */
 internal fun chooseFile(title: String, save: Boolean, suggested: String? = null): Path? {

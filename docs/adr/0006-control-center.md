@@ -31,6 +31,7 @@ PRD section 7 asks for a guided, transparent way to make supported changes to a 
 - Make Oriel the home app with `cmd package set-home-activity` (nothing is turned off).
 - Turn the built-in home screen off and back on with `pm disable-user` and `pm enable` (nothing is uninstalled).
 - Export a backup, and restore one after previewing every change.
+- Copy a device report for compatibility reports and troubleshooting. It's built from an allowlist of fields, so the address, serial number, and app list can't leak into it.
 
 ## Consequences
 

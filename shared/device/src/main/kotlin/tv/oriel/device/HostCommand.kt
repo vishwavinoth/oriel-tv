@@ -36,6 +36,9 @@ sealed class HostCommand(val args: List<String>, val changesDevice: Boolean, val
 
     class ReadMemory(serial: String) : HostCommand(shell(serial, "cat", "/proc/meminfo"), changesDevice = false)
 
+    class ReadPackageVersion(serial: String, packageName: String) :
+        HostCommand(shell(serial, "dumpsys", "package", Validate.packageName(packageName)), changesDevice = false)
+
     class ResolveHome(serial: String) : HostCommand(
         shell(serial, "cmd", "package", "resolve-activity", "--brief", "-a", "android.intent.action.MAIN", "-c", "android.intent.category.HOME"),
         changesDevice = false,

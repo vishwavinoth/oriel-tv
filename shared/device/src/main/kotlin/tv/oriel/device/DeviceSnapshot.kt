@@ -52,6 +52,9 @@ object Parsers {
     /** The last line of `cmd package resolve-activity --brief`, when it's a valid activity name. */
     fun homeActivity(output: String): String? =
         output.lineSequence().map(String::trim).lastOrNull { it.contains('/') }?.takeIf(Validate::isComponent)
+
+    /** The first "versionName=" in `dumpsys package` output. */
+    fun versionName(output: String): String? = Regex("versionName=([\\w.+-]+)").find(output)?.groupValues?.get(1)
 }
 
 /**
@@ -72,6 +75,7 @@ data class DeviceSnapshot(
     val installedPackages: Set<String>,
     val disabledPackages: Set<String>,
     val homeActivity: String?,
+    val orielVersion: String? = null,
 ) {
     val label: String get() = "$manufacturer $model".trim()
     val orielInstalled: Boolean get() = ORIEL_PACKAGE in installedPackages
@@ -115,6 +119,7 @@ data class DeviceSnapshot(
             screenSize: String?,
             memoryMb: Int?,
             homeActivity: String?,
+            orielVersion: String? = null,
         ): DeviceSnapshot {
             val manufacturer = properties["ro.product.manufacturer"].orEmpty().ifBlank { "Unknown maker" }
             return DeviceSnapshot(
@@ -131,6 +136,7 @@ data class DeviceSnapshot(
                 installedPackages = installed,
                 disabledPackages = disabled,
                 homeActivity = homeActivity,
+                orielVersion = orielVersion,
             )
         }
     }

@@ -46,15 +46,21 @@ object DeviceReader {
         val serial = device.serial
         val properties = runner.run(HostCommand.ReadProperties(serial))
         if (!properties.succeeded) throw IllegalStateException("Couldn’t read ${device.model ?: serial}: ${properties.output.trim().take(200)}")
+        val installed = Parsers.packages(runner.run(HostCommand.ListPackages(serial)).output)
         return DeviceSnapshot.from(
             device = device,
             properties = Parsers.properties(properties.output),
             features = Parsers.features(runner.run(HostCommand.ListFeatures(serial)).output),
-            installed = Parsers.packages(runner.run(HostCommand.ListPackages(serial)).output),
+            installed = installed,
             disabled = Parsers.packages(runner.run(HostCommand.ListPackages(serial, disabledOnly = true)).output),
             screenSize = Parsers.screenSize(runner.run(HostCommand.ReadScreenSize(serial)).output),
             memoryMb = Parsers.memoryTotalMb(runner.run(HostCommand.ReadMemory(serial)).output),
             homeActivity = Parsers.homeActivity(runner.run(HostCommand.ResolveHome(serial)).output),
+            orielVersion = if (DeviceSnapshot.ORIEL_PACKAGE in installed) {
+                Parsers.versionName(runner.run(HostCommand.ReadPackageVersion(serial, DeviceSnapshot.ORIEL_PACKAGE)).output)
+            } else {
+                null
+            },
         )
     }
 }

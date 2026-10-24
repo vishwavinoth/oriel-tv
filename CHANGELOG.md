@@ -27,6 +27,7 @@ All notable changes to Oriel TV are recorded here. The format follows the common
   - Shows every operation's explanation, risks, reversibility, exact commands, and recovery before a confirmation, and reports partial failures honestly.
   - Exports a backup of which apps are turned off, and restores one after previewing every change.
   - Keeps an operation history on the computer, without device serial numbers.
+  - Copies a device report for compatibility and bug reports, leaving out the TV's address, serial number, and app list.
 - A device-safety core with a closed command allowlist and validation that blocks shell injection, covered by unit tests.
 
 ### Privacy
