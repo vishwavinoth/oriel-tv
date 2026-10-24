@@ -34,8 +34,10 @@ Out of scope:
 
 These are design commitments from the product requirements (PRD sections 7.5 and 11). If you find a place where the code breaks one of them, that's a security bug.
 
-- The launcher doesn't request network access and contains no analytics or advertising SDKs.
+- The launcher doesn't request internet access and contains no analytics or advertising SDKs. It reads only whether the TV is on Wi-Fi, Ethernet, or offline.
 - Device operations run only from a fixed allowlist, with validated arguments, after explicit confirmation.
 - Text from an AI model or any other untrusted source is never executed as a command.
 - Imported backups and settings are validated before use and never deserialized unsafely.
 - Logs and diagnostics avoid device identifiers and are sanitized before sharing.
+
+The latest review of these controls, with its findings, is in [docs/security-review.md](docs/security-review.md).

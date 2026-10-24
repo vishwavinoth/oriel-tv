@@ -136,7 +136,7 @@ class ControlCenterState(
 
     fun reviewRestore(file: Path) = act {
         val device = snapshot ?: return@act
-        val backup = BackupCodec.decode(Files.readString(file))
+        val backup = BackupCodec.read(file)
         when (val option = OperationPlanner.restore(device, backup)) {
             is OperationOption.Available -> review(option.plan)
             is OperationOption.Unavailable -> notice = option.reason

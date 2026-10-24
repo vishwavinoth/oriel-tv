@@ -1,5 +1,7 @@
 package tv.oriel.device
 
+import java.nio.file.Files
+import java.nio.file.Path
 import java.time.Instant
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.Serializable
@@ -46,6 +48,12 @@ object BackupCodec {
     )
 
     fun encode(backup: DeviceBackup): String = json.encodeToString(DeviceBackup.serializer(), backup)
+
+    /** Reads a backup file, refusing an oversized one before it's loaded into memory. */
+    fun read(file: Path): DeviceBackup {
+        if (Files.size(file) > MAX_BYTES) throw InvalidBackupException("This file is too large to be an Oriel backup.")
+        return decode(Files.readString(file))
+    }
 
     fun decode(text: String): DeviceBackup {
         if (text.length > MAX_BYTES) throw InvalidBackupException("This file is too large to be an Oriel backup.")

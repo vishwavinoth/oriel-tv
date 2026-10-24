@@ -1,5 +1,6 @@
 package tv.oriel.device
 
+import java.nio.file.Files
 import java.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -34,5 +35,14 @@ class BackupTest {
         for ((name, text) in cases) {
             assertFailsWith<InvalidBackupException>(name) { BackupCodec.decode(text) }
         }
+    }
+
+    @Test
+    fun `backup files are read from disk, and oversized ones are refused before loading`() {
+        val folder = Files.createTempDirectory("oriel-backup")
+        val good = Files.writeString(folder.resolve("good.json"), BackupCodec.encode(BackupCodec.create(device, Instant.parse("2026-10-24T10:00:00Z"))))
+        assertEquals(listOf("com.example.a", "com.example.b"), BackupCodec.read(good).disabledPackages)
+        val huge = Files.write(folder.resolve("huge.json"), ByteArray(BackupCodec.MAX_BYTES + 1))
+        assertFailsWith<InvalidBackupException> { BackupCodec.read(huge) }
     }
 }
