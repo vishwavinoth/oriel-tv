@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The TV banner shown in system app lists: the Oriel mark over the Dusk wallpaper colors. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+    <path android:pathData="M0,0h320v180h-320z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="320"
+                android:endY="180"
+                android:startX="0"
+                android:startY="0"
+                android:type="linear">
+                <item android:color="#FF2A1B52" android:offset="0" />
+                <item android:color="#FF130F26" android:offset="0.55" />
+                <item android:color="#FF4A2324" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <group
+        android:scaleX="2.6"
+        android:scaleY="2.6"
+        android:translateX="76.8"
+        android:translateY="7.45">
+        <clip-path android:pathData="M17,49V29.5a15,15 0,0 1,30 0V49Z" />
+        <path android:pathData="M17,49V29.5a15,15 0,0 1,30 0V49Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:endX="42"
+                    android:endY="49"
+                    android:startX="22"
+                    android:startY="14"
+                    android:type="linear">
+                    <item android:color="#FFF4F6FF" android:offset="0" />
+                    <item android:color="#FF9DB2FF" android:offset="0.5" />
+                    <item android:color="#FF5B5FD6" android:offset="1" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path
+            android:pathData="M27,50V12M37,50V12M16,37.5h32"
+            android:strokeWidth="2.2"
+            android:strokeColor="#FF130F26" />
+    </group>
+</vector>

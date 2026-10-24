@@ -4,13 +4,16 @@
 
 Oriel TV is an open-source, privacy-first home screen and customization toolkit for Android TV and Google TV, with a calm, glass-inspired design built for the remote.
 
-> **Status:** Early development. There is nothing to install yet.
+> **Status:** Early development. There's no release yet, but you can build the launcher yourself. See [Getting started](docs/guides/getting-started.md).
 
-## What's planned
+**Website:** <https://oriel-tv.vercel.app>
 
-- **Oriel Launcher:** a fast, customizable home screen for Android TV and Google TV, with favorites, themes, wallpapers, and full D-pad navigation.
-- **Oriel Control Center:** a desktop companion that guides you through supported device customization, compatibility checks, and backups, and asks before changing anything.
-- **Website:** a product overview, a device compatibility list, and documentation.
+## What's here
+
+- **Oriel Launcher** (`launcher/`): a home screen for Android TV and Google TV, in Kotlin with Jetpack Compose for TV. It has a favorites dock, a grid of every app, D-pad navigation that stops at edges, an options menu for favorites and hiding apps, and settings for theme, accent, wallpaper, clock, reduce transparency, and reduce motion. It has no network permission.
+- **Website** (`website/`): Next.js, React, Tailwind CSS, Motion, and Radix UI, exported as a static site. It includes an interactive launcher demo, a compatibility explorer, and the documentation.
+- **Design tokens** (`shared/design-tokens/`): one source of colors, materials, type, motion, and wallpapers for both, with contrast tests.
+- **Oriel Control Center**, a guided tool for safe device customization, is planned and hasn't started yet.
 
 ## Principles
 
@@ -20,14 +23,30 @@ Oriel TV is an open-source, privacy-first home screen and customization toolkit 
 - **Safe:** device changes are explained, previewed, and confirmed before they happen.
 - **Original:** designed and written from scratch for this project.
 
+## Build
+
+```bash
+# Launcher: JDK 17+ and the Android SDK (platform 36)
+./gradlew :launcher:assembleDebug :launcher:testDebugUnitTest
+
+# Website: Node.js 20.9+
+cd website && npm ci && npm run dev
+
+# Design tokens, from the repository root
+npm run tokens && npm run test:tokens
+```
+
 ## Documentation
 
-The full product requirements are in [PRD.md](PRD.md).
+- [Product requirements](PRD.md)
+- [Getting started](docs/guides/getting-started.md), [Device management](docs/guides/device-management.md), and [Troubleshooting](docs/guides/troubleshooting.md)
+- [Design system](docs/design-system.md) and [architecture decisions](docs/adr/)
+- [Contributing](CONTRIBUTING.md), [Security](SECURITY.md), [Privacy](PRIVACY.md), and [Changelog](CHANGELOG.md)
 
 ## License
 
 Copyright 2026 Vishwa R and the Oriel TV contributors.
 
-Licensed under the [Apache License 2.0](LICENSE). The license does not grant rights to use the Oriel name or logo.
+Licensed under the [Apache License 2.0](LICENSE). The license doesn't grant rights to use the Oriel name or logo; see [TRADEMARKS.md](TRADEMARKS.md).
 
 <sub>Beautiful by design. Open by nature.</sub>
