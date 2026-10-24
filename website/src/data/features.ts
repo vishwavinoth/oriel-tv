@@ -22,7 +22,7 @@ export const FEATURES: readonly Feature[] = [
     points: [
       "A favorites dock for the apps you open most, above a grid of everything else.",
       "Reorder favorites and hide apps you never use, without uninstalling anything.",
-      "The focused appâ€™s name and category appear large enough to read from the couch.",
+      "The focused app’s name and category appear large enough to read from the couch.",
     ],
     icon: Tv,
     status: IN_BUILD,
@@ -58,7 +58,7 @@ export const FEATURES: readonly Feature[] = [
     points: [
       "Every operation shows what it does, what could go wrong, and how to undo it.",
       "Nothing changes until you confirm, and only allowlisted operations can run.",
-      "Changes that canâ€™t be reversed reliably are marked before you approve them.",
+      "Changes that can’t be reversed reliably are marked before you approve them.",
     ],
     icon: ShieldCheck,
     status: IN_BUILD,
@@ -66,7 +66,7 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "privacy",
     title: "Privacy-first operation",
-    summary: "The launcher has no network permission. It canâ€™t send anything anywhere.",
+    summary: "The launcher has no network permission. It can’t send anything anywhere.",
     points: [
       "No accounts, analytics, ads, or tracking.",
       "Your settings live on the TV and are deleted when you uninstall Oriel.",
@@ -82,7 +82,7 @@ export const FEATURES: readonly Feature[] = [
     points: [
       "Backups are validated before anything is restored.",
       "You see a preview of what a restore will change.",
-      "Oriel wonâ€™t claim to back up anything it canâ€™t actually restore.",
+      "Oriel won’t claim to back up anything it can’t actually restore.",
     ],
     icon: RotateCcw,
     status: IN_BUILD,
@@ -102,10 +102,10 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "honest",
     title: "Compatibility transparency",
-    summary: "Clear labels for whatâ€™s verified on real hardware and whatâ€™s only expected to work.",
+    summary: "Clear labels for what’s verified on real hardware and what’s only expected to work.",
     points: [
       "Device reports say who tested what, on which software version, and when.",
-      "Platform limits are stated plainly, including where Oriel canâ€™t help.",
+      "Platform limits are stated plainly, including where Oriel can’t help.",
       "Nothing is marked as tested unless someone actually tested it.",
     ],
     icon: LayoutGrid,
