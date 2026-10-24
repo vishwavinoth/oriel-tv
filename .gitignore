@@ -37,6 +37,10 @@ npm-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Local tool settings
+.claude/
+.vercel/
+
 # Operating system files
 .DS_Store
 Thumbs.db

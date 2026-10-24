@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Oriel</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1C2344"/>
+      <stop offset="1" stop-color="#07090F"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#F4F6FF"/>
+      <stop offset="0.5" stop-color="#9DB2FF"/>
+      <stop offset="1" stop-color="#5B5FD6"/>
+    </linearGradient>
+    <clipPath id="arch">
+      <path d="M17 49V29.5a15 15 0 0 1 30 0V49Z"/>
+    </clipPath>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <path d="M17 49V29.5a15 15 0 0 1 30 0V49Z" fill="url(#glass)"/>
+  <g clip-path="url(#arch)" stroke="#11162C" stroke-width="2.2">
+    <path d="M27 50V12M37 50V12M16 37.5h32"/>
+  </g>
+  <path d="M14 49.5h36" stroke="#9DB2FF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+</svg>

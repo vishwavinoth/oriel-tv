@@ -94,7 +94,7 @@ Recommended starting point:
 |---|---|---|
 | Android TV launcher | Kotlin, Jetpack Compose for TV, Gradle | Google's current toolkit for TV interfaces, with built-in focus and D-pad handling |
 | Control Center | Kotlin desktop app built with Compose Multiplatform, using the user's installed Android platform tools (ADB) | Shares the language, design tokens, and domain models with the launcher |
-| Website | A static site generator such as Astro | Fast pages, minimal client-side JavaScript, and simple hosting |
+| Website | Next.js with React and TypeScript, Tailwind CSS, Motion, and Radix UI, exported as a static site | A React ecosystem many contributors know, with no server to run |
 
 Deviate from these only with a documented reason. Avoid unnecessary services, databases, or deployment dependencies.
 
@@ -160,6 +160,8 @@ Liquid Glass-inspired design is a core requirement, not an optional visual enhan
 
 Use it as a coherent design language across the marketing website, setup flows, launcher controls, dialogs, toolbars, settings, and interactive demonstrations.
 
+Follow Apple's [Human Interface Guidelines for Materials](https://developer.apple.com/design/human-interface-guidelines/materials) on every platform Oriel targets, including the web and Android, not only where Apple's own frameworks apply. That means Liquid Glass for the functional layer of controls and navigation, standard materials from ultra-thin to thick for structure in the content layer, vibrant label colors on materials, and the tvOS guidance for focus and overlays. [ADR 0005](docs/adr/0005-materials-hig.md) maps each guideline to Oriel's tokens and components. Oriel applies these guidelines with each platform's own rendering tools and uses no Apple APIs, assets, or symbols.
+
 ### Material principles
 
 **Translucency:** Use translucent surfaces that allow selected background colors or imagery to contribute to the visual appearance.
@@ -192,7 +194,8 @@ Create a centralized, documented design system for:
 - Typography and font scales.
 - Spacing and layout.
 - Corner radii.
-- Surface opacity and material strength.
+- Surface opacity and material strength, including the standard material thicknesses (ultra-thin, thin, regular, and thick).
+- Label vibrancy levels (primary, secondary, tertiary, and quaternary) for text on materials.
 - Blur intensity.
 - Borders and highlights.
 - Elevation and shadows.

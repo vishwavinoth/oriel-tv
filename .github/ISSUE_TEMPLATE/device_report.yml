@@ -1,0 +1,69 @@
+name: Device compatibility report
+description: Tell us how Oriel works on a TV or streaming device you own.
+title: "[Device]: "
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Compatibility reports feed the device list on the website. Please report only what you tested yourself on a physical device.
+  - type: input
+    id: model
+    attributes:
+      label: Device model
+      placeholder: "e.g. Sony Bravia XR-55A80L"
+    validations:
+      required: true
+  - type: input
+    id: manufacturer
+    attributes:
+      label: Manufacturer
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Google TV
+        - Android TV
+        - Other Android-based TV
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: Android or Google TV version
+      placeholder: "e.g. Android TV 12"
+    validations:
+      required: true
+  - type: input
+    id: oriel-version
+    attributes:
+      label: Oriel version or commit
+    validations:
+      required: true
+  - type: checkboxes
+    id: worked
+    attributes:
+      label: What worked
+      options:
+        - label: Installing the launcher
+        - label: Opening it from the app list
+        - label: Setting it as the default home screen
+        - label: Showing and opening installed apps
+        - label: D-pad navigation and focus
+        - label: Favorites and hiding apps
+        - label: Themes and wallpapers
+  - type: textarea
+    id: problems
+    attributes:
+      label: Problems or limitations
+      description: Anything that didn't work, looked wrong, or felt slow.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I tested this myself on the physical device described above.
+          required: true
