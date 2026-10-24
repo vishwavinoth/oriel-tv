@@ -1,0 +1,43 @@
+# Gradle and Android
+.gradle/
+build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Kotlin
+.kotlin/
+
+# Signing keys and secrets
+*.jks
+*.keystore
+keystore.properties
+.env
+.env.*
+!.env.example
+
+# Android Studio and IntelliJ
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# Website (Node)
+node_modules/
+dist/
+.astro/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
