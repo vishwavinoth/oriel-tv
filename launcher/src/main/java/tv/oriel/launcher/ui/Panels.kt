@@ -198,7 +198,8 @@ fun SettingsPanel(
 
                 SettingLabel(stringResource(R.string.settings_theme))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    ThemeMode.entries.forEach { mode ->
+                    // for loops, not forEach: AGP 8's lint reads Kotlin 2.4's forEach as Java's Iterable.forEach (API 24+).
+                    for (mode in ThemeMode.entries) {
                         PanelControl(
                             onClick = { onUpdate { it.copy(theme = mode) } },
                             shape = RoundedCornerShape(OrielTokens.Radius.Pill),
@@ -215,7 +216,7 @@ fun SettingsPanel(
 
                 SettingLabel(stringResource(R.string.settings_accent))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    OrielTokens.Accent.All.forEach { accent ->
+                    for (accent in OrielTokens.Accent.All) {
                         val accentLabel = tokenText("accent_${accent.id}", accent.label)
                         PanelControl(
                             onClick = { onUpdate { it.copy(accentId = accent.id) } },
@@ -229,7 +230,7 @@ fun SettingsPanel(
 
                 SettingLabel(stringResource(R.string.settings_wallpaper))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    OrielTokens.Wallpaper.All.forEach { wallpaper ->
+                    for (wallpaper in OrielTokens.Wallpaper.All) {
                         val wallpaperLabel = tokenText("wallpaper_${wallpaper.id}", wallpaper.label)
                         PanelControl(
                             onClick = { onUpdate { it.copy(wallpaperId = wallpaper.id) } },
