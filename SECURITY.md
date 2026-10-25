@@ -14,7 +14,7 @@ You'll receive an acknowledgement within 7 days. Fixes for confirmed problems ar
 
 ## Supported versions
 
-Oriel TV hasn't published a release yet. Until it does, security fixes go to the `main` branch only. This section will list supported releases once they exist.
+Oriel TV is in public preview, and only the latest release is supported. Security fixes go to the `main` branch and ship in the next release.
 
 ## Scope
 

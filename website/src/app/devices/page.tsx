@@ -58,7 +58,7 @@ export default function DevicesPage() {
             {reports.length === 0 ? "No device has been tested yet" : reports.length === 1 ? "1 device report" : `${reports.length} device reports`}
           </h2>
           <p className="max-w-[56ch] text-fg-2">
-            Oriel is in early development. If you try a build on your own TV, a report helps everyone, including when something doesn’t work.
+            Oriel is in public preview. If you try it on your own TV, a report helps everyone, including when something doesn’t work.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild>

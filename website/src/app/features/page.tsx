@@ -27,7 +27,7 @@ export default function FeaturesPage() {
       <PageHeader
         eyebrow="Features"
         title="Everything Oriel does, and how honestly"
-        description="Every feature below is in the current development build. Oriel hasn’t had its first release yet, and no TV has been verified."
+        description="Every feature below is in the public preview. No TV has been verified yet."
       >
         <Button asChild>
           <Link href="/docs/getting-started/">Get started</Link>

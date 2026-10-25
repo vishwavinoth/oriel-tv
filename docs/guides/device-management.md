@@ -1,6 +1,6 @@
 # Device management
 
-Oriel Control Center guides supported device changes with explanations, previews, confirmations, and recovery steps. It's available as a development build. With Android platform tools and JDK 17 or newer installed, run it from the repository:
+Oriel Control Center guides supported device changes with explanations, previews, confirmations, and recovery steps. Download it from the [latest release](https://github.com/vishwavinoth/oriel-tv/releases/latest): the `.msi` for Windows or the `.deb` for Debian and Ubuntu, each with its own Java runtime, or the `.jar` for macOS (run it with `java -jar`, Java 17 or newer). It needs [Android platform tools](https://developer.android.com/tools/releases/platform-tools) installed. You can also run it from the repository with JDK 17 or newer:
 
 ```bash
 ./gradlew :control-center:run

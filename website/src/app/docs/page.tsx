@@ -44,7 +44,7 @@ export default function DocsIndexPage() {
           Oriel TV docs
         </h1>
         <p className="max-w-[60ch] text-body-lg text-fg-2">
-          Oriel hasn’t published a release yet, so these guides describe the current development build. Every guide is a Markdown file in the
+          These guides describe the public preview, which nobody has tested on a physical TV yet. Every guide is a Markdown file in the
           repository, and improvements are welcome.
         </p>
       </div>

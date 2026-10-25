@@ -28,7 +28,7 @@ android {
         minSdk = 21
         targetSdk = 36
         versionCode = 1
-        versionName = "0.1.0-dev"
+        versionName = "0.1.0"
     }
 
     // Lists Oriel's languages for Android 13's per-app language setting, from the values-<language> folders.
