@@ -11,6 +11,13 @@ updates:
         patterns: ["androidx.*", "com.android.*"]
       kotlin-and-compose:
         patterns: ["org.jetbrains.kotlin*", "org.jetbrains.kotlinx*", "org.jetbrains.compose*"]
+    ignore:
+      # Gradle 9.6 removed an internal API that the Android Gradle Plugin 8 uses, so moving to Gradle 9.6 or
+      # newer means moving to AGP 9 at the same time. That's a migration to plan, not a routine update.
+      - dependency-name: "com.android.application"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "gradle-wrapper"
+        versions: [">= 9.6"]
 
   - package-ecosystem: npm
     directory: /website
@@ -23,6 +30,10 @@ updates:
         patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
       tailwind:
         patterns: ["tailwindcss", "@tailwindcss/*", "tailwind-merge"]
+    ignore:
+      # The lint setup (typescript-eslint, through eslint-config-next) doesn't support TypeScript 7 yet.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
