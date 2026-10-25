@@ -11,7 +11,7 @@ The first public preview. It's for testing: nobody has run it on a physical TV y
 ### Supported platforms
 
 - **Launcher:** Android TV and Google TV devices running Android 5.0 or newer. It also installs on Fire TV, but it can't be the home screen there.
-- **Control Center:** Windows (`.msi`) and Debian or Ubuntu Linux (`.deb`), each with its own Java runtime, and macOS as a `.jar` that needs Java 17 or newer. It needs Android platform tools (`adb`).
+- **Control Center:** Windows (`.msi`) and Debian or Ubuntu Linux (`.deb`), each with its own Java runtime, and macOS as a `.jar` for Apple silicon Macs that needs Java 17 or newer (there's no build for Intel Macs yet). Control Center needs Android platform tools (`adb`).
 
 ### Known limitations
 
@@ -51,7 +51,7 @@ The first public preview. It's for testing: nobody has run it on a physical TV y
   - Copies a device report for compatibility and bug reports, leaving out the TV's address, serial number, and app list.
 - A device-safety core with a closed command allowlist and validation that blocks shell injection, covered by unit tests.
 - Dependency license checks: every Gradle and npm dependency is checked against the licenses the project allows, in CI and in every release build. The launcher and Control Center show their libraries in an Open-source licenses screen, and the website lists its own on the License page.
-- A release workflow that builds the launcher APK and Control Center installers for Linux and Windows (and a runnable jar for macOS) from a version tag, adds SHA-256 checksums and build provenance, and opens a draft release for review. See [docs/releasing.md](docs/releasing.md).
+- A release workflow that builds the launcher APK and Control Center installers for Linux and Windows (and a runnable jar for Apple silicon Macs) from a version tag, adds SHA-256 checksums and build provenance, and opens a draft release for review. See [docs/releasing.md](docs/releasing.md).
 - Dependabot keeps Gradle, npm, and GitHub Actions dependencies up to date.
 - Six theme packs (Evening, Cinema, Reef, Northern, Morning, and Sunrise) set the theme, accent, and wallpaper in one step, in the launcher and the website demo. Anyone can propose a new one; see CONTRIBUTING.md.
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const RELEASE_CONTENTS = [
   "The launcher APK, for Android TV and Google TV on Android 5.0 or newer",
-  "Control Center for Windows and Linux, and as a jar for macOS",
+  "Control Center for Windows and Linux, and as a jar for Apple silicon Macs",
   "SHA-256 checksums and build provenance for every file",
   "The changelog, supported platforms, and known limitations",
   "Only test results that actually happened",
