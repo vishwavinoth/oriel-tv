@@ -8,6 +8,8 @@ Every font, icon, image, and other media file used by Oriel must be listed here 
 | Wallpapers ("atmospheres": Dusk, Lagoon, Aurora, Ember, Mist, Dawn) | Website and launcher, generated from `shared/design-tokens/tokens.json` | Created for this project as gradient definitions | Apache-2.0 |
 | Launcher demo app glyphs (fictional apps) | `website/src/components/demo/AppGlyph.tsx` | Created for this project | Apache-2.0 |
 | Launcher settings glyph | `launcher/src/main/java/tv/oriel/launcher/ui/HomeScreen.kt` | Created for this project | Apache-2.0 |
+| `assets/readme/banner.png`: the README banner | `README.md` | Rendered by the website's own social image, `website/src/app/opengraph-image.tsx` | Apache-2.0, trademark policy applies |
+| `assets/readme/control-panel.jpg`, `assets/readme/theme-packs.jpg`: launcher screenshots | `README.md` | Screenshots of the Oriel launcher in the Android emulator, taken for this project | Apache-2.0 |
 | Website interface icons | Throughout `website/src/` | [Lucide](https://lucide.dev), installed as the `lucide-react` npm dependency, not copied into the repository | ISC |
 
 ## Fonts
