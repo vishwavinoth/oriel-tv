@@ -62,7 +62,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Unit tests, dependency licenses, lint, and debug build
         run: ./gradlew :shared:device:test :shared:device:licensee :control-center:test :control-center:licensee :launcher:testDebugUnitTest :launcher:licenseeRelease :launcher:lintDebug :launcher:assembleDebug --console=plain
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: launcher-reports
@@ -71,7 +71,7 @@ jobs:
             launcher/build/test-results/
             shared/device/build/reports/
             control-center/build/reports/
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: launcher-debug-apk
           path: launcher/build/outputs/apk/debug/*.apk
