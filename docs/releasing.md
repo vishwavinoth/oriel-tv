@@ -9,7 +9,7 @@ A release starts with a version tag. The [release workflow](../.github/workflows
 | `oriel-launcher-<version>.apk` | Linux | The launcher, signed with the project's release key. |
 | `oriel-control-center_<version>-1_amd64.deb` | Linux | Control Center for Debian and Ubuntu, with its own Java runtime. |
 | `oriel-control-center-<version>.msi` | Windows | Control Center for Windows, with its own Java runtime. |
-| `oriel-control-center-macos-<arch>-<version>.jar` | macOS | Run with `java -jar` (Java 17 or newer). A macOS installer needs Apple signing and notarization first. |
+| `oriel-control-center-macos-<arch>-<version>.jar` | macOS | Run with `java -jar` (Java 17 or newer). It's built on GitHub's Apple silicon runner, so it runs only on Apple silicon Macs. A macOS installer needs Apple signing and notarization first. |
 | `SHA256SUMS.txt` | Linux | SHA-256 checksums for every file above. |
 
 Every file also gets a [build provenance attestation](https://docs.github.com/actions/security-for-github-actions/using-artifact-attestations), so anyone can confirm it was built from this repository by this workflow:
