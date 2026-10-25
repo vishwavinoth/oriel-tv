@@ -124,6 +124,29 @@
   color: var(--o-color-text-secondary);
 }
 
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 1cqi;
+}
+
+/* The connection status: information, not a control, so it never takes focus. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7cqi;
+  height: 5.4cqi;
+  padding-inline: 1.6cqi;
+  border-radius: 999px;
+  font-size: 1.3cqi;
+  font-weight: 650;
+}
+
+.status svg {
+  width: 1.9cqi;
+  height: 1.9cqi;
+}
+
 .controls {
   display: flex;
   gap: 0.4cqi;
@@ -354,6 +377,37 @@
   gap: 1.5cqi;
   border-radius: 2.8cqi;
   border-width: 0.1cqi;
+  /* Taller than the screen when every setting shows, so it scrolls itself to keep focus in view. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.panel::-webkit-scrollbar {
+  display: none;
+}
+
+.settingHint {
+  font-size: 1.1cqi;
+  line-height: 1.4;
+  color: var(--o-color-text-secondary);
+}
+
+/* A theme pack's swatch: its wallpaper, with its accent as a dot. */
+.packSwatch {
+  position: relative;
+}
+
+.packSwatch::after {
+  content: "";
+  position: absolute;
+  right: 0.45cqi;
+  bottom: 0.45cqi;
+  width: 1.1cqi;
+  height: 1.1cqi;
+  border-radius: 50%;
+  background: var(--pack-accent);
+  box-shadow: 0 0 0 0.12cqi rgba(255, 255, 255, 0.7);
 }
 
 .panelHeader {
@@ -418,7 +472,8 @@
 }
 
 .wallpaperSwatch {
-  width: 5cqi;
+  /* Six of these, with their borders and gaps, fit on one row of the 31cqi-wide panel. */
+  width: 3.9cqi;
   border-radius: 0.9cqi;
 }
 
@@ -478,11 +533,13 @@
   transition: translate var(--o-duration-base) var(--o-ease-spring);
 }
 
-.toggle[data-on="true"] .toggleTrack {
+.toggle[data-on="true"] .toggleTrack,
+.toggleTrack[data-on="true"] {
   background: var(--o-color-accent);
 }
 
-.toggle[data-on="true"] .toggleTrack::after {
+.toggle[data-on="true"] .toggleTrack::after,
+.toggleTrack[data-on="true"]::after {
   translate: 1.8cqi 0;
 }
 
@@ -599,6 +656,199 @@
 .appBack svg {
   width: 1.8cqi;
   height: 1.8cqi;
+}
+
+/* ---------- Control panel: shares the settings panel's glass ---------- */
+
+.connection {
+  display: flex;
+  align-items: center;
+  gap: 1.2cqi;
+}
+
+.connection svg {
+  flex: none;
+  width: 2.6cqi;
+  height: 2.6cqi;
+}
+
+.connectionTitle {
+  font-size: 1.7cqi;
+  font-weight: 700;
+}
+
+.connectionDetail {
+  font-size: 1.15cqi;
+  color: var(--o-color-text-secondary);
+}
+
+.panelWide {
+  width: 41cqi;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7cqi;
+}
+
+.controlTile {
+  display: flex;
+  align-items: center;
+  gap: 0.8cqi;
+  padding: 0.95cqi 1.1cqi;
+  border: 0;
+  border-radius: 1.1cqi;
+  background: color-mix(in srgb, var(--o-color-text-primary) 10%, transparent);
+  font-size: 1.15cqi;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.controlTile svg {
+  flex: none;
+  width: 1.6cqi;
+  height: 1.6cqi;
+}
+
+.controlTile[data-focused="true"] {
+  background: color-mix(in srgb, var(--o-color-text-primary) 18%, transparent);
+}
+
+/* ---------- The TV's own settings: solid and plain, so it reads as the TV's screen, not Oriel's ---------- */
+
+.system {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 38% 1fr;
+  background: #11141c;
+  color: #f2f4f8;
+}
+
+.systemIntro {
+  display: grid;
+  align-content: center;
+  gap: 1.2cqi;
+  padding: 5cqi 4cqi;
+  background: #0b0d13;
+}
+
+.systemIntro svg {
+  width: 5cqi;
+  height: 5cqi;
+  color: #9db2ff;
+}
+
+.systemTitle {
+  font-size: 3cqi;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.systemCaption {
+  font-size: 1.25cqi;
+  line-height: 1.45;
+  color: rgba(242, 244, 248, 0.7);
+}
+
+.systemList {
+  display: grid;
+  align-content: start;
+  gap: 0.6cqi;
+  padding: 5cqi 3cqi;
+}
+
+.systemRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5cqi;
+  padding: 1.4cqi 1.8cqi;
+  border: 0;
+  border-radius: 0.8cqi;
+  background: transparent;
+  font-size: 1.5cqi;
+  text-align: left;
+  cursor: pointer;
+}
+
+.systemRow[data-kind="action"] span:first-child {
+  color: #9db2ff;
+}
+
+.systemRow[data-focused="true"] {
+  background: #f2f4f8;
+  color: #11141c;
+}
+
+.systemRow[data-focused="true"] span:first-child {
+  color: inherit;
+}
+
+.systemValue {
+  font-size: 1.25cqi;
+  color: rgba(242, 244, 248, 0.66);
+}
+
+.systemRow[data-focused="true"] .systemValue {
+  color: rgba(17, 20, 28, 0.72);
+}
+
+/* ---------- Power and start-up, for the demo page ---------- */
+
+.power {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  background: #000000;
+}
+
+.power .powerButton {
+  display: grid;
+  justify-items: center;
+  gap: 1.6cqi;
+  padding: 3cqi;
+  border: 0;
+  background: transparent;
+  font-size: 1.6cqi;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
+  cursor: pointer;
+}
+
+.powerButton svg {
+  box-sizing: content-box;
+  width: 5cqi;
+  height: 5cqi;
+  padding: 1.6cqi;
+  border: 0.2cqi solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: border-color var(--o-duration-fast) var(--o-ease-standard);
+}
+
+.powerButton:hover svg {
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
+.boot {
+  display: grid;
+  justify-items: center;
+  gap: 1.4cqi;
+  font-size: 2.6cqi;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.bootMark {
+  width: 9cqi;
+  height: 9cqi;
 }
 
 /* ---------- Toast: carries text, so regular glass ---------- */

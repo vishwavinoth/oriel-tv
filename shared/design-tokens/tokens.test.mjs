@@ -141,6 +141,28 @@ test('every wallpaper is complete and the default exists', () => {
   }
 });
 
+test('every theme pack uses a real theme, accent, and wallpaper', () => {
+  // Every theme is contrast-tested over every wallpaper above, so a pack built from existing tokens stays legible.
+  const combinations = new Set();
+  for (const [id, pack] of Object.entries(tokens.themePack.options)) {
+    assert.match(id, /^[a-z]+$/, `${id} is one lowercase word, so it also works as a Kotlin name`);
+    for (const key of Object.keys(pack)) {
+      assert.ok(['label', 'description', 'theme', 'accent', 'wallpaper', 'author'].includes(key), `${id} has an unknown field "${key}"`);
+    }
+    if (pack.author !== undefined) {
+      assert.match(pack.author, /^[A-Za-z0-9](?:[A-Za-z0-9]|-(?=[A-Za-z0-9])){0,38}$/, `${id} author is a GitHub username`);
+    }
+    assert.ok(pack.label && pack.description, `${id} has a label and a description`);
+    assert.doesNotMatch(pack.label + pack.description, /["\\$]/, `${id} text is safe to generate into Kotlin`);
+    assert.ok(THEMES.includes(pack.theme), `${id} uses a real theme`);
+    assert.ok(tokens.accent.options[pack.accent], `${id} uses a real accent`);
+    assert.ok(tokens.wallpaper.options[pack.wallpaper], `${id} uses a real wallpaper`);
+    const combination = `${pack.theme}/${pack.accent}/${pack.wallpaper}`;
+    assert.ok(!combinations.has(combination), `${id} repeats another pack`);
+    combinations.add(combination);
+  }
+});
+
 test('renderCss includes themes and accessibility overrides', () => {
   const css = renderCss(tokens);
   assert.match(css, /--o-color-text-primary: var\(--o-raw-color-text-primary\);/);
@@ -162,9 +184,9 @@ test('renderCss scopes themes so a preview can differ from the page', () => {
   assert.match(css, /@media \(prefers-reduced-transparency: reduce\) \{\n {2}\[data-oriel-scope\]\[data-theme\] \{/);
 });
 
-test('renderTs lists every accent and wallpaper', () => {
+test('renderTs lists every accent, wallpaper, and theme pack', () => {
   const ts = renderTs(tokens);
-  for (const id of [...Object.keys(tokens.accent.options), ...Object.keys(tokens.wallpaper.options)]) {
+  for (const id of [...Object.keys(tokens.accent.options), ...Object.keys(tokens.wallpaper.options), ...Object.keys(tokens.themePack.options)]) {
     assert.match(ts, new RegExp(`"id": "${id}"`));
   }
   assert.match(ts, /export const defaultWallpaper: WallpaperId = "dusk";/);
@@ -174,7 +196,7 @@ test('renderKotlin emits ARGB color literals and every accent', () => {
   const kotlin = renderKotlin(tokens);
   assert.match(kotlin, /val Background = Color\(0xFF07090F\)/);
   assert.match(kotlin, /val Dim = Color\(0x59000000\)/);
-  for (const id of [...Object.keys(tokens.accent.options), ...Object.keys(tokens.wallpaper.options)]) {
+  for (const id of [...Object.keys(tokens.accent.options), ...Object.keys(tokens.wallpaper.options), ...Object.keys(tokens.themePack.options)]) {
     assert.match(kotlin, new RegExp(`id = "${id}"`));
   }
   assert.doesNotMatch(kotlin, /NaN|undefined/);

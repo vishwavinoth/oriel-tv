@@ -1,6 +1,6 @@
 # Troubleshooting
 
-If your problem isn't here, [open a bug report](https://github.com/vishwavinoth/oriel-tv/issues/new?template=bug_report.yml) with your TV model and software version.
+If your problem isn't here, [open a bug report](https://github.com/vishwavinoth/oriel-tv/issues/new?template=bug_report.yml) with your TV model and software version. If you use Control Center, its **Copy report** button gives you both, without the TV's address or serial number.
 
 ## The Home button still opens the old home screen
 

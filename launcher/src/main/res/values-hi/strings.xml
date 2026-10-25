@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hindi. Draft translation: it needs review by a native speaker before a release. See docs/translations.md. -->
+<resources>
+    <string name="loading_apps">ऐप लोड हो रहे हैं…</string>
+    <string name="favorites">पसंदीदा</string>
+    <string name="all_apps">सभी ऐप</string>
+    <string name="no_favorites">अभी कोई पसंदीदा ऐप नहीं है. किसी ऐप को जोड़ने के लिए उस पर OK दबाकर रखें.</string>
+    <string name="no_apps">दिखाने के लिए कोई ऐप नहीं है. छिपाए गए ऐप वापस लाने के लिए, सेटिंग में डिफ़ॉल्ट वापस लाएं.</string>
+    <string name="tv_app">टीवी ऐप</string>
+    <string name="android_app">Android ऐप</string>
+    <string name="options_hint">विकल्पों के लिए OK दबाकर रखें</string>
+    <string name="settings">सेटिंग</string>
+
+    <string name="settings_close_hint">बंद करने के लिए, वापस जाएं बटन दबाएं</string>
+    <string name="settings_theme_pack">थीम पैक</string>
+    <string name="theme_pack_custom">कस्टम: थीम, ऐक्सेंट रंग, और वॉलपेपर का आपका अपना मेल.</string>
+    <string name="theme_pack_caption">%1$s: %2$s</string>
+    <string name="settings_theme">थीम</string>
+    <string name="theme_dark">गहरी</string>
+    <string name="theme_light">हल्की</string>
+    <string name="settings_accent">ऐक्सेंट रंग</string>
+    <string name="settings_wallpaper">वॉलपेपर</string>
+    <string name="settings_clock">घड़ी दिखाएं</string>
+    <string name="settings_reduce_transparency">पारदर्शिता कम करें</string>
+    <string name="settings_reduce_motion">ऐनिमेशन कम करें</string>
+    <string name="settings_restore">डिफ़ॉल्ट वापस लाएं</string>
+    <string name="settings_licenses">ओपन सोर्स लाइसेंस</string>
+    <string name="licenses_intro">Oriel, Apache License 2.0 के तहत ओपन सोर्स है. इसे इन लाइब्रेरी से बनाया गया है, और हर लाइब्रेरी का इस्तेमाल दिखाए गए लाइसेंस के तहत होता है. हर बिल्ड इन्हें उन लाइसेंस से मिलाकर जांचता है जिनकी इस प्रोजेक्ट में अनुमति है.</string>
+    <string name="licenses_missing">इस बिल्ड में लाइसेंस की सूची नहीं है. ऐप को Gradle से बनाने पर यह सूची जुड़ जाती है.</string>
+    <string name="state_on">चालू</string>
+    <string name="state_off">बंद</string>
+
+    <string name="option_add_favorite">पसंदीदा में जोड़ें</string>
+    <string name="option_remove_favorite">पसंदीदा से हटाएं</string>
+    <string name="option_move_left">बाईं ओर ले जाएं</string>
+    <string name="option_move_right">दाईं ओर ले जाएं</string>
+    <string name="option_hide">ऐप छिपाएं</string>
+
+    <string name="control_panel">कंट्रोल पैनल</string>
+    <string name="control_panel_hint">आपके टीवी की अपनी सेटिंग खोलता है</string>
+    <string name="connection_wifi">वाई-फ़ाई</string>
+    <string name="connection_ethernet">ईथरनेट</string>
+    <string name="connection_other">ऑनलाइन</string>
+    <string name="connection_offline">ऑफ़लाइन</string>
+    <string name="connection_wifi_detail">वाई-फ़ाई से कनेक्ट है.</string>
+    <string name="connection_ethernet_detail">नेटवर्क केबल से कनेक्ट है.</string>
+    <string name="connection_other_detail">किसी नेटवर्क से कनेक्ट है.</string>
+    <string name="connection_offline_detail">कनेक्ट नहीं है. जिन ऐप को इंटरनेट की ज़रूरत है, वे टीवी के फिर से कनेक्ट होने तक काम नहीं करेंगे.</string>
+    <string name="shortcut_oriel">Oriel की सेटिंग</string>
+    <string name="shortcut_network">वाई-फ़ाई और नेटवर्क</string>
+    <string name="shortcut_bluetooth">ब्लूटूथ</string>
+    <string name="shortcut_notifications">सूचनाएं</string>
+    <string name="shortcut_display">डिसप्ले और तस्वीर</string>
+    <string name="shortcut_sound">आवाज़</string>
+    <string name="shortcut_screensaver">स्क्रीन सेवर</string>
+    <string name="shortcut_date">तारीख और समय</string>
+    <string name="shortcut_language">भाषा</string>
+    <string name="shortcut_keyboard">कीबोर्ड</string>
+    <string name="shortcut_accessibility">सुलभता</string>
+    <string name="shortcut_apps">ऐप</string>
+    <string name="shortcut_storage">स्टोरेज</string>
+    <string name="shortcut_privacy">निजता</string>
+    <string name="shortcut_about">इस टीवी के बारे में</string>
+    <string name="shortcut_all">सभी सेटिंग</string>
+    <string name="message_shortcut_failed">इस टीवी पर %1$s नहीं खुल सका.</string>
+
+    <string name="message_open_failed">%1$s नहीं खुल सका. हो सकता है कि इसे अनइंस्टॉल कर दिया गया हो.</string>
+    <string name="message_hidden">%1$s छिपा दिया गया है. इसे वापस लाने के लिए, सेटिंग में डिफ़ॉल्ट वापस लाएं.</string>
+    <string name="message_restored">सेटिंग, पसंदीदा, और छिपाए गए ऐप अपने डिफ़ॉल्ट पर वापस आ गए हैं.</string>
+
+    <string name="accent_daylight">दिन की रोशनी</string>
+    <string name="accent_amber">अंबर</string>
+    <string name="accent_lagoon">लैगून</string>
+    <string name="accent_rose">गुलाबी</string>
+    <string name="accent_violet">बैंगनी</string>
+    <string name="wallpaper_dusk">सांझ</string>
+    <string name="wallpaper_lagoon">लैगून</string>
+    <string name="wallpaper_aurora">ध्रुवीय ज्योति</string>
+    <string name="wallpaper_ember">अंगारा</string>
+    <string name="wallpaper_mist">धुंध</string>
+    <string name="wallpaper_dawn">भोर</string>
+    <string name="pack_evening">शाम</string>
+    <string name="pack_evening_description">Oriel की डिफ़ॉल्ट थीम: बैंगनी सांझ और हल्का नीला ऐक्सेंट.</string>
+    <string name="pack_cinema">सिनेमा</string>
+    <string name="pack_cinema_description">गर्म और मद्धम रोशनी, अंधेरे में देखने के लिए.</string>
+    <string name="pack_reef">रीफ़</string>
+    <string name="pack_reef_description">गहरा फ़िरोज़ी पानी और चमकीला लैगून ऐक्सेंट.</string>
+    <string name="pack_northern">उत्तरी रोशनी</string>
+    <string name="pack_northern_description">रात के आसमान के हरे और नीले रंग, बैंगनी ऐक्सेंट के साथ.</string>
+    <string name="pack_morning">सुबह</string>
+    <string name="pack_morning_description">दिन के लिए एक चमकदार और हल्की थीम.</string>
+    <string name="pack_sunrise">सूर्योदय</string>
+    <string name="pack_sunrise_description">आड़ू रंग की हल्की रोशनी और गुलाबी ऐक्सेंट.</string>
+</resources>

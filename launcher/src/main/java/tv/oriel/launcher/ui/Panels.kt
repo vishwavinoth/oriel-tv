@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
@@ -43,6 +44,8 @@ import tv.oriel.launcher.data.AppEntry
 import tv.oriel.launcher.home.AppOption
 import tv.oriel.launcher.prefs.LauncherPreferences
 import tv.oriel.launcher.prefs.ThemeMode
+import tv.oriel.launcher.prefs.matches
+import tv.oriel.launcher.prefs.withPack
 import tv.oriel.launcher.ui.theme.LocalOrielColors
 import tv.oriel.launcher.ui.theme.LocalOrielEffects
 import tv.oriel.launcher.ui.theme.OrielTokens
@@ -50,7 +53,7 @@ import tv.oriel.launcher.ui.theme.OrielType
 
 /** A focusable control inside a glass panel. It uses a tinted fill, never glass of its own (ADR 0004, rule 3). */
 @Composable
-private fun PanelControl(
+internal fun PanelControl(
     onClick: () -> Unit,
     shape: Shape,
     modifier: Modifier = Modifier,
@@ -82,7 +85,7 @@ private fun PanelControl(
 }
 
 @Composable
-private fun SettingLabel(text: String) {
+internal fun SettingLabel(text: String) {
     Text(text, style = OrielType.Label, color = LocalOrielColors.current.textSecondary)
 }
 
@@ -129,6 +132,7 @@ fun SettingsPanel(
     preferences: LauncherPreferences,
     onUpdate: ((LauncherPreferences) -> LauncherPreferences) -> Unit,
     onRestore: () -> Unit,
+    onLicenses: () -> Unit,
     onClose: () -> Unit,
 ) {
     val colors = LocalOrielColors.current
@@ -155,14 +159,50 @@ fun SettingsPanel(
                     Text(stringResource(R.string.settings_close_hint), style = OrielType.Caption, color = colors.textSecondary)
                 }
 
+                // Theme packs come first: one choice sets the theme, accent, and wallpaper together.
+                val currentPack = OrielTokens.ThemePack.All.firstOrNull { preferences.matches(it) }
+                SettingLabel(stringResource(R.string.settings_theme_pack))
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    OrielTokens.ThemePack.All.forEachIndexed { index, pack ->
+                        val wallpaper = wallpaperById(pack.wallpaperId)
+                        val accent = OrielTokens.Accent.All.firstOrNull { it.id == pack.accentId } ?: OrielTokens.Accent.Default
+                        val packLabel = tokenText("pack_${pack.id}", pack.label)
+                        PanelControl(
+                            onClick = { onUpdate { it.withPack(pack) } },
+                            shape = RoundedCornerShape(OrielTokens.Radius.Sm),
+                            selected = currentPack == pack,
+                            container = wallpaper.base,
+                            modifier = Modifier
+                                .size(width = 52.dp, height = 36.dp)
+                                .semantics { contentDescription = packLabel }
+                                .then(if (index == 0) Modifier.focusRequester(first) else Modifier),
+                        ) {
+                            Canvas(Modifier.fillMaxSize()) {
+                                drawWallpaper(wallpaper)
+                                drawCircle(
+                                    color = if (pack.isLight) accent.onLight else accent.onDark,
+                                    radius = 5.dp.toPx(),
+                                    center = Offset(size.width - 9.dp.toPx(), size.height - 9.dp.toPx()),
+                                )
+                            }
+                        }
+                    }
+                }
+                Text(
+                    currentPack?.let {
+                        stringResource(R.string.theme_pack_caption, tokenText("pack_${it.id}", it.label), tokenText("pack_${it.id}_description", it.description))
+                    } ?: stringResource(R.string.theme_pack_custom),
+                    style = OrielType.Caption,
+                    color = colors.textSecondary,
+                )
+
                 SettingLabel(stringResource(R.string.settings_theme))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    ThemeMode.entries.forEachIndexed { index, mode ->
+                    ThemeMode.entries.forEach { mode ->
                         PanelControl(
                             onClick = { onUpdate { it.copy(theme = mode) } },
                             shape = RoundedCornerShape(OrielTokens.Radius.Pill),
                             selected = preferences.theme == mode,
-                            modifier = if (index == 0) Modifier.focusRequester(first) else Modifier,
                         ) {
                             Text(
                                 stringResource(if (mode == ThemeMode.Dark) R.string.theme_dark else R.string.theme_light),
@@ -176,12 +216,13 @@ fun SettingsPanel(
                 SettingLabel(stringResource(R.string.settings_accent))
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                     OrielTokens.Accent.All.forEach { accent ->
+                        val accentLabel = tokenText("accent_${accent.id}", accent.label)
                         PanelControl(
                             onClick = { onUpdate { it.copy(accentId = accent.id) } },
                             shape = CircleShape,
                             selected = preferences.accentId == accent.id,
                             container = if (colors.isLight) accent.onLight else accent.onDark,
-                            modifier = Modifier.size(40.dp).semantics { contentDescription = accent.label },
+                            modifier = Modifier.size(40.dp).semantics { contentDescription = accentLabel },
                         ) {}
                     }
                 }
@@ -189,12 +230,13 @@ fun SettingsPanel(
                 SettingLabel(stringResource(R.string.settings_wallpaper))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     OrielTokens.Wallpaper.All.forEach { wallpaper ->
+                        val wallpaperLabel = tokenText("wallpaper_${wallpaper.id}", wallpaper.label)
                         PanelControl(
                             onClick = { onUpdate { it.copy(wallpaperId = wallpaper.id) } },
                             shape = RoundedCornerShape(OrielTokens.Radius.Sm),
                             selected = preferences.wallpaperId == wallpaper.id,
                             container = wallpaper.base,
-                            modifier = Modifier.size(width = 56.dp, height = 36.dp).semantics { contentDescription = wallpaper.label },
+                            modifier = Modifier.size(width = 56.dp, height = 36.dp).semantics { contentDescription = wallpaperLabel },
                         ) {
                             Canvas(Modifier.fillMaxSize()) { drawWallpaper(wallpaper) }
                         }
@@ -207,6 +249,20 @@ fun SettingsPanel(
                 }
                 ToggleRow(stringResource(R.string.settings_reduce_motion), preferences.reduceMotion) {
                     onUpdate { it.copy(reduceMotion = !it.reduceMotion) }
+                }
+
+                PanelControl(
+                    onClick = onLicenses,
+                    shape = RoundedCornerShape(OrielTokens.Radius.Md),
+                    container = colors.textPrimary.copy(alpha = 0f),
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(
+                        stringResource(R.string.settings_licenses),
+                        style = OrielType.Body,
+                        color = colors.textSecondary,
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                    )
                 }
 
                 PanelControl(

@@ -23,7 +23,7 @@ npm run build
 npm run check:routes
 ```
 
-`npm test` runs the demo's focus and state logic and the Markdown parser with Node's built-in test runner. `check:routes` verifies that the static export contains every required route (PRD section 5.2) and that no internal link is broken.
+`npm test` runs the launcher demo's focus and state logic, the Control Center walkthrough's logic, the Markdown parser, and a check for mis-encoded text, with Node's built-in test runner. `check:routes` verifies that the static export contains every required route (PRD section 5.2) and that no internal link is broken.
 
 ## Deploy
 

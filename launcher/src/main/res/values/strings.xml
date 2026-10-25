@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- The source strings. Translations live in values-<language>/strings.xml; see docs/translations.md. -->
 <resources>
-    <string name="app_name">Oriel</string>
+    <string name="app_name" translatable="false">Oriel</string>
 
     <string name="loading_apps">Loading apps…</string>
     <string name="favorites">Favorites</string>
     <string name="all_apps">All apps</string>
+    <!-- "OK" is the name of the remote's center button; keep it as it appears on remotes. -->
     <string name="no_favorites">No favorites yet. Press and hold OK on an app to add one.</string>
     <string name="no_apps">No apps to show. Restore defaults in Settings to bring back hidden apps.</string>
     <string name="tv_app">TV app</string>
@@ -13,6 +15,10 @@
     <string name="settings">Settings</string>
 
     <string name="settings_close_hint">Press Back to close</string>
+    <string name="settings_theme_pack">Theme pack</string>
+    <string name="theme_pack_custom">Custom: your own mix of theme, accent, and wallpaper.</string>
+    <!-- A theme pack's name (%1$s) and its description (%2$s). -->
+    <string name="theme_pack_caption">%1$s: %2$s</string>
     <string name="settings_theme">Theme</string>
     <string name="theme_dark">Dark</string>
     <string name="theme_light">Light</string>
@@ -22,16 +28,78 @@
     <string name="settings_reduce_transparency">Reduce transparency</string>
     <string name="settings_reduce_motion">Reduce motion</string>
     <string name="settings_restore">Restore defaults</string>
+    <string name="settings_licenses">Open-source licenses</string>
+    <string name="licenses_intro">Oriel is open source under the Apache License 2.0. It’s built with these libraries, each used under the license shown. Every build checks them against the licenses the project allows.</string>
+    <string name="licenses_missing">The license list isn’t in this build. It’s added when the app is built with Gradle.</string>
     <string name="state_on">On</string>
     <string name="state_off">Off</string>
 
     <string name="option_add_favorite">Add to Favorites</string>
     <string name="option_remove_favorite">Remove from Favorites</string>
+    <!-- Moves the app toward the start of the row: left in left-to-right languages, right in right-to-left ones. -->
     <string name="option_move_left">Move left</string>
+    <!-- Moves the app toward the end of the row: right in left-to-right languages, left in right-to-left ones. -->
     <string name="option_move_right">Move right</string>
     <string name="option_hide">Hide app</string>
 
+    <string name="control_panel">Control panel</string>
+    <string name="control_panel_hint">Opens your TV’s own settings</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">Online</string>
+    <string name="connection_offline">Offline</string>
+    <string name="connection_wifi_detail">Connected over Wi-Fi.</string>
+    <string name="connection_ethernet_detail">Connected with a network cable.</string>
+    <string name="connection_other_detail">Connected to a network.</string>
+    <string name="connection_offline_detail">Not connected. Apps that need the internet won’t work until the TV reconnects.</string>
+    <string name="shortcut_oriel">Oriel settings</string>
+    <string name="shortcut_network">Wi-Fi and network</string>
+    <string name="shortcut_bluetooth">Bluetooth</string>
+    <string name="shortcut_notifications">Notifications</string>
+    <string name="shortcut_display">Display and picture</string>
+    <string name="shortcut_sound">Sound</string>
+    <string name="shortcut_screensaver">Screen saver</string>
+    <string name="shortcut_date">Date and time</string>
+    <string name="shortcut_language">Language</string>
+    <string name="shortcut_keyboard">Keyboard</string>
+    <string name="shortcut_accessibility">Accessibility</string>
+    <string name="shortcut_apps">Apps</string>
+    <string name="shortcut_storage">Storage</string>
+    <string name="shortcut_privacy">Privacy</string>
+    <string name="shortcut_about">About this TV</string>
+    <string name="shortcut_all">All settings</string>
+    <!-- %1$s is the name of a settings screen, such as "Bluetooth". -->
+    <string name="message_shortcut_failed">Couldn’t open %1$s on this TV.</string>
+
+    <!-- %1$s is an app's name. -->
     <string name="message_open_failed">Couldn’t open %1$s. It may have been uninstalled.</string>
+    <!-- %1$s is an app's name. -->
     <string name="message_hidden">%1$s is hidden. Restore defaults in Settings to bring it back.</string>
     <string name="message_restored">Settings, favorites, and hidden apps are back to their defaults.</string>
+
+    <!-- Names of design tokens from shared/design-tokens/tokens.json, looked up by id (ui/TokenText.kt). -->
+    <string name="accent_daylight">Daylight</string>
+    <string name="accent_amber">Amber</string>
+    <string name="accent_lagoon">Lagoon</string>
+    <string name="accent_rose">Rose</string>
+    <string name="accent_violet">Violet</string>
+    <string name="wallpaper_dusk">Dusk</string>
+    <string name="wallpaper_lagoon">Lagoon</string>
+    <!-- The northern lights, not the dawn. -->
+    <string name="wallpaper_aurora">Aurora</string>
+    <string name="wallpaper_ember">Ember</string>
+    <string name="wallpaper_mist">Mist</string>
+    <string name="wallpaper_dawn">Dawn</string>
+    <string name="pack_evening">Evening</string>
+    <string name="pack_evening_description">Oriel’s default: a violet dusk with a soft blue accent.</string>
+    <string name="pack_cinema">Cinema</string>
+    <string name="pack_cinema_description">Warm and low, for watching in the dark.</string>
+    <string name="pack_reef">Reef</string>
+    <string name="pack_reef_description">Deep teal water and a bright lagoon accent.</string>
+    <string name="pack_northern">Northern</string>
+    <string name="pack_northern_description">Night-sky greens and blues with a violet accent.</string>
+    <string name="pack_morning">Morning</string>
+    <string name="pack_morning_description">A bright, airy light theme for daytime.</string>
+    <string name="pack_sunrise">Sunrise</string>
+    <string name="pack_sunrise_description">Soft peach light with a rose accent.</string>
 </resources>

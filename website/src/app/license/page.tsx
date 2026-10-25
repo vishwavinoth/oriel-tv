@@ -1,8 +1,11 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import { Markdown } from "@/components/Markdown";
 import { PageHeader } from "@/components/PageHeader";
 import { repoFileUrl } from "@/config/site";
 import { loadRepoDoc, readRepoFile } from "@/lib/content";
+import { siteLibraries } from "@/lib/licenses";
 
 export const metadata: Metadata = {
   title: "License",
@@ -14,6 +17,10 @@ export default function LicensePage() {
   const notice = readRepoFile("NOTICE").trim();
   const license = readRepoFile("LICENSE");
   const trademarks = loadRepoDoc("TRADEMARKS.md");
+  const libraries = siteLibraries(
+    JSON.parse(readFileSync(path.join(process.cwd(), "package.json"), "utf8")),
+    JSON.parse(readFileSync(path.join(process.cwd(), "package-lock.json"), "utf8")),
+  );
 
   return (
     <>
@@ -37,6 +44,25 @@ export default function LicensePage() {
             {trademarks.title}
           </h2>
           <Markdown blocks={trademarks.blocks} resolveLink={trademarks.resolveLink} />
+        </section>
+
+        <section aria-labelledby="libraries-title" className="grid gap-3">
+          <h2 id="libraries-title" className="text-title3">
+            Open-source libraries
+          </h2>
+          <p className="text-callout text-fg-2">
+            Every dependency is checked against the licenses the project allows: Apache 2.0 and permissive licenses such as MIT, BSD, and
+            ISC. The launcher and Control Center list their libraries in their own Open-source licenses screens. This website’s browser code
+            comes from these libraries:
+          </p>
+          <ul className="grid gap-1.5 rounded-md border border-border bg-surface p-5 text-callout sm:grid-cols-2">
+            {libraries.map((library) => (
+              <li key={library.name}>
+                <span className="font-semibold">{library.name}</span> <span className="text-fg-2">{library.version}</span>
+                <span className="text-fg-2"> · {library.license}</span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section aria-labelledby="license-title" className="grid gap-3">

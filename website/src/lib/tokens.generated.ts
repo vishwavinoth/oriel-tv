@@ -73,3 +73,56 @@ export const wallpapers = [
 export type WallpaperId = (typeof wallpapers)[number]["id"];
 
 export const defaultWallpaper: WallpaperId = "dusk";
+
+export const themePacks = [
+  {
+    "id": "evening",
+    "label": "Evening",
+    "description": "Oriel’s default: a violet dusk with a soft blue accent.",
+    "theme": "dark",
+    "accent": "daylight",
+    "wallpaper": "dusk"
+  },
+  {
+    "id": "cinema",
+    "label": "Cinema",
+    "description": "Warm and low, for watching in the dark.",
+    "theme": "dark",
+    "accent": "amber",
+    "wallpaper": "ember"
+  },
+  {
+    "id": "reef",
+    "label": "Reef",
+    "description": "Deep teal water and a bright lagoon accent.",
+    "theme": "dark",
+    "accent": "lagoon",
+    "wallpaper": "lagoon"
+  },
+  {
+    "id": "northern",
+    "label": "Northern",
+    "description": "Night-sky greens and blues with a violet accent.",
+    "theme": "dark",
+    "accent": "violet",
+    "wallpaper": "aurora"
+  },
+  {
+    "id": "morning",
+    "label": "Morning",
+    "description": "A bright, airy light theme for daytime.",
+    "theme": "light",
+    "accent": "daylight",
+    "wallpaper": "mist"
+  },
+  {
+    "id": "sunrise",
+    "label": "Sunrise",
+    "description": "Soft peach light with a rose accent.",
+    "theme": "light",
+    "accent": "rose",
+    "wallpaper": "dawn"
+  }
+] as const;
+
+export type ThemePackId = (typeof themePacks)[number]["id"];

@@ -39,11 +39,7 @@ import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.focusRestorer
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.addPathNodes
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -66,6 +62,8 @@ import tv.oriel.launcher.home.AppOption
 import tv.oriel.launcher.home.HomeArrangement
 import tv.oriel.launcher.home.HomeModel
 import tv.oriel.launcher.prefs.LauncherPreferences
+import tv.oriel.launcher.system.AvailableShortcut
+import tv.oriel.launcher.system.Connection
 import tv.oriel.launcher.ui.theme.LocalOrielColors
 import tv.oriel.launcher.ui.theme.LocalOrielEffects
 import tv.oriel.launcher.ui.theme.OrielTokens
@@ -85,7 +83,10 @@ fun HomeScreen(
     home: HomeModel?,
     artwork: Map<String, AppArtwork>,
     homePresses: Flow<Unit>,
+    connection: Connection,
+    shortcuts: List<AvailableShortcut>,
     onOpen: (AppEntry) -> Boolean,
+    onShortcut: (AvailableShortcut) -> Boolean,
     onLoadArtwork: (AppEntry) -> Unit,
     onUpdatePreferences: ((LauncherPreferences) -> LauncherPreferences) -> Unit,
 ) {
@@ -94,6 +95,8 @@ fun HomeScreen(
     var screenSize by remember { mutableStateOf(Size.Zero) }
     var focused by remember { mutableStateOf<AppEntry?>(null) }
     var showSettings by rememberSaveable { mutableStateOf(false) }
+    var showControlPanel by rememberSaveable { mutableStateOf(false) }
+    var showLicenses by rememberSaveable { mutableStateOf(false) }
     var options by remember { mutableStateOf<Pair<AppEntry, Boolean>?>(null) }
     var message by remember { mutableStateOf<String?>(null) }
     var initialFocusDone by rememberSaveable { mutableStateOf(false) }
@@ -108,6 +111,8 @@ fun HomeScreen(
     LaunchedEffect(homePresses) {
         homePresses.collect {
             showSettings = false
+            showControlPanel = false
+            showLicenses = false
             options = null
             listState.scrollToItem(0)
             focusFirstTile()
@@ -153,6 +158,8 @@ fun HomeScreen(
                             TopRow(
                                 showClock = preferences.showClock,
                                 brightWallpaper = backdrop.wallpaper.isLight,
+                                connection = connection,
+                                onControlPanel = { showControlPanel = true },
                                 onSettings = { showSettings = true },
                             )
                         }
@@ -200,6 +207,21 @@ fun HomeScreen(
             }
         }
 
+        if (showControlPanel) {
+            ControlPanel(
+                connection = connection,
+                shortcuts = shortcuts,
+                onShortcut = { shortcut ->
+                    if (!onShortcut(shortcut)) message = context.getString(R.string.message_shortcut_failed, context.getString(shortcut.shortcut.label()))
+                },
+                onOrielSettings = {
+                    showControlPanel = false
+                    showSettings = true
+                },
+                onClose = { showControlPanel = false },
+            )
+        }
+
         if (showSettings) {
             SettingsPanel(
                 preferences = preferences,
@@ -208,9 +230,15 @@ fun HomeScreen(
                     onUpdatePreferences { HomeArrangement.restoreDefaults() }
                     message = context.getString(R.string.message_restored)
                 },
+                onLicenses = {
+                    showSettings = false
+                    showLicenses = true
+                },
                 onClose = { showSettings = false },
             )
         }
+
+        if (showLicenses) LicensesPanel(onClose = { showLicenses = false })
 
         options?.let { (app, fromDock) ->
             AppOptionsMenu(
@@ -229,10 +257,13 @@ fun HomeScreen(
     }
 }
 
-/** Left on the first item and Right on the last item stop at the edge instead of jumping rows. */
+/**
+ * Moving past the first or last item stops at the edge instead of jumping rows. Start and end, not left and right,
+ * so the edges stay correct when a right-to-left language mirrors the row.
+ */
 private fun Modifier.rowEdges(index: Int, count: Int): Modifier = focusProperties {
-    if (index == 0) left = FocusRequester.Cancel
-    if (index == count - 1) right = FocusRequester.Cancel
+    if (index == 0) start = FocusRequester.Cancel
+    if (index == count - 1) end = FocusRequester.Cancel
 }
 
 @Composable
@@ -241,31 +272,47 @@ private fun SectionLabel(text: String) {
 }
 
 @Composable
-private fun TopRow(showClock: Boolean, brightWallpaper: Boolean, onSettings: () -> Unit) {
+private fun TopRow(showClock: Boolean, brightWallpaper: Boolean, connection: Connection, onControlPanel: () -> Unit, onSettings: () -> Unit) {
     val colors = LocalOrielColors.current
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Top) {
         Box(Modifier.heightIn(min = 64.dp)) { if (showClock) Clock() }
-        // A small control over the wallpaper: clear glass, dimmed when the wallpaper is bright (ADR 0005).
-        GlassSurface(shape = CircleShape, variant = GlassVariant.Clear, dim = brightWallpaper) {
-            Surface(
-                onClick = onSettings,
-                modifier = Modifier.padding(4.dp).size(48.dp),
-                shape = ClickableSurfaceDefaults.shape(CircleShape),
-                colors = ClickableSurfaceDefaults.colors(
-                    containerColor = colors.textPrimary.copy(alpha = 0f),
-                    contentColor = colors.textPrimary,
-                    focusedContainerColor = colors.textPrimary,
-                    focusedContentColor = colors.background,
-                ),
-                scale = ClickableSurfaceDefaults.scale(focusedScale = if (LocalOrielEffects.current.reduceMotion) 1f else 1.1f),
-                border = ClickableSurfaceDefaults.border(focusedBorder = Border(BorderStroke(2.dp, colors.focusRing), shape = CircleShape)),
-            ) {
-                Icon(
-                    imageVector = SlidersIcon,
-                    contentDescription = stringResource(R.string.settings),
-                    modifier = Modifier.align(Alignment.Center).size(24.dp),
-                )
+        Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+            // Status, not a control, so it can't take focus.
+            GlassSurface(shape = RoundedCornerShape(OrielTokens.Radius.Pill), variant = GlassVariant.Clear, dim = brightWallpaper) {
+                Row(
+                    Modifier.heightIn(min = 56.dp).padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(connection.icon(), contentDescription = null, tint = colors.textPrimary, modifier = Modifier.size(20.dp))
+                    Text(stringResource(connection.label()), style = OrielType.Label, color = colors.textPrimary)
+                }
             }
+            TopButton(SystemIcons.Controls, stringResource(R.string.control_panel), brightWallpaper, onControlPanel)
+            TopButton(SystemIcons.Sliders, stringResource(R.string.settings), brightWallpaper, onSettings)
+        }
+    }
+}
+
+@Composable
+private fun TopButton(icon: ImageVector, description: String, brightWallpaper: Boolean, onClick: () -> Unit) {
+    val colors = LocalOrielColors.current
+    // A small control over the wallpaper: clear glass, dimmed when the wallpaper is bright (ADR 0005).
+    GlassSurface(shape = CircleShape, variant = GlassVariant.Clear, dim = brightWallpaper) {
+        Surface(
+            onClick = onClick,
+            modifier = Modifier.padding(4.dp).size(48.dp),
+            shape = ClickableSurfaceDefaults.shape(CircleShape),
+            colors = ClickableSurfaceDefaults.colors(
+                containerColor = colors.textPrimary.copy(alpha = 0f),
+                contentColor = colors.textPrimary,
+                focusedContainerColor = colors.textPrimary,
+                focusedContentColor = colors.background,
+            ),
+            scale = ClickableSurfaceDefaults.scale(focusedScale = if (LocalOrielEffects.current.reduceMotion) 1f else 1.1f),
+            border = ClickableSurfaceDefaults.border(focusedBorder = Border(BorderStroke(2.dp, colors.focusRing), shape = CircleShape)),
+        ) {
+            Icon(imageVector = icon, contentDescription = description, modifier = Modifier.align(Alignment.Center).size(24.dp))
         }
     }
 }
@@ -375,18 +422,3 @@ private fun AppRow(
         }
     }
 }
-
-/** A settings glyph drawn for Oriel: two sliders. */
-private val SlidersIcon: ImageVector = ImageVector.Builder(
-    name = "Sliders",
-    defaultWidth = 24.dp,
-    defaultHeight = 24.dp,
-    viewportWidth = 24f,
-    viewportHeight = 24f,
-).addPath(
-    pathData = addPathNodes("M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4"),
-    stroke = SolidColor(androidx.compose.ui.graphics.Color.White),
-    strokeLineWidth = 1.8f,
-    strokeLineCap = StrokeCap.Round,
-    strokeLineJoin = StrokeJoin.Round,
-).build()

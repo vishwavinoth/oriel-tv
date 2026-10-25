@@ -27,6 +27,7 @@ body:
       options:
         - Google TV
         - Android TV
+        - Fire TV
         - Other Android-based TV
     validations:
       required: true
@@ -54,7 +55,9 @@ body:
         - label: Showing and opening installed apps
         - label: D-pad navigation and focus
         - label: Favorites and hiding apps
-        - label: Themes and wallpapers
+        - label: Themes, wallpapers, and theme packs
+        - label: The control panel's shortcuts
+        - label: Control Center's operations
   - type: textarea
     id: problems
     attributes:

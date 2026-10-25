@@ -251,6 +251,14 @@ export function renderTs(tokens) {
     '',
     `export const defaultWallpaper: WallpaperId = ${JSON.stringify(tokens.wallpaper.default)};`,
     '',
+    `export const themePacks = ${JSON.stringify(
+      Object.entries(tokens.themePack.options).map(([id, pack]) => ({ id, ...pack })),
+      null,
+      2,
+    )} as const;`,
+    '',
+    'export type ThemePackId = (typeof themePacks)[number]["id"];',
+    '',
   ].join('\n');
 }
 
@@ -306,6 +314,18 @@ export function renderKotlin(tokens, packageName = 'tv.oriel.launcher.ui.theme')
     `val Default: WallpaperToken = ${pascal(tokens.wallpaper.default)}`,
   ];
 
+  const packIds = Object.keys(tokens.themePack.options);
+  const packLines = [
+    ...packIds.map((id) => {
+      const pack = tokens.themePack.options[id];
+      return (
+        `val ${pascal(id)} = ThemePackToken(id = "${id}", label = "${pack.label}", description = "${pack.description}", ` +
+        `isLight = ${pack.theme === 'light'}, accentId = "${pack.accent}", wallpaperId = "${pack.wallpaper}")`
+      );
+    }),
+    `val All: List<ThemePackToken> = listOf(${packIds.map(pascal).join(', ')})`,
+  ];
+
   const typeLines = Object.entries(tokens.type.tv).flatMap(([name, style]) =>
     kotlinObject(
       pascal(name),
@@ -341,6 +361,8 @@ export function renderKotlin(tokens, packageName = 'tv.oriel.launcher.ui.theme')
     ...kotlinObject('Accent', accentLines, 4),
     '',
     ...kotlinObject('Wallpaper', wallpaperLines, 4),
+    '',
+    ...kotlinObject('ThemePack', packLines, 4),
     '',
     ...kotlinObject(
       'Blur',
@@ -418,6 +440,16 @@ export function renderKotlin(tokens, packageName = 'tv.oriel.launcher.ui.theme')
     '    val isLight: Boolean,',
     '    val base: Color,',
     '    val glows: List<WallpaperGlow>,',
+    ')',
+    '',
+    '/** A named set of a theme, an accent, and a wallpaper, applied together. */',
+    'data class ThemePackToken(',
+    '    val id: String,',
+    '    val label: String,',
+    '    val description: String,',
+    '    val isLight: Boolean,',
+    '    val accentId: String,',
+    '    val wallpaperId: String,',
     ')',
     '',
   ].join('\n');

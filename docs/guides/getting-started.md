@@ -6,7 +6,7 @@ Oriel is in early development and hasn't published a release yet. Until it does,
 
 ## What you need
 
-- An Android TV or Google TV device running Android 8.0 or newer. Check the [compatibility notes](https://oriel-tv.vercel.app/devices/) for your platform first.
+- An Android TV or Google TV device running Android 5.0 or newer. On Android 6.0 and older, pressing Home asks which home app to use; choose Oriel. Check the [compatibility notes](https://oriel-tv.vercel.app/devices/) for your platform first.
 - A computer on the same Wi-Fi network as the TV, with [Android platform tools](https://developer.android.com/tools/releases/platform-tools) installed, which include `adb`.
 - To build Oriel: JDK 17 or newer and the Android SDK. Android Studio includes both.
 

@@ -23,3 +23,5 @@ dependencyResolutionManagement {
 rootProject.name = "oriel-tv"
 
 include(":launcher")
+include(":shared:device")
+include(":control-center")

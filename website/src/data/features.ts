@@ -13,7 +13,6 @@ export interface Feature {
 }
 
 const IN_BUILD = { tone: "success", label: "In the current build" } as const;
-const PLANNED = { tone: "neutral", label: "Planned" } as const;
 
 export const FEATURES: readonly Feature[] = [
   {
@@ -23,7 +22,8 @@ export const FEATURES: readonly Feature[] = [
     points: [
       "A favorites dock for the apps you open most, above a grid of everything else.",
       "Reorder favorites and hide apps you never use, without uninstalling anything.",
-      "The focused appâ€™s name and category appear large enough to read from the couch.",
+      "A control panel shows the connection and opens the TV’s own Wi-Fi, Bluetooth, notification, and display settings.",
+      "The focused app’s name and category appear large enough to read from the couch.",
     ],
     icon: Tv,
     status: IN_BUILD,
@@ -33,6 +33,7 @@ export const FEATURES: readonly Feature[] = [
     title: "Personal themes and wallpapers",
     summary: "Light or dark, five accent colors, and six original wallpapers called atmospheres.",
     points: [
+      "Theme packs set the theme, accent, and wallpaper in one step, and anyone can propose a new one.",
       "Every combination is checked for legible contrast before it ships.",
       "Glass surfaces adapt to the wallpaper behind them.",
       "Reduce transparency and reduce motion are built-in settings.",
@@ -55,19 +56,19 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "safe",
     title: "Safe device customization",
-    summary: "Control Center will guide supported changes on your TV, and explain each one first.",
+    summary: "Control Center, a desktop companion, guides supported changes on your TV and explains each one first.",
     points: [
       "Every operation shows what it does, what could go wrong, and how to undo it.",
       "Nothing changes until you confirm, and only allowlisted operations can run.",
-      "Changes that canâ€™t be reversed reliably are marked before you approve them.",
+      "Changes that can’t be reversed reliably are marked before you approve them.",
     ],
     icon: ShieldCheck,
-    status: PLANNED,
+    status: IN_BUILD,
   },
   {
     id: "privacy",
     title: "Privacy-first operation",
-    summary: "The launcher has no network permission. It canâ€™t send anything anywhere.",
+    summary: "The launcher has no internet permission. It can’t send anything anywhere.",
     points: [
       "No accounts, analytics, ads, or tracking.",
       "Your settings live on the TV and are deleted when you uninstall Oriel.",
@@ -79,14 +80,14 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "backup",
     title: "Backup and recovery",
-    summary: "Export your setup, check it, and restore it on the same or another TV.",
+    summary: "Control Center saves which apps are turned off and which app is home, checks the file, and previews any restore.",
     points: [
       "Backups are validated before anything is restored.",
       "You see a preview of what a restore will change.",
-      "Oriel wonâ€™t claim to back up anything it canâ€™t actually restore.",
+      "Oriel won’t claim to back up anything it can’t actually restore.",
     ],
     icon: RotateCcw,
-    status: PLANNED,
+    status: IN_BUILD,
   },
   {
     id: "open",
@@ -103,10 +104,10 @@ export const FEATURES: readonly Feature[] = [
   {
     id: "honest",
     title: "Compatibility transparency",
-    summary: "Clear labels for whatâ€™s verified on real hardware and whatâ€™s only expected to work.",
+    summary: "Clear labels for what’s verified on real hardware and what’s only expected to work.",
     points: [
       "Device reports say who tested what, on which software version, and when.",
-      "Platform limits are stated plainly, including where Oriel canâ€™t help.",
+      "Platform limits are stated plainly, including where Oriel can’t help.",
       "Nothing is marked as tested unless someone actually tested it.",
     ],
     icon: LayoutGrid,

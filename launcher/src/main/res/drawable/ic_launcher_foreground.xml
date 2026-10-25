@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The Oriel mark: an arched bay window with six panes of light. Original artwork (assets/README.md). -->
+<!-- The Oriel mark for Android 5.0 to 6.0, which can't draw gradients in vectors. drawable-v24 has the full version. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
@@ -11,23 +10,11 @@
         android:scaleY="1.6"
         android:translateX="2.8"
         android:translateY="3.2">
-        <clip-path android:pathData="M17,49V29.5a15,15 0,0 1,30 0V49Z" />
-        <path android:pathData="M17,49V29.5a15,15 0,0 1,30 0V49Z">
-            <aapt:attr name="android:fillColor">
-                <gradient
-                    android:endX="42"
-                    android:endY="49"
-                    android:startX="22"
-                    android:startY="14"
-                    android:type="linear">
-                    <item android:color="#FFF4F6FF" android:offset="0" />
-                    <item android:color="#FF9DB2FF" android:offset="0.5" />
-                    <item android:color="#FF5B5FD6" android:offset="1" />
-                </gradient>
-            </aapt:attr>
-        </path>
         <path
-            android:pathData="M27,50V12M37,50V12M16,37.5h32"
+            android:fillColor="#FF9DB2FF"
+            android:pathData="M17,49V29.5a15,15 0,0 1,30 0V49Z" />
+        <path
+            android:pathData="M27,49V16.5M37,49V16.5M17,37.5h30"
             android:strokeWidth="2.2"
             android:strokeColor="#FF11162C" />
     </group>

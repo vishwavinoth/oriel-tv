@@ -38,7 +38,7 @@ const STEPS = [
 ];
 
 const PRIVACY_FACTS = [
-  "No network permission, so the launcher can’t send data anywhere",
+  "No internet permission, so the launcher can’t send data anywhere",
   "No accounts, analytics, advertising, or tracking",
   "Settings stay on the TV and leave with the app when you uninstall it",
   "The website uses no cookies, analytics, or third-party scripts",
@@ -124,13 +124,19 @@ export default function HomePage() {
         </div>
         <div className="page-width rise mt-14 [animation-delay:150ms]">
           <LauncherDemo />
+          <p className="mt-6 text-center">
+            <Link href="/demo/" className="inline-flex items-center gap-1.5 font-semibold text-accent no-underline hover:underline">
+              Try the full demo, with power-on, a guided walkthrough, and Control Center
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          </p>
         </div>
       </section>
 
       <section className="py-[clamp(4rem,9vw,7.5rem)]" aria-labelledby="features-title">
         <div className="page-width">
           <SectionHeader id="features-title" eyebrow="What Oriel does" title="A calmer home screen that stays out of your way">
-            Eight promises shape every decision. Each one says honestly whether it’s in the current build or still planned.
+            Eight promises shape every decision. All of them are in the current development build, which hasn’t been verified on a TV yet.
           </SectionHeader>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((feature, index) => (

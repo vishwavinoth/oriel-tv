@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import tv.oriel.launcher.ui.theme.OrielTokens
+import tv.oriel.launcher.ui.theme.ThemePackToken
 
 enum class ThemeMode(val id: String) {
     Dark("dark"),
@@ -38,6 +39,13 @@ data class LauncherPreferences(
     /** False until the dock has been filled with suggested favorites once. */
     val favoritesInitialized: Boolean = false,
 )
+
+/** A theme pack sets the theme, accent, and wallpaper together, and leaves everything else as it is. */
+fun LauncherPreferences.withPack(pack: ThemePackToken): LauncherPreferences =
+    copy(theme = if (pack.isLight) ThemeMode.Light else ThemeMode.Dark, accentId = pack.accentId, wallpaperId = pack.wallpaperId)
+
+/** True when these preferences already look exactly like the pack. */
+fun LauncherPreferences.matches(pack: ThemePackToken): Boolean = this == withPack(pack)
 
 /**
  * Converts preferences to and from plain stored values. Unknown, missing, or malformed values fall back

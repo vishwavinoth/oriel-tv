@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- French. Draft translation: it needs review by a native speaker before a release. See docs/translations.md. -->
+<resources>
+    <string name="loading_apps">Chargement des applications…</string>
+    <string name="favorites">Favoris</string>
+    <string name="all_apps">Toutes les applications</string>
+    <string name="no_favorites">Aucun favori pour l’instant. Maintenez OK sur une application pour l’ajouter.</string>
+    <string name="no_apps">Aucune application à afficher. Restaurez les valeurs par défaut dans Paramètres pour retrouver les applications masquées.</string>
+    <string name="tv_app">Application TV</string>
+    <string name="android_app">Application Android</string>
+    <string name="options_hint">Maintenez OK pour afficher les options</string>
+    <string name="settings">Paramètres</string>
+
+    <string name="settings_close_hint">Appuyez sur Retour pour fermer</string>
+    <string name="settings_theme_pack">Pack de thème</string>
+    <string name="theme_pack_custom">Personnalisé&#160;: votre propre mélange de thème, de couleur d’accent et de fond d’écran.</string>
+    <string name="theme_pack_caption">%1$s&#160;: %2$s</string>
+    <string name="settings_theme">Thème</string>
+    <string name="theme_dark">Sombre</string>
+    <string name="theme_light">Clair</string>
+    <string name="settings_accent">Couleur d’accent</string>
+    <string name="settings_wallpaper">Fond d’écran</string>
+    <string name="settings_clock">Afficher l’horloge</string>
+    <string name="settings_reduce_transparency">Réduire la transparence</string>
+    <string name="settings_reduce_motion">Réduire les animations</string>
+    <string name="settings_restore">Restaurer les valeurs par défaut</string>
+    <string name="settings_licenses">Licences open source</string>
+    <string name="licenses_intro">Oriel est un logiciel open source sous licence Apache 2.0. Il est conçu avec ces bibliothèques, chacune utilisée sous la licence indiquée. Chaque compilation les vérifie par rapport aux licences que le projet autorise.</string>
+    <string name="licenses_missing">La liste des licences ne figure pas dans cette version. Elle est ajoutée lorsque l’application est compilée avec Gradle.</string>
+    <string name="state_on">Activé</string>
+    <string name="state_off">Désactivé</string>
+
+    <string name="option_add_favorite">Ajouter aux favoris</string>
+    <string name="option_remove_favorite">Retirer des favoris</string>
+    <string name="option_move_left">Déplacer vers la gauche</string>
+    <string name="option_move_right">Déplacer vers la droite</string>
+    <string name="option_hide">Masquer l’application</string>
+
+    <string name="control_panel">Panneau de contrôle</string>
+    <string name="control_panel_hint">Ouvre les paramètres de votre téléviseur</string>
+    <string name="connection_wifi">Wi-Fi</string>
+    <string name="connection_ethernet">Ethernet</string>
+    <string name="connection_other">En ligne</string>
+    <string name="connection_offline">Hors ligne</string>
+    <string name="connection_wifi_detail">Connecté en Wi-Fi.</string>
+    <string name="connection_ethernet_detail">Connecté avec un câble réseau.</string>
+    <string name="connection_other_detail">Connecté à un réseau.</string>
+    <string name="connection_offline_detail">Non connecté. Les applications qui ont besoin d’Internet ne fonctionneront pas tant que le téléviseur ne sera pas reconnecté.</string>
+    <string name="shortcut_oriel">Paramètres d’Oriel</string>
+    <string name="shortcut_network">Wi-Fi et réseau</string>
+    <string name="shortcut_bluetooth">Bluetooth</string>
+    <string name="shortcut_notifications">Notifications</string>
+    <string name="shortcut_display">Affichage et image</string>
+    <string name="shortcut_sound">Son</string>
+    <string name="shortcut_screensaver">Économiseur d’écran</string>
+    <string name="shortcut_date">Date et heure</string>
+    <string name="shortcut_language">Langue</string>
+    <string name="shortcut_keyboard">Clavier</string>
+    <string name="shortcut_accessibility">Accessibilité</string>
+    <string name="shortcut_apps">Applications</string>
+    <string name="shortcut_storage">Stockage</string>
+    <string name="shortcut_privacy">Confidentialité</string>
+    <string name="shortcut_about">À propos du téléviseur</string>
+    <string name="shortcut_all">Tous les paramètres</string>
+    <string name="message_shortcut_failed">Impossible d’ouvrir %1$s sur ce téléviseur.</string>
+
+    <string name="message_open_failed">Impossible d’ouvrir %1$s. L’application a peut-être été désinstallée.</string>
+    <string name="message_hidden">L’application %1$s est masquée. Restaurez les valeurs par défaut dans Paramètres pour la retrouver.</string>
+    <string name="message_restored">Les paramètres, les favoris et les applications masquées ont retrouvé leurs valeurs par défaut.</string>
+
+    <string name="accent_daylight">Lumière du jour</string>
+    <string name="accent_amber">Ambre</string>
+    <string name="accent_lagoon">Lagon</string>
+    <string name="accent_rose">Rose</string>
+    <string name="accent_violet">Violet</string>
+    <string name="wallpaper_dusk">Crépuscule</string>
+    <string name="wallpaper_lagoon">Lagon</string>
+    <string name="wallpaper_aurora">Aurore boréale</string>
+    <string name="wallpaper_ember">Braise</string>
+    <string name="wallpaper_mist">Brume</string>
+    <string name="wallpaper_dawn">Aube</string>
+    <string name="pack_evening">Soirée</string>
+    <string name="pack_evening_description">Le thème par défaut d’Oriel&#160;: un crépuscule violet avec un accent bleu doux.</string>
+    <string name="pack_cinema">Cinéma</string>
+    <string name="pack_cinema_description">Chaleureux et tamisé, pour regarder dans le noir.</string>
+    <string name="pack_reef">Récif</string>
+    <string name="pack_reef_description">Des eaux turquoise profondes et un accent lagon éclatant.</string>
+    <string name="pack_northern">Boréal</string>
+    <string name="pack_northern_description">Les verts et les bleus d’un ciel nocturne, avec un accent violet.</string>
+    <string name="pack_morning">Matin</string>
+    <string name="pack_morning_description">Un thème clair, lumineux et aérien pour la journée.</string>
+    <string name="pack_sunrise">Lever du soleil</string>
+    <string name="pack_sunrise_description">Une douce lumière pêche avec un accent rose.</string>
+</resources>

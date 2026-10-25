@@ -81,6 +81,18 @@ On Windows, use `gradlew.bat`. To try it, install the debug APK on an Android TV
 
 Read [ADR 0004](docs/adr/0004-glass-material-system.md) and [ADR 0005](docs/adr/0005-materials-hig.md) before changing any surface. In short: glass is only for controls and navigation, standard materials give structure to content, glass never sits on glass, and every combination must pass the contrast tests.
 
+### Review or add a translation
+
+The launcher's first translations (Spanish, French, German, Hindi, Tamil, and Arabic) are drafts that need a native speaker's review. If you speak one of them, or want to add a language, follow [docs/translations.md](docs/translations.md).
+
+### Submit a theme pack
+
+Anyone can propose a theme pack:
+
+1. Add an entry to `themePack.options` in `shared/design-tokens/tokens.json`, with a one-word lowercase id, a `label`, a one-sentence `description`, a `theme` (`dark` or `light`), an existing `accent` and `wallpaper`, and your GitHub username as `author` so the [Community page](https://oriel-tv.vercel.app/community/) credits you. To use a new wallpaper or accent, add it to `tokens.json` first. Add the pack's name and description to `launcher/src/main/res/values/strings.xml` too, as `pack_<id>` and `pack_<id>_description`.
+2. Run `npm run tokens && npm run test:tokens` from the repository root. The tests check contrast and that the pack is valid and new.
+3. Open a pull request with a screenshot of the pack in the website demo or the launcher. All artwork must be original (see Ground rules).
+
 ## Pull requests
 
 1. Open an issue first for anything larger than a small fix, so we can agree on the approach.
