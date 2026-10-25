@@ -4,7 +4,7 @@
 
 Oriel TV is an open-source, privacy-first home screen and customization toolkit for Android TV and Google TV, with a calm, glass-inspired design built for the remote.
 
-> **Status:** Early development. There's no release yet, but you can build the launcher yourself. See [Getting started](docs/guides/getting-started.md).
+> **Status:** Public preview. Oriel is ready to try, but nobody has tested it on a physical TV yet. [Download the latest release](https://github.com/vishwavinoth/oriel-tv/releases/latest), follow [Getting started](docs/guides/getting-started.md), and please [report how it works on your TV](https://github.com/vishwavinoth/oriel-tv/issues/new?template=device_report.yml), including when something doesn't.
 
 **Website:** <https://oriel-tv.vercel.app>
 

@@ -4,6 +4,22 @@ All notable changes to Oriel TV are recorded here. The format follows the common
 
 ## Unreleased
 
+## [0.1.0] - 2026-10-25
+
+The first public preview. It's for testing: nobody has run it on a physical TV yet, so expect rough edges. Please report what you find, including when something works, with a device report or a bug report on GitHub.
+
+### Supported platforms
+
+- **Launcher:** Android TV and Google TV devices running Android 5.0 or newer. It also installs on Fire TV, but it can't be the home screen there.
+- **Control Center:** Windows (`.msi`) and Debian or Ubuntu Linux (`.deb`), each with its own Java runtime, and macOS as a `.jar` that needs Java 17 or newer. It needs Android platform tools (`adb`).
+
+### Known limitations
+
+- Not yet tested on a physical TV. It has run only on an Android phone emulator in landscape.
+- On Google TV and many Android TV devices, there's no setting to change the home app. Control Center can turn the built-in home screen off with adb, which can affect setup screens, voice search, or casting on some models, and firmware updates can turn it back on.
+- The Control Center window has only had a startup check, and there's no macOS installer yet.
+- The translations are drafts awaiting native-speaker review.
+
 ### Added
 
 - Product requirements in [PRD.md](PRD.md), with Oriel TV as an original, independent project.

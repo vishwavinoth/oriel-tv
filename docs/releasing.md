@@ -53,8 +53,11 @@ The key never goes into the repository. The workflow decodes it into the runner'
 6. **Review the draft.** When the workflow finishes, open the draft on the Releases page. Check that every file is there, that `SHA256SUMS.txt` matches, and that the notes are right. Add which devices this release was tested on, and never list a device nobody tested.
 7. **Publish.** Publish the draft, then confirm the website's Downloads page points at it.
 
-## Known blockers before the first public release
+## Public previews
 
-- A release signing key and its secrets (above).
-- Testing on at least one physical Android TV or Google TV device (PRD sections 9.4 and 13).
-- The name and trademark check in PRD section 4.1, before the repository goes public.
+Versions before 1.0 are public previews for testing. Their notes must say which devices they were tested on, or that none were. A release counts as verified only after someone tests it on at least one physical Android TV or Google TV device (PRD sections 9.4 and 13).
+
+Still open:
+
+- A release signing key and its secrets (above). Without them, the draft is marked "Don't publish".
+- The name and trademark check in PRD section 4.1 is preliminary: a web search, not trademark clearance.

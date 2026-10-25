@@ -1,6 +1,6 @@
 # Getting started
 
-Oriel is in early development and hasn't published a release yet. Until it does, you can build the launcher yourself and install it on an Android TV or Google TV device you own.
+Oriel is in public preview: it's ready to try on an Android TV or Google TV device you own, but nobody has tested it on a physical TV yet. Please [report how it goes](https://github.com/vishwavinoth/oriel-tv/issues/new?template=device_report.yml), including when something doesn't work.
 
 > **Before you start:** Oriel replaces the home screen and nothing else. It doesn't remove ads inside streaming apps, and it doesn't change other apps or system settings.
 
@@ -8,9 +8,19 @@ Oriel is in early development and hasn't published a release yet. Until it does,
 
 - An Android TV or Google TV device running Android 5.0 or newer. On Android 6.0 and older, pressing Home asks which home app to use; choose Oriel. Check the [compatibility notes](https://oriel-tv.vercel.app/devices/) for your platform first.
 - A computer on the same Wi-Fi network as the TV, with [Android platform tools](https://developer.android.com/tools/releases/platform-tools) installed, which include `adb`.
-- To build Oriel: JDK 17 or newer and the Android SDK. Android Studio includes both.
+- Only if you build Oriel yourself: JDK 17 or newer and the Android SDK. Android Studio includes both.
 
-## 1. Build the launcher
+## 1. Get the launcher
+
+Download `oriel-launcher-<version>.apk` and `SHA256SUMS.txt` from the [latest release](https://github.com/vishwavinoth/oriel-tv/releases/latest). To check the download, put both files in one folder and run:
+
+```bash
+sha256sum -c SHA256SUMS.txt --ignore-missing
+```
+
+On Windows, run `certutil -hashfile oriel-launcher-<version>.apk SHA256` and compare the result with the APK's line in `SHA256SUMS.txt`.
+
+Or build it yourself:
 
 ```bash
 git clone https://github.com/vishwavinoth/oriel-tv.git
@@ -32,10 +42,10 @@ Find the TV's IP address in its network settings, then run:
 
 ```bash
 adb connect 192.168.1.50:5555
-adb install -r launcher/build/outputs/apk/debug/launcher-debug.apk
+adb install -r oriel-launcher-<version>.apk
 ```
 
-The first time you connect, the TV asks whether to allow debugging from your computer. Accept it.
+Use the debug APK's path instead if you built it yourself. The first time you connect, the TV asks whether to allow debugging from your computer. Accept it. If a build you made yourself is already installed, uninstall it first (see [Uninstall](#uninstall)), because releases are signed with a different key.
 
 > **Security:** Network debugging isn't encrypted, so anyone on your network could connect while it's on. Turn it off when you're done, as described in [Device management](device-management.md).
 

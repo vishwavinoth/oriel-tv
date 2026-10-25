@@ -96,7 +96,7 @@ export default function HomePage() {
         <div className="page-width rise grid justify-items-center gap-6 text-center">
           <p className="inline-flex items-center gap-2 rounded-full border border-border bg-raised/70 px-3.5 py-1.5 text-caption font-semibold text-fg-2">
             <span className="size-1.5 rounded-full bg-success" aria-hidden="true" />
-            Open source · Android TV and Google TV · Early development
+            Open source · Android TV and Google TV · Public preview
           </p>
           <h1
             id="hero-title"
@@ -136,7 +136,7 @@ export default function HomePage() {
       <section className="py-[clamp(4rem,9vw,7.5rem)]" aria-labelledby="features-title">
         <div className="page-width">
           <SectionHeader id="features-title" eyebrow="What Oriel does" title="A calmer home screen that stays out of your way">
-            Eight promises shape every decision. All of them are in the current development build, which hasn’t been verified on a TV yet.
+            Eight promises shape every decision. All of them are in the public preview, which hasn’t been verified on a TV yet.
           </SectionHeader>
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((feature, index) => (
