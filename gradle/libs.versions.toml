@@ -11,7 +11,7 @@ tvMaterial = "1.0.1"
 coroutines = "1.11.0"
 junit = "4.13.2"
 composeMultiplatform = "1.12.2"
-kotlinxSerialization = "1.12.0"
+kotlinxSerialization = "1.13.0"
 licensee = "1.14.1"
 
 [libraries]
